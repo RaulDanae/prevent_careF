@@ -1,0 +1,9 @@
+Array
+(
+    [curp] => MAOJ25091977
+    [nombre] => MIGUEL ANGEL OJARA
+    [genero] => M
+    [fnacimiento] => 1977-09-25
+    [asistencia] => SI
+    [observaciones] => lol
+)

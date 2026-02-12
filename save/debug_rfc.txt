@@ -1,0 +1,9 @@
+Array
+(
+    [rfc] => KJKKLP5563
+    [nombre] => SAUL GOMEZ HERNANDEZ
+    [genero] => M
+    [fnacimiento] => 1970-01-01
+    [asistencia] => NO
+    [observaciones] => vbdd
+)

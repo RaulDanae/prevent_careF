@@ -1,0 +1,5 @@
+USUARIO: RSANCHEZ
+FECHA : 2026-02-04 21:59:04
+============================================================
+Fila 2 | Too few arguments to function procesarCliente(), 3 passed in C:\laragon\www\prevent_care\save\importar_excel.php on line 216 and exactly 6 expected
+Fila 3 | Too few arguments to function procesarCliente(), 3 passed in C:\laragon\www\prevent_care\save\importar_excel.php on line 216 and exactly 6 expected

@@ -1,0 +1,94 @@
+/* Escritorio columnas 3 filas 2 */
+.menu-container {
+ min-height: calc(100vh - 120px);
+ 
+ display: grid;
+ grid-template-columns: repeat(5, minmax(220px, 1fr));
+ gap: 2rem;
+
+ width: 100%;
+ max-width: 1200px;
+ margin: 0 auto;
+
+ padding: 2rem;
+ align-content: center;
+
+}
+
+/* Tabletas columnas 2 filas 3 */
+@media (max-width: 992px) {
+  .menu-container {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+}
+
+@media (max-width: 576px) {
+  .menu-container {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+  }
+}
+
+
+.menu-card {
+  min-height: 160px;
+  max-height: 220px;
+
+  padding: 1.5rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 16px;
+  background: #fff;
+
+  box-shadow: 0 6px 16px rgba(0,0,0,.08);
+  transition: transform .2s ease;
+
+  text-decoration: none;
+
+  color: inherit;
+  
+}
+
+.menu-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,.12);
+  text-decoration: none;
+}
+
+.menu-card:focus,
+.menu-card:active {
+  text-decoration: none;
+}
+
+.menu-card i {
+  font-size: clamp(2.5rem, 4vw, 3rem);
+  margin-bottom: 1rem;
+}
+
+.menu-card span {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  text-align: center;
+}
+
+.menu-card.orange  { color: #fd7e14; }
+.menu-card.green   { color: #28a745; }
+.menu-card.blue    { color: #0d6efd; }
+.menu-card.greengrass  { color: #28bd49; }
+.menu-card.red     { color: #d30000; }
+.menu-card.black   { color: #000000; }
+.menu-card.cyan    { color: #0dcaf0; }
+.menu-card.purple  { color: #6f42c1; }
+.menu-card.gray    { color: #6c757d; }
+.menu-card.pink  { color: #9a4f9d; }
+
+
+.menu-card.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+    filter: grayscale(100%);
+}

@@ -1,0 +1,365 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color: #f5f7f9;
+}
+
+body {
+    display: flex;
+    flex-direction: column; 
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* 2. Aumentar el tamaño del logo */
+.logo_marco{
+  height: 40px; /* Tamaño mas grande para el logo */
+  width: auto;
+}
+
+button {
+    width: 100%;
+    background: #0072ce;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background: #005fa3;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .left {
+        display: none;
+    }
+
+    .right {
+        flex: 100%;
+    }
+}
+
+.logo-area{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+}
+
+/* Área del logo y nombre de la app */
+.logo-area img {
+    width: 200px; /* Ajusta el tamaño de tu logo */
+    margin-bottom: 10px;
+}
+
+.logo-area h1 {
+    color: #007bff; /* Color azul para el nombre "TimelyCare" */
+    font-size: 24px;
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+.logo_menu{
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+}
+
+.logo_menu{
+  width: 30px;
+  margin-bottom: 10px;
+}
+
+.menu-container {
+  flex: 1; /* 👈 ocupa el espacio disponible */
+
+  display: grid;
+  grid-template-columns: repeat(5, minmax(220px, 1fr));
+  gap: 2rem;
+
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  padding: 2rem;
+
+  justify-content: center; /* Este centra los botones */
+}
+
+/* Información del dominio */
+.domain-info {
+    margin-top: 40px;
+    font-size: 12px;
+    color: #888;
+}
+
+.login-error {
+  background: #ffdddd;
+  color: #900;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #f00;
+}
+
+.app-footer {
+  padding: 1rem 2rem;
+  background-color: #f1f1f1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #555;
+}
+
+.app-version {
+  font-weight: 500;
+}
+
+.busqueda-flex {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+}
+
+/* MISMA ALTURA PARA TODO */
+.busqueda-flex .btn,
+.busqueda-flex .form-control,
+.busqueda-flex .form-select {
+  height: 32px !important;
+  line-height: 32px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  width: auto;
+  max-width: 160px;
+}
+
+/* Botones */
+.busqueda-flex .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .busqueda-flex {
+    flex-wrap: wrap;
+  }
+
+  .busqueda-flex .btn,
+  .busqueda-flex .form-control,
+  .busqueda-flex .form-select {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+.busqueda-barra {
+  margin-bottom: 1rem;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  width: 100%;
+}
+
+#tabla-rel{
+  width: 100%;
+  min-width: 1400px;
+  border-collapse: collapse;
+
+}
+
+.table .btn {
+    width: auto !important;
+}
+
+#tabla-rel th,
+#tabla-rel td {
+    white-space: nowrap;
+}
+
+.dataTables_wrapper {
+    width: 100%;
+}
+
+.dataTables_scrollBody {
+    overflow-x: auto !important;
+}
+
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter {
+    display: flex;
+    align-items: center;
+}
+
+/* Separacion entre label y control */
+.dataTables_wrapper .dataTables_length label,
+.dataTables_wrapper .dataTables_filter label{
+    margin-bottom: 0;
+}
+
+/* Ajuste fino de inpouts y selects */
+.dataTables_wrapper select,
+.dataTables_wrapper input[type="search"] {
+    height: 38px;
+}
+
+/* Para celular */
+@media (max-width: 768px) {
+    .table.dataTable {
+        min-width: 1200px;
+    }
+}
+
+/* Transiciones del wizard */
+.step {
+    display: none;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.4s ease;
+}
+
+.step.active {
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.stepper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Stepper */
+.stepper-container {
+    user-select: none;
+}
+
+.step-item {
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    background: #dee2e6;
+    transition: all 0.3s ease;
+    text-align: center;
+    position: relative;
+    flex: 1;
+}
+
+.step-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #dee2e6;
+    color: #6c757d;
+    line-height: 36px;
+    font-weight: bold;
+    margin: 0 auto;
+}
+
+.step-label {
+    font-size: 0.8rem;
+    margin-top: 5px;
+    color: #6c757d;
+}
+
+.step-line {
+    height: 2px;
+    background: #dee2e6;
+    flex: 1;
+    margin: 0 5px;
+}
+
+.step-item.active .step-circle,
+.step-item.completed .step-circle {
+    background: #acfb77;
+    color: #fff;
+}
+
+.step-item.completed .step-circle {
+    background: #198754;
+}
+
+.step-item.active .step-label,
+.step-item.completed .step-label {
+    color: #000;
+}
+
+.step-line.completed {
+    background: #198754;
+}
+
+.step-item.active {
+    background: #7bbfe6ee;
+    color: #030303;
+}
+
+.step-item.completed {
+    background: #bcefc0;
+    color: #030303;
+}
+
+/* Barra de progreso */
+.progress-bar {
+    transition: width 0.4s ease;
+}
+
+input[type="text"] {
+    text-transform: uppercase;
+}
+
+.modal-footer .btn {
+    width: auto;    /* para forzar el tamaño de los botones en el modal  */
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Inputs y textareas en solo lectura */
+input[readonly],
+textarea[readonly] {
+    background-color: #e9ecef;   /* mismo gris que Bootstrap */
+    color: #495057;
+    cursor: not-allowed;
+    opacity: 1;                  /* evita look deslavado */
+}
+
+/* Evitar foco visual confuso */
+input[readonly]:focus,
+textarea[readonly]:focus {
+    box-shadow: none;
+    border-color: #ced4da;
+    outline: none;
+}
+
+/* Esto es para colorear los estatus de baja o Modificacion de la tabla */
+tr.row-baja > td {
+    background-color: #f8d7da !important;
+    color: #842029 !important;
+}
+
+.row-activo {
+    background-color: #d1e7dd !important;
+    color: #0f5132 !important;
+}

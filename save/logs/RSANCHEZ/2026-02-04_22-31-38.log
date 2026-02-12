@@ -1,0 +1,5 @@
+USUARIO: RSANCHEZ
+FECHA : 2026-02-04 22:31:38
+============================================================
+Fila 2 | SQLSTATE[42S02]: Base table or view not found: 1146 Table 'preventbd.paciente' doesn't exist
+Fila 3 | SQLSTATE[42S02]: Base table or view not found: 1146 Table 'preventbd.paciente' doesn't exist
