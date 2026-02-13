@@ -48,8 +48,41 @@
         this.api().columns.adjust();
       },
 
+      rowCallback: function(row, data){
+
+        if(data[5] === "SI") {
+            $(row).addClass('fila-asistencia');
+        }
+
+      },      
+
       initComplete: function() {
         this.api().columns.adjust();
+
+        // Mover input arriba del buscador, (tiene que ser aqui para que se genere cuando la tabla ya fue dibujada)
+        $('#tabla-snu_filter').prepend(`
+            <div style="margin-bottom:5px;">
+                <input type="text"
+                    id = "asistenciaSCAN"
+                    autocomplete = "off"
+                    placeholder = "Escanea ID"
+                    class="form-control form-control-sm me-2"
+                    style="width:200px; display:inline-block;">
+            </div>
+        `);
+
+        // Si se presiona enter en la caja de texto de escaneo llama a la funcion "procesar Escaneo"
+        $('#asistenciaSCAN').on('keypress', function(e){
+            if(e.which === 13){ // ENTER
+                let codigo = $(this).val().trim();
+                $(this).val('');
+
+                if(codigo !== ''){
+                    procesarEscaneo(codigo);
+                }
+            }
+        });
+
       }
 
     });
@@ -317,3 +350,47 @@ $('#formWizard').on('submit', function (e) {
         }
     });
 });
+
+//////////////////////// PArte para Asistencia con solo escanear ////////////////////////////
+
+// ALT + ENTER → foco asistencia
+// ESC → limpiar campo
+$(document).on('keydown', function(e){
+
+    // F2
+    if(e.which === 113){   // 113 = F2
+        e.preventDefault();
+        $('#asistenciaSCAN').focus().select();
+    }
+
+    if(e.which === 27){ // ESC
+        $('#asistenciaSCAN').val('').focus();
+    }
+
+});
+
+// Funcion Ajax que es disparada al dar enter en la caja de escaneo
+function procesarEscaneo(CODIGO){
+
+    $.ajax({
+        url: '../save/update_asistencia_SNU.php',
+        method: 'POST',
+        data: { codigo: CODIGO },
+        dataType: 'json', 
+        success: function(response){
+
+            if(response.success){
+                alertify.success("Asistencia registrada");
+                tabla_nutricional.ajax.reload(null, false);
+
+            } else {
+                alertify.error(response.message);
+            }
+
+        },
+        error: function(){
+            alertify.error("Error del servidor");
+        }
+    });
+
+}

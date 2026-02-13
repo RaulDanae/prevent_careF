@@ -51,23 +51,23 @@
                 ^MNM
 
                 ; ===== NOMBRE PEQUEÑO =====
-                ^FO320,760
+                ^FO320,330
                 ^A0R,16,16
                 ^FD${data.nombre}^FS
 
                 ; ===== FECHA =====
-                ^FO290,820
+                ^FO290,380
                 ^A0R,16,16
                 ^FD${data.fecha}^FS
 
                 ; ===== BARCODE ROTADO (Id) =====
                 ^BY2,2,60
-                ^FO220,750
+                ^FO220,300
                 ^BCR,60,N,N,N
                 ^FD${data.id}^FS
 
                 ; ===== CURP =====
-                ^FO190,800
+                ^FO190,320
                 ^A0R,16,16
                 ^FD${data.curp}^FS
 

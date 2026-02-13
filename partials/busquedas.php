@@ -39,7 +39,6 @@
 
     <?php endif; ?>
 
-
     <!-- Descargar -->
      <button
       type="button"

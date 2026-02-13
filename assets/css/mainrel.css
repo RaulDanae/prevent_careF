@@ -40,6 +40,14 @@ button:hover {
     background: #005fa3;
 }
 
+#asistencia {
+    width: 30mm;
+}
+
+#tabla-rel tbody tr.fila-asistencia td {
+    background-color: #d4edda !important;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .container {
