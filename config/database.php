@@ -1,14 +1,40 @@
 <?php
 
     function conn(): mysqli{
-        // Carga las credenciales desde un archivo.
-        $credentials = require 'C:\laragon\credentials.php';
+        // Si existen variables de entorno 
+        if (getenv('DB_HOST')){
 
-        $mysqli = new mysqli(
-            $credentials['servername'],
-            $credentials['username'],
-            $credentials['password'],
-            $credentials['database']
+            $servername = getenv('DB_HOST');
+            $username   = getenv('DB_USER');
+            $password   = getenv('DB_PASS');
+            $database   = getenv('DB_NAME');
+
+        } else {
+
+            // SI no existen, usar archivo local
+            $credentials = require 'C:\laragon\credentials11.php';
+
+            
+            $servername =    $credentials['servername'];
+            $username   =    $credentials['username'];
+            $password   =    $credentials['password'];
+            $database   =    $credentials['database'];
+
+        }
+
+        $mysqli = mysqli_init();
+
+        // Forzar SSL (Azure lo requiere)
+        mysqli_ssl_set($mysqli, NULL, NULL, NULL, NULL, NULL);
+
+        $mysqli = real_connect(
+            $servername,
+            $username,
+            $password,
+            $database,
+            3306,
+            NULL,
+            MYSQLI_CLIENT_SSL
         );
 
         // Certificar conexion

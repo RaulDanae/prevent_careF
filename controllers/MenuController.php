@@ -9,70 +9,70 @@
                     'title' => 'Registros',
                     'icon'  => 'fas fa-file-lines',
                     'color' => 'orange',
-                    'url'   => '/prevent_care/views/fREG.php',
+                    'url'   => '/prevent-care/views/fREG.php',
                     'roles' => ['Adminis', 'Supervi']
                 ],
                 [
                     'title' => 'Toma de Signos Vitales',
                     'icon'  => 'fas fa-stethoscope',
                     'color' => 'green',
-                    'url'   => '/prevent_care/views/fTSV.php',
+                    'url'   => '/prevent-care/views/fTSV.php',
                     'roles' => ['Adminis', 'Supervi', 'Svitale', 'Pulmvit']
                 ],
                 [
                     'title' => 'Toma de Muestras',
                     'icon'  => 'fas fa-syringe',
                     'color' => 'blue',
-                    'url'   => '/prevent_care/views/fTDM.php',
+                    'url'   => '/prevent-care/views/fTDM.php',
                     'roles' => ['Adminis', 'Supervi', 'Tmuestr']
                 ],
                 [
                     'title' => 'Composicion Corporal',
                     'icon'  => 'fas fa-person',
                     'color' => 'brown',
-                    'url'   => '/prevent_care/views/fCCO.php',
+                    'url'   => '/prevent-care/views/fCCO.php',
                     'roles' => ['Adminis', 'Supervi', 'Ccorpor']
                 ],
                 [
                     'title' => 'Salud Nutricional',
                     'icon'  => 'fa-solid fa-drumstick-bite',
                     'color' => 'greengrass',
-                    'url'   => '/prevent_care/views/fSNU.php',
+                    'url'   => '/prevent-care/views/fSNU.php',
                     'roles' => ['Adminis', 'Supervi', 'Snutric']
                 ],
                 [
                     'title' => 'Capacidad Auditiva',
                     'icon'  => 'fas fa-ear-deaf',
                     'color' => 'blue',
-                    'url'   => '/prevent_care/views/fCAU.php',
+                    'url'   => '/prevent-care/views/fCAU.php',
                     'roles' => ['Adminis', 'Supervi']
                 ],
                 [
                     'title' => 'Capacidad Pulmonar',
                     'icon'  => 'fas fa-lungs',
                     'color' => 'pink',
-                    'url'   => '/prevent_care/views/fCPU.php',
+                    'url'   => '/prevent-care/views/fCPU.php',
                     'roles' => ['Adminis', 'Supervi', 'Pulmvit']
                 ],
                 [
                     'title' => 'Agudeza Visual',
                     'icon'  => 'fas fa-eye',
                     'color' => 'cyan',
-                    'url'   => '/prevent_care/views/fAVI.php',
+                    'url'   => '/prevent-care/views/fAVI.php',
                     'roles' => ['Adminis', 'Supervi', 'Avisual']
                 ],
                 [
                     'title' => 'Activacion Fisica',
                     'icon'  => 'fas fa-person-running',
                     'color' => 'purple',
-                    'url'   => '/prevent_care/views/fAFI.php',
+                    'url'   => '/prevent-care/views/fAFI.php',
                     'roles' => ['Adminis', 'Supervi', 'Afisica']
                 ],
                 [
                     'title' => 'Relajacion',
                     'icon'  => 'fas fa-bed',
                     'color' => 'gray',
-                    'url'   => '/prevent_care/views/fREL.php',
+                    'url'   => '/prevent-care/views/fREL.php',
                     'roles' => ['Adminis', 'Supervi']
                 ],
             ];

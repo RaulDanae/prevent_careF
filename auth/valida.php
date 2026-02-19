@@ -8,7 +8,7 @@
 
     // Valida que la sesion sea POST
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        header("Location: /prevent_care/index.php");
+        header("Location: /prevent-care/index.php");
         exit();
     }
 
@@ -17,7 +17,7 @@
 
     if ($username === '' || $password === '') {
         setFlash('error', 'Todos los campos son obligatorios');
-        header("Location: /prevent_care/index.php");
+        header("Location: /prevent-care/index.php");
         exit();
     }
 
@@ -37,7 +37,7 @@
 
     if (!$user || !password_verify($password, $user['password'])) {
         setFlash('error', 'Usuario o contraseña incorrectos');
-        header("Location: /prevent_care/index.php");
+        header("Location: /prevent-care/index.php");
         exit();
     }
 
@@ -46,7 +46,7 @@
     $_SESSION['usuario']    = $user['usuario'];
     $_SESSION['perfil']     = $user['perfil'];
 
-    header("Location: /prevent_care/views/menu.php");
+    header("Location: /prevent-care/views/menu.php");
     exit();
 
 ?>

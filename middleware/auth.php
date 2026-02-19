@@ -34,12 +34,12 @@
     function authorize(array $rolesPermitidos = [])
     {
         if (!isset($_SESSION['usuario'], $_SESSION['perfil'])) {
-            header('Location: /prevent_care/login.php');
+            header('Location: /prevent-care/login.php');
             exit;
         }
 
         if (!empty($rolesPermitidos) && !in_array($_SESSION['perfil'], $rolesPermitidos, true)) {
-            header('Location: /prevent_care/views/menu.php');
+            header('Location: /prevent-care/views/menu.php');
             exit;
         }
     }

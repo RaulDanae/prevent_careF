@@ -32,28 +32,28 @@
     <head>
     <meta charset="UTF-8">
     <!-- Logo -->
-    <link rel="shortcut icon" href="/prevent_care/assets/img/preventcare_icon1.png">
+    <link rel="shortcut icon" href="/prevent-care/assets/img/preventcare_icon1.png">
     <!-- /Logo -->
     <!-- CSS -->
-    <link rel="stylesheet" type = "text/css" href="/prevent_care/assets/libs/css/bootstrap.min.css">
-    <link rel="stylesheet" type = "text/css" href="/prevent_care/assets/libs/fontawesome/css/all.min.css">
-    <link rel="stylesheet" type = "text/css" href="/prevent_care/assets/libs/css/jquery-ui.css">
-    <link rel="stylesheet" type = "text/css" href="/prevent_care/assets/libs/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type = "text/css" href="/prevent_care/assets/libs/css/alertify.min.css">
-    <link rel="stylesheet" type = "text/css" href="/prevent_care/assets/libs/css/default.min.css">
-    <link rel="stylesheet" type = "text/css" href="/prevent_care/assets/libs/css/buttons.dataTables.min.css">
-    <link rel="stylesheet" type = "text/css" href="/prevent_care/assets/css/main.css">
-    <!-- <link rel="stylesheet" type = "text/css" href="/prevent_care/assets/css/menu.css"> -->
+    <link rel="stylesheet" type = "text/css" href="/prevent-care/assets/libs/css/bootstrap.min.css">
+    <link rel="stylesheet" type = "text/css" href="/prevent-care/assets/libs/fontawesome/css/all.min.css">
+    <link rel="stylesheet" type = "text/css" href="/prevent-care/assets/libs/css/jquery-ui.css">
+    <link rel="stylesheet" type = "text/css" href="/prevent-care/assets/libs/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type = "text/css" href="/prevent-care/assets/libs/css/alertify.min.css">
+    <link rel="stylesheet" type = "text/css" href="/prevent-care/assets/libs/css/default.min.css">
+    <link rel="stylesheet" type = "text/css" href="/prevent-care/assets/libs/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" type = "text/css" href="/prevent-care/assets/css/main.css">
+    <!-- <link rel="stylesheet" type = "text/css" href="/prevent-care/assets/css/menu.css"> -->
     <!-- /CSS -->
     <!-- JS -->
-    <script type = "text/javascript" src = "/prevent_care/assets/libs/js/jquery-3.7.1.min.js"></script>
-    <script type = "text/javascript" src = "/prevent_care/assets/libs/js/jquery-ui.min.js"></script>
-    <script type = "text/javascript" src = "/prevent_care/assets/libs/js/jquery.dataTables.min.js"></script>
-    <script type = "text/javascript" src = "/prevent_care/assets/libs/js/dataTables.buttons.min.js"></script>
-    <script type = "text/javascript" src = "/prevent_care/assets/libs/js/jszip.min.js"></script>
-    <script type = "text/javascript" src = "/prevent_care/assets/libs/js/buttons.html5.min.js"></script>
-    <script type = "text/javascript" src = "/prevent_care/assets/libs/js/alertify.min.js"></script>
-    <script type = "text/javascript" src = "/prevent_care/assets/libs/js/bootstrap.bundle.min.js"></script>
+    <script type = "text/javascript" src = "/prevent-care/assets/libs/js/jquery-3.7.1.min.js"></script>
+    <script type = "text/javascript" src = "/prevent-care/assets/libs/js/jquery-ui.min.js"></script>
+    <script type = "text/javascript" src = "/prevent-care/assets/libs/js/jquery.dataTables.min.js"></script>
+    <script type = "text/javascript" src = "/prevent-care/assets/libs/js/dataTables.buttons.min.js"></script>
+    <script type = "text/javascript" src = "/prevent-care/assets/libs/js/jszip.min.js"></script>
+    <script type = "text/javascript" src = "/prevent-care/assets/libs/js/buttons.html5.min.js"></script>
+    <script type = "text/javascript" src = "/prevent-care/assets/libs/js/alertify.min.js"></script>
+    <script type = "text/javascript" src = "/prevent-care/assets/libs/js/bootstrap.bundle.min.js"></script>
     <!-- /JS -->
 
 

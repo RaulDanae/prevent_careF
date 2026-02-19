@@ -4,7 +4,7 @@
     require_once 'helpers/flash.php';
 
     if (isset($_SESSION['no_empleado'])) {
-        header("Location: /prevent_care/views/menu.php");
+        header("Location: /prevent-care/views/menu.php");
         exit();
     }
 
@@ -16,9 +16,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="/prevent_care/assets/img/preventcare_icon1.png">
+    <link rel="shortcut icon" href="/prevent-care/assets/img/preventcare_icon1.png">
     <title>Prevent Care</title>
-    <link rel="stylesheet" href="/prevent_care/assets/css/main.css">
+    <link rel="stylesheet" href="/prevent-care/assets/css/main.css">
 </head>
 <body>
 
@@ -37,7 +37,7 @@
         <div class="right">
             <div class="card login-card">
                 <div class="logo-area">
-                    <img src="/prevent_care/assets/img/preventcare_icon2.png" alt="Logo PreventCare">
+                    <img src="/prevent-care/assets/img/preventcare_icon2.png" alt="Logo PreventCare">
                     <h1>Bienvenid@</h1>
                     <p>Accede a tu plataforma de trabajo</p>
                 </div>
@@ -53,7 +53,7 @@
                 </form>
 
                 <div class="domain-info">
-                    <span>🌐 www.prevent_care.mx</span>
+                    <span>🌐 www.prevent-care.mx</span>
                 </div>
 
             </div>
@@ -61,6 +61,6 @@
 
     </div>
 
-<script src="/prevent_care/assets/js/login.js"></script>
+<script src="/prevent-care/assets/js/login.js"></script>
 </body>
 </html>
