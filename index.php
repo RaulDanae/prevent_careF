@@ -1,10 +1,11 @@
 <?php
     session_start();
 
+    require_once __DIR__ . '/config/config.php';
     require_once 'helpers/flash.php';
 
     if (isset($_SESSION['no_empleado'])) {
-        header("Location: /prevent-care/views/menu.php");
+        header("Location: " . BASE_URL . "/views/menu.php");
         exit();
     }
 
@@ -16,9 +17,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="/prevent-care/assets/img/preventcare_icon1.png">
+    <link rel="shortcut icon" href="<?= BASE_URL ?>/assets/img/preventcare_icon1.png">
     <title>Prevent Care</title>
-    <link rel="stylesheet" href="/prevent-care/assets/css/main.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/main.css">
 </head>
 <body>
 
@@ -37,7 +38,7 @@
         <div class="right">
             <div class="card login-card">
                 <div class="logo-area">
-                    <img src="/prevent-care/assets/img/preventcare_icon2.png" alt="Logo PreventCare">
+                    <img src="<?= BASE_URL ?>/assets/img/preventcare_icon2.png" alt="Logo PreventCare">
                     <h1>Bienvenid@</h1>
                     <p>Accede a tu plataforma de trabajo</p>
                 </div>
@@ -61,6 +62,10 @@
 
     </div>
 
-<script src="/prevent-care/assets/js/login.js"></script>
+
+    <script>
+        const BASE_URL = "<?= BASE_URL ?>";
+    </script>
+    <script src="<?= BASE_URL ?>/assets/js/login.js"></script>
 </body>
 </html>

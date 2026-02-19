@@ -32,28 +32,28 @@
     <head>
     <meta charset="UTF-8">
     <!-- Logo -->
-    <link rel="shortcut icon" href="/prevent-care/assets/img/preventcare_icon1.png">
+    <link rel="shortcut icon" href="<?= BASE_URL ?>/assets/img/preventcare_icon1.png">
     <!-- /Logo -->
     <!-- CSS -->
-    <link rel="stylesheet" type = "text/css" href="/prevent-care/assets/libs/css/bootstrap.min.css">
-    <link rel="stylesheet" type = "text/css" href="/prevent-care/assets/libs/fontawesome/css/all.min.css">
-    <link rel="stylesheet" type = "text/css" href="/prevent-care/assets/libs/css/jquery-ui.css">
-    <link rel="stylesheet" type = "text/css" href="/prevent-care/assets/libs/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type = "text/css" href="/prevent-care/assets/libs/css/alertify.min.css">
-    <link rel="stylesheet" type = "text/css" href="/prevent-care/assets/libs/css/default.min.css">
-    <link rel="stylesheet" type = "text/css" href="/prevent-care/assets/libs/css/buttons.dataTables.min.css">
-    <link rel="stylesheet" type = "text/css" href="/prevent-care/assets/css/main.css">
-    <!-- <link rel="stylesheet" type = "text/css" href="/prevent-care/assets/css/menu.css"> -->
+    <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/libs/css/bootstrap.min.css">
+    <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/libs/fontawesome/css/all.min.css">
+    <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/libs/css/jquery-ui.css">
+    <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/libs/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/libs/css/alertify.min.css">
+    <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/libs/css/default.min.css">
+    <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/libs/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/css/main.css">
+    <!-- <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/css/menu.css"> -->
     <!-- /CSS -->
     <!-- JS -->
-    <script type = "text/javascript" src = "/prevent-care/assets/libs/js/jquery-3.7.1.min.js"></script>
-    <script type = "text/javascript" src = "/prevent-care/assets/libs/js/jquery-ui.min.js"></script>
-    <script type = "text/javascript" src = "/prevent-care/assets/libs/js/jquery.dataTables.min.js"></script>
-    <script type = "text/javascript" src = "/prevent-care/assets/libs/js/dataTables.buttons.min.js"></script>
-    <script type = "text/javascript" src = "/prevent-care/assets/libs/js/jszip.min.js"></script>
-    <script type = "text/javascript" src = "/prevent-care/assets/libs/js/buttons.html5.min.js"></script>
-    <script type = "text/javascript" src = "/prevent-care/assets/libs/js/alertify.min.js"></script>
-    <script type = "text/javascript" src = "/prevent-care/assets/libs/js/bootstrap.bundle.min.js"></script>
+    <script type = "text/javascript" src = "<?= BASE_URL ?>/assets/libs/js/jquery-3.7.1.min.js"></script>
+    <script type = "text/javascript" src = "<?= BASE_URL ?>/assets/libs/js/jquery-ui.min.js"></script>
+    <script type = "text/javascript" src = "<?= BASE_URL ?>/assets/libs/js/jquery.dataTables.min.js"></script>
+    <script type = "text/javascript" src = "<?= BASE_URL ?>/assets/libs/js/dataTables.buttons.min.js"></script>
+    <script type = "text/javascript" src = "<?= BASE_URL ?>/assets/libs/js/jszip.min.js"></script>
+    <script type = "text/javascript" src = "<?= BASE_URL ?>/assets/libs/js/buttons.html5.min.js"></script>
+    <script type = "text/javascript" src = "<?= BASE_URL ?>/assets/libs/js/alertify.min.js"></script>
+    <script type = "text/javascript" src = "<?= BASE_URL ?>/assets/libs/js/bootstrap.bundle.min.js"></script>
     <!-- /JS -->
 
 
@@ -86,9 +86,10 @@
             const PERFIL_USUARIO = "<?= $_SESSION['perfil'] ?? '' ?>";
             const GRUPO_NOMBRE = "<?= $_SESSION['nombre'] ?? '' ?>";
             const GRUPO_USUARIO = "<?= $_SESSION['usuario'] ?? '' ?>";
+            const BASE_URL = "<?= BASE_URL ?>";
         </script>
 
-        <script src= '../assets/js/alb.js'></script>
+        <script src= '<?= BASE_URL ?>/assets/js/alb.js'></script>
         <script src = "<?= BASE_URL ?>/assets/js/comun.js"></script>
 
     </body>

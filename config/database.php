@@ -27,7 +27,7 @@
         // Forzar SSL (Azure lo requiere)
         mysqli_ssl_set($mysqli, NULL, NULL, NULL, NULL, NULL);
 
-        $mysqli = real_connect(
+        $mysqli -> real_connect(
             $servername,
             $username,
             $password,

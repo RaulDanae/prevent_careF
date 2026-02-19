@@ -13,11 +13,11 @@
       order: [],
       destroy: true,
       language: {
-        url: "../assets/js/Spanish.json"
+        url: BASE_URL + "/assets/js/Spanish.json"
       },
 
       "ajax": {
-        url: "../partials/relltdm.php",
+        url: BASE_URL + "/partials/relltdm.php",
         type: "POST",
         },
 
@@ -260,7 +260,7 @@ $('#tabla-tdm').on('click', '.btnEditar', function () {
 
 function cargarDatosColaborador(CURP) {
     $.ajax({
-        url: '../config/get_tdm.php',
+        url: BASE_URL + '/config/get_tdm.php',
         type: 'POST',
         dataType: 'json',
         data: { curp: CURP },
@@ -313,7 +313,7 @@ $('#formWizard').on('submit', function (e) {
         .prop('disabled', false);
 
     $.ajax({
-        url: '../save/update_muestras.php',
+        url: BASE_URL + '/save/update_muestras.php',
         type: 'POST',
         data: $(this).serialize(),
         dataType: 'json',
@@ -376,7 +376,7 @@ $(document).on('keydown', function(e){
 function procesarEscaneo(CODIGO){
 
     $.ajax({
-        url: '../save/update_asistencia_TDM.php',
+        url: BASE_URL + '/save/update_asistencia_TDM.php',
         method: 'POST',
         data: { codigo: CODIGO },
         dataType: 'json', 

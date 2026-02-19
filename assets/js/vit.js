@@ -13,11 +13,11 @@
       order: [],
       destroy: true,
       language: {
-        url: "../assets/js/Spanish.json"
+        url: BASE_URL + "/assets/js/Spanish.json"
       },
 
       "ajax": {
-        url: "../partials/rellvit.php",
+        url: BASE_URL + "/partials/rellvit.php",
         type: "POST",
         },
 
@@ -225,7 +225,7 @@ $('#tabla-vit').on('click', '.btnEditar', function () {
 
 function cargarDatosColaborador(CURP) {
     $.ajax({
-        url: '../config/get_vit.php',
+        url: BASE_URL + '/config/get_vit.php',
         type: 'POST',
         dataType: 'json',
         data: { curp: CURP },
@@ -279,7 +279,7 @@ $('#formWizard').on('submit', function (e) {
         .prop('disabled', false);
 
     $.ajax({
-        url: '../save/update_vitales.php',
+        url: BASE_URL + '/save/update_vitales.php',
         type: 'POST',
         data: $(this).serialize(),
         dataType: 'json',

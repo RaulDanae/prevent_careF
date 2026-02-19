@@ -2,9 +2,15 @@
    // Ruta física del proyecto (filesystem)
     define('ROOT_PATH', realpath(__DIR__ . '/..'));
 
-    // Ruta base web
-    define('BASE_URL', '/prevent-care');
+    // Detectar si estamos en Azure
+    if (isset($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'azurewebsites.net') !== false) {
+    
+        defina('BASE_URL', '');
 
+    } else {
 
+        define('BASE_URL', '/prevent-care');
+
+    }
 
 ?>

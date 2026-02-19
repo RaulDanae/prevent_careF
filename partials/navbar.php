@@ -3,7 +3,7 @@
 
     <div class = "d-flex align-items-center">
       <a href="#" class = "navbar-brand me-4">
-        <img src="../assets/img/preventcare_icon3.png" class = "logo_marco" alt="logo">
+        <img src="<?= BASE_URL ?>/assets/img/preventcare_icon3.png" class = "logo_marco" alt="logo">
       </a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -18,18 +18,18 @@
                aria-expanded="false">Registros
             </a>
             <ul class="dropdown-menu" aria-labelledby="ABM">
-              <li><a href="../views/fREG.php" class="dropdown-item">Registro</a></li>
-              <li><a href="../views/fTSV.php" class="dropdown-item">Toma Signos Vitales</a></li>
-              <li><a href="../views/fTDM.php" class="dropdown-item">Toma de Muestras</a></li>
-              <li><a href="../views/fCCO.php" class="dropdown-item">Composicion Corporal</a></li>
-              <li><a href="../views/fSNU.php" class="dropdown-item">Salud Nutricional</a></li>
-              <li><a href="../views/fCAU.php" class="dropdown-item">Capacidad Auditiva</a></li>
-              <li><a href="../views/fCPU.php" class="dropdown-item">Capacidad Pulmonar</a></li>
-              <li><a href="../views/fAVI.php" class="dropdown-item">Agudeza Visual</a></li>
-              <li><a href="../views/fAFI.php" class="dropdown-item">Activacion Fisica</a></li>
-              <li><a href="../views/fREL.php" class="dropdown-item">Relajacion</a></li>
+              <li><a href="<?= BASE_URL ?>/views/fREG.php" class="dropdown-item">Registro</a></li>
+              <li><a href="<?= BASE_URL ?>/views/fTSV.php" class="dropdown-item">Toma Signos Vitales</a></li>
+              <li><a href="<?= BASE_URL ?>/views/fTDM.php" class="dropdown-item">Toma de Muestras</a></li>
+              <li><a href="<?= BASE_URL ?>/views/fCCO.php" class="dropdown-item">Composicion Corporal</a></li>
+              <li><a href="<?= BASE_URL ?>/views/fSNU.php" class="dropdown-item">Salud Nutricional</a></li>
+              <li><a href="<?= BASE_URL ?>/views/fCAU.php" class="dropdown-item">Capacidad Auditiva</a></li>
+              <li><a href="<?= BASE_URL ?>/views/fCPU.php" class="dropdown-item">Capacidad Pulmonar</a></li>
+              <li><a href="<?= BASE_URL ?>/views/fAVI.php" class="dropdown-item">Agudeza Visual</a></li>
+              <li><a href="<?= BASE_URL ?>/views/fAFI.php" class="dropdown-item">Activacion Fisica</a></li>
+              <li><a href="<?= BASE_URL ?>/views/fREL.php" class="dropdown-item">Relajacion</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a href="../middleware/logout.php" class="dropdown-item">Salir</a></li> 
+              <li><a href="<?= BASE_URL ?>/middleware/logout.php" class="dropdown-item">Salir</a></li> 
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -37,7 +37,7 @@
                aria-expanded="false">Usuarios
             </a>
             <ul class="dropdown-menu" aria-labelledby="CD">
-              <li><a href="../views/fALBA.php" class="dropdown-item" >Alta o Bajas</a></li>
+              <li><a href="<?= BASE_URL ?>/views/fALBA.php" class="dropdown-item" >Alta o Bajas</a></li>
             </ul>                            
           </li>
           <li class="nav-item dropdown">
@@ -58,7 +58,7 @@
           Bienvenid@ <?= $_SESSION['nombre'] ?>
       </div>
       <div>
-        <a href="../middleware/logout.php" class="btn btn-danger">
+        <a href="<?= BASE_URL ?>/middleware/logout.php" class="btn btn-danger">
           Salir
         </a>
 <!--        <button type="button" class="btn btn-danger" action="../middleware/logout.php">

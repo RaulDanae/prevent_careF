@@ -13,11 +13,11 @@
       order: [],
       destroy: true,
       language: {
-        url: "../assets/js/Spanish.json"
+        url: BASE_URL + "/assets/js/Spanish.json"
       },
 
       "ajax": {
-        url: "../partials/rellavi.php",
+        url: BASE_URL + "/partials/rellavi.php",
         type: "POST",
         },
 
@@ -230,7 +230,7 @@ $('#tabla-avi').on('click', '.btnEditar', function () {
 
 function cargarDatosColaborador(CURP) {
     $.ajax({
-        url: '../config/get_avi.php',
+        url: BASE_URL + '/config/get_avi.php',
         type: 'POST',
         dataType: 'json',
         data: { curp: CURP },
@@ -289,7 +289,7 @@ $('#formWizard').on('submit', function (e) {
         .prop('disabled', false);
 
     $.ajax({
-        url: '../save/update_visual.php',
+        url: BASE_URL + '/save/update_visual.php',
         type: 'POST',
         data: $(this).serialize(),
         dataType: 'json',

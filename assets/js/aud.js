@@ -13,11 +13,11 @@
       order: [],
       destroy: true,
       language: {
-        url: "../assets/js/Spanish.json"
+        url: BASE_URL + "/assets/js/Spanish.json"
       },
 
       "ajax": {
-        url: "../partials/rellcau.php",
+        url: BASE_URL + "/partials/rellcau.php",
         type: "POST",
         },
 
@@ -226,7 +226,7 @@ $('#tabla-cau').on('click', '.btnEditar', function () {
 
 function cargarDatosColaborador(CURP) {
     $.ajax({
-        url: '../config/get_cau.php',
+        url: BASE_URL + '/config/get_cau.php',
         type: 'POST',
         dataType: 'json',
         data: { curp: CURP },
@@ -281,7 +281,7 @@ $('#formWizard').on('submit', function (e) {
         .prop('disabled', false);
 
     $.ajax({
-        url: '../save/update_auditivo.php',
+        url: BASE_URL + '/save/update_auditivo.php',
         type: 'POST',
         data: $(this).serialize(),
         dataType: 'json',

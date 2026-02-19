@@ -13,11 +13,11 @@
       order: [],
       destroy: true,
       language: {
-        url: "../assets/js/Spanish.json"
+        url: BASE_URL + "/assets/js/Spanish.json"
       },
 
       "ajax": {
-        url: "../partials/rellalb.php",
+        url: BASE_URL + "/partials/rellalb.php",
         type: "POST",
         },
 
@@ -419,7 +419,7 @@ $('#tabla-alb').on('click', '.btnEditar', function () {
 function cargarDatosUsuario(Id) {
 
         $.ajax({
-        url: '../config/get_usuario.php',
+        url: BASE_URL + '/config/get_usuario.php',
         type: 'POST',
         dataType: 'json',
         data: { id: Id },

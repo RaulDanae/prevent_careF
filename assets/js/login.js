@@ -20,9 +20,9 @@ document.querySelector('form').addEventListener('submit', function(e) {
 /// Procedimiento para transicion de fondo  /////
 
 const images = [
-    'assets/img/fondo_1.png',
-    'assets/img/fondo_2.png',
-    'assets/img/fondo_3.png'
+    BASE_URL + '/assets/img/fondo_1.png',
+    BASE_URL + '/assets/img/fondo_2.png',
+    BASE_URL + '/assets/img/fondo_3.png'
 ];
 
 let currentIndex = 0;

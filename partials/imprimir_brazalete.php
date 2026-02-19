@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Imprimiendo brazalete</title>
 
+    <?php require_once __DIR__ . '/../config/config.php'; ?>
     <!-- Text2Barcode (OFICIAL) -->
     <script src="https://labeldictate.com/text2barcode/lib/t2bprinter.js"></script>
 </head>
@@ -38,7 +39,7 @@
             }
 
             // 3️⃣ Obtener datos del paciente (PHP)
-            const res = await fetch(`imprimir_pacientes.php?id=${id}`);
+            const res = await fetch(`<?= BASE_URL ?>/ajax/imprimir_pacientes.php?id=${id}`);
             const data = await res.json();
 
             // 4️⃣ Construir ZPL (VISIBLE – SIN ROTAR)

@@ -5,7 +5,7 @@ function showAlert(message) {
 
 // Cerrar sesión
 function logout() {
-  window.location.href = "/middleware/logout.php";
+  window.location.href = BASE_URL + "/middleware/logout.php";
 }
 
 (function () {

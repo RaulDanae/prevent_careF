@@ -7,7 +7,7 @@
 
     <div class = "d-flex align-items-center">
       <a href="#" class = "navbar-brand me-4">
-        <img src="../assets/img/preventcare_icon3.png" class = "logo_marco" alt="logo">
+        <img src="<?= BASE_URL ?>/assets/img/preventcare_icon3.png" class = "logo_marco" alt="logo">
       </a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -29,7 +29,7 @@
                aria-expanded="false">Registros
             </a>
             <ul class="dropdown-menu" aria-labelledby="ABM">
-              <li><a href="../middleware/logout.php" class="dropdown-item">Salir</a></li> 
+              <li><a href="<?= BASE_URL ?>/middleware/logout.php" class="dropdown-item">Salir</a></li> 
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -50,7 +50,7 @@
           Bienvenid@ <?= $_SESSION['nombre'] ?>
       </div>
       <div>
-        <a href="../views/menu.php" class="btn btn-danger">
+        <a href="<?= BASE_URL ?>/views/menu.php" class="btn btn-danger">
           Salir
         </a>
 <!--        <button type="button" class="btn btn-danger" action="../middleware/logout.php">

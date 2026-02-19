@@ -13,11 +13,11 @@
       order: [],
       destroy: true,
       language: {
-        url: "../assets/js/Spanish.json"
+        url: BASE_URL + "/assets/js/Spanish.json"
       },
 
       "ajax": {
-        url: "../partials/rellcco.php",
+        url: BASE_URL + "/partials/rellcco.php",
         type: "POST",
         },
 
@@ -228,7 +228,7 @@ $('#tabla-cco').on('click', '.btnEditar', function () {
 
 function cargarDatosColaborador(CURP) {
     $.ajax({
-        url: '../config/get_cco.php',
+        url: BASE_URL + '/config/get_cco.php',
         type: 'POST',
         dataType: 'json',
         data: { curp: CURP },
@@ -287,7 +287,7 @@ $('#formWizard').on('submit', function (e) {
         .prop('disabled', false);
 
     $.ajax({
-        url: '../save/update_corporal.php',
+        url: BASE_URL + '/save/update_corporal.php',
         type: 'POST',
         data: $(this).serialize(),
         dataType: 'json',

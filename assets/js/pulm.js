@@ -13,11 +13,11 @@
       order: [],
       destroy: true,
       language: {
-        url: "../assets/js/Spanish.json"
+        url: BASE_URL + "/assets/js/Spanish.json"
       },
 
       "ajax": {
-        url: "../partials/rellcpu.php",
+        url: BASE_URL + "/partials/rellcpu.php",
         type: "POST",
         },
 
@@ -226,7 +226,7 @@ $('#tabla-cpu').on('click', '.btnEditar', function () {
 
 function cargarDatosColaborador(CURP) {
     $.ajax({
-        url: '../config/get_cpu.php',
+        url: BASE_URL + '/config/get_cpu.php',
         type: 'POST',
         dataType: 'json',
         data: { curp: CURP },
@@ -284,7 +284,7 @@ $('#formWizard').on('submit', function (e) {
         .prop('disabled', false);
 
     $.ajax({
-        url: '../save/update_pulmonar.php',
+        url: BASE_URL + '/save/update_pulmonar.php',
         type: 'POST',
         data: $(this).serialize(),
         dataType: 'json',

@@ -3,12 +3,13 @@
     session_start();
 
     require_once '../config/database.php';
+    require_once '../config/config.php';
     require_once '../helpers/flash.php';
 
 
     // Valida que la sesion sea POST
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        header("Location: /prevent-care/index.php");
+        header("Location: " . BASE_URL . "/index.php");
         exit();
     }
 
@@ -17,7 +18,7 @@
 
     if ($username === '' || $password === '') {
         setFlash('error', 'Todos los campos son obligatorios');
-        header("Location: /prevent-care/index.php");
+        header("Location: " . BASE_URL . "/index.php");
         exit();
     }
 
@@ -37,7 +38,7 @@
 
     if (!$user || !password_verify($password, $user['password'])) {
         setFlash('error', 'Usuario o contraseña incorrectos');
-        header("Location: /prevent-care/index.php");
+        header("Location: " . BASE_URL . "/index.php");
         exit();
     }
 
@@ -46,7 +47,7 @@
     $_SESSION['usuario']    = $user['usuario'];
     $_SESSION['perfil']     = $user['perfil'];
 
-    header("Location: /prevent-care/views/menu.php");
+    header("Location: " . BASE_URL . "/views/menu.php");
     exit();
 
 ?>

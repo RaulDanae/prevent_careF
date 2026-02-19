@@ -24,19 +24,19 @@
 <head>
   <meta charset="UTF-8">
   <!-- Logo -->
-   <link rel="shortcut icon" href="/prevent-care/assets/img/preventcare_icon1.png">
+   <link rel="shortcut icon" href="<?= BASE_URL ?>/assets/img/preventcare_icon1.png">
   <!-- /Logo -->
   <!-- CSS -->
-   <link rel="stylesheet" type = "text/css" href="/prevent-care/assets/libs/css/bootstrap.min.css">
-   <link rel="stylesheet" type = "text/css" href="/prevent-care/assets/libs/fontawesome/css/all.min.css">
-   <link rel="stylesheet" type = "text/css" href="/prevent-care/assets/libs/css/jquery-ui.css">
-   <link rel="stylesheet" type = "text/css" href="/prevent-care/assets/css/main.css">
-   <link rel="stylesheet" type = "text/css" href="/prevent-care/assets/css/menu.css">
+   <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/libs/css/bootstrap.min.css">
+   <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/libs/fontawesome/css/all.min.css">
+   <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/libs/css/jquery-ui.css">
+   <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/css/main.css">
+   <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/css/menu.css">
   <!-- /CSS -->
   <!-- JS -->
-   <script type = "text/javascript" src = "/prevent-care/assets/libs/js/jquery-3.7.1.min.js"></script>
-   <script type = "text/javascript" src = "/prevent-care/assets/libs/js/jquery-ui.min.js"></script>
-   <script type = "text/javascript" src = "/prevent-care/assets/libs/js/bootstrap.bundle.min.js"></script>
+   <script type = "text/javascript" src = "<?= BASE_URL ?>/assets/libs/js/jquery-3.7.1.min.js"></script>
+   <script type = "text/javascript" src = "<?= BASE_URL ?>/assets/libs/js/jquery-ui.min.js"></script>
+   <script type = "text/javascript" src = "<?= BASE_URL ?>/assets/libs/js/bootstrap.bundle.min.js"></script>
   <!-- /JS -->
 
 
@@ -74,6 +74,7 @@
         <?php endforeach; ?>
 
     </main>
+    <script> const BASE_URL = "<?= BASE_URL ?>"; </script>
     <script src = "<?= BASE_URL ?>/assets/js/main.js"></script>
     <script src = "<?= BASE_URL ?>/assets/js/menu.js"></script>
     <script src = "<?= BASE_URL ?>/assets/js/comun.js"></script>

@@ -4,6 +4,9 @@
         session_start();
     }
 
+    require_once __DIR__ . '/../config/config.php';
+
+
     function authorizeApi(array $rolesPermitidos = [])
     {
 
@@ -34,12 +37,12 @@
     function authorize(array $rolesPermitidos = [])
     {
         if (!isset($_SESSION['usuario'], $_SESSION['perfil'])) {
-            header('Location: /prevent-care/login.php');
+            header('Location: ' . BASE_URL . '/login.php');
             exit;
         }
 
         if (!empty($rolesPermitidos) && !in_array($_SESSION['perfil'], $rolesPermitidos, true)) {
-            header('Location: /prevent-care/views/menu.php');
+            header('Location: ' . BASE_URL . '/views/menu.php');
             exit;
         }
     }

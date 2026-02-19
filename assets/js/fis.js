@@ -13,11 +13,11 @@
       order: [],
       destroy: true,
       language: {
-        url: "../assets/js/Spanish.json"
+        url: BASE_URL + "/assets/js/Spanish.json"
       },
 
       "ajax": {
-        url: "../partials/rellafi.php",
+        url: BASE_URL + "/partials/rellafi.php",
         type: "POST",
         },
 
@@ -257,7 +257,7 @@ $('#tabla-afi').on('click', '.btnEditar', function () {
 
 function cargarDatosColaborador(CURP) {
     $.ajax({
-        url: '../config/get_afi.php',
+        url: BASE_URL + '/config/get_afi.php',
         type: 'POST',
         dataType: 'json',
         data: { curp: CURP},
@@ -310,7 +310,7 @@ $('#formWizard').on('submit', function (e) {
         .prop('disabled', false);
 
     $.ajax({
-        url: '../save/update_fisica.php',
+        url: BASE_URL + '/save/update_fisica.php',
         type: 'POST',
         data: $(this).serialize(),
         dataType: 'json',
@@ -373,7 +373,7 @@ $(document).on('keydown', function(e){
 function procesarEscaneo(CODIGO){
 
     $.ajax({
-        url: '../save/update_asistencia_AFI.php',
+        url: BASE_URL + '/save/update_asistencia_AFI.php',
         method: 'POST',
         data: { codigo: CODIGO },
         dataType: 'json', 

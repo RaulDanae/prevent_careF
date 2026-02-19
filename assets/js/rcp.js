@@ -22,11 +22,11 @@
       destroy: true,
 
       language: {
-        url: "../assets/js/Spanish.json"
+        url: BASE_URL + "/assets/js/Spanish.json"
       },
 
       "ajax": {
-        url: "../partials/tremcp.php",
+        url: BASE_URL + "/partials/tremcp.php",
         type: "POST",
         data: function (data){
           data.fecvarias = $('#fecvarias').val();

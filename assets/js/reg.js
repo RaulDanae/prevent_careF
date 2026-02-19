@@ -13,11 +13,11 @@
       order: [],
       destroy: true,
       language: {
-        url: "../assets/js/Spanish.json"
+        url: BASE_URL + "/assets/js/Spanish.json"
       },
 
       "ajax": {
-        url: "../partials/rellreg.php",
+        url: BASE_URL + "/partials/rellreg.php",
         type: "POST",
         },
 
@@ -451,7 +451,7 @@ function cargarDatosColaborador(Id) {
     /////////////////////////////////////////////////////////////////////////////////
 
     $.ajax({
-        url: '../config/get_registro.php',
+        url: BASE_URL + '/config/get_registro.php',
         type: 'POST',
         dataType: 'json',
         data: { id: Id },
@@ -514,7 +514,7 @@ $('#excelFile').on('change', function () {
     formData.append('excel', archivo);
 
     $.ajax({
-        url: '../save/importar_excel.php',
+        url: BASE_URL + '/save/importar_excel.php',
         type: 'POST',
         data: formData,
         contentType: false,

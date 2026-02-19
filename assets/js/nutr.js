@@ -13,11 +13,11 @@
       order: [],
       destroy: true,
       language: {
-        url: "../assets/js/Spanish.json"
+        url: BASE_URL + "/assets/js/Spanish.json"
       },
 
       "ajax": {
-        url: "../partials/rellsnu.php",
+        url: BASE_URL + "/partials/rellsnu.php",
         type: "POST",
         },
 
@@ -257,7 +257,7 @@ $('#tabla-snu').on('click', '.btnEditar', function () {
 
 function cargarDatosColaborador(CURP) {
     $.ajax({
-        url: '../config/get_snu.php',
+        url: BASE_URL + '/config/get_snu.php',
         type: 'POST',
         dataType: 'json',
         data: { curp: CURP },
@@ -310,7 +310,7 @@ $('#formWizard').on('submit', function (e) {
         .prop('disabled', false);
 
     $.ajax({
-        url: '../save/update_nutricion.php',
+        url: BASE_URL + '/save/update_nutricion.php',
         type: 'POST',
         data: $(this).serialize(),
         dataType: 'json',
@@ -373,7 +373,7 @@ $(document).on('keydown', function(e){
 function procesarEscaneo(CODIGO){
 
     $.ajax({
-        url: '../save/update_asistencia_SNU.php',
+        url: BASE_URL + '/save/update_asistencia_SNU.php',
         method: 'POST',
         data: { codigo: CODIGO },
         dataType: 'json', 
