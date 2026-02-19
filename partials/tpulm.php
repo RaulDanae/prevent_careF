@@ -11,7 +11,9 @@
                 <th>Peso</th>
                 <th>Talla</th>
                 <th>Edad</th>
-                <th>Asistencia</th>
+                <th>FVC</th>
+                <th>FEV1</th>
+                <th>FEV1_FVC</th>
                 <th>Observacion</th>
                 <th>F_Modifica</th>
                 <th>H_Modifica</th>

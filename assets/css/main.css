@@ -118,6 +118,10 @@ form button,
     border-radius: 4px;
 }
 
+#tabla-alb tbody tr.fila-baja td {
+    background-color: #d76f6f !important;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .container {
@@ -440,4 +444,15 @@ tr.row-baja > td {
 .row-activo {
     background-color: #d1e7dd !important;
     color: #0f5132 !important;
+}
+
+.modal-info-custom {
+    background: linear-gradient(135deg, #e7eda6, #cce46f);
+    color: rgb(3, 3, 3);
+    border-radius: 15px;
+}
+
+.modal-info-custom .modal-header,
+.modal-info-custom .modal-footer {
+    border: none;
 }

@@ -4,7 +4,7 @@
     require_once ROOT_PATH . '/middleware/auth.php';
     require_once ROOT_PATH . '/controllers/AfiliadosController.php';
     require_once ROOT_PATH . '/controllers/MenuController.php';
-    authorize(['Adminis', 'Supervi']);
+    authorize(['Adminis', 'Supervi', 'Ccorpor']);
 
     $perfil  = $_SESSION['perfil'] ?? null;
     $nombre  = $_SESSION['nombre'] ?? null;   // Nombre
@@ -73,6 +73,7 @@
         <?php include '../partials/nuevo_corp.php'; ?>
 
         <?php include '../partials/footer.php'; ?>
+        <?php include '../partials/modal_info.php'; ?>
 
         <script>
             const PERFIL_USUARIO = "<?= $_SESSION['perfil'] ?? '' ?>";
@@ -81,7 +82,17 @@
         </script>
 
         <script src= '../assets/js/corp.js'></script>
+        <script src = "<?= BASE_URL ?>/assets/js/comun.js"></script>
 
     </body>
 
 </html>
+
+<script>
+    const INFO_MODULO = `
+        <p><strong>Composicion Corporal</strong></p>
+        <p>Se registran la composicion corporal del Colaborador y otros datos.</p>
+        <p>Telefono, Celular, Peso, Talla, Marcapasos.</p>
+        <p>Se exporta datos de las tablas.</p>
+    `;
+</script>

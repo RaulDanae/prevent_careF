@@ -37,6 +37,17 @@
        accept=".xlsx,.xls"
        style="display:none">
 
+    <?php elseif (in_array($perfil, ['Adminis', 'Supervi']) && $modulo === 'Altas o Bajas'): ?>
+     <button
+      type="button"
+      id="btnNuevoM"
+      class="btn btn-primary btn-sm btn-toolbar"
+      data-bs-toggle="modal"
+      data-bs-target="#modalNuevo"
+      title="Nuevo">
+      <i class="fa fa-plus"></i>
+     </button>
+
     <?php endif; ?>
 
     <!-- Descargar -->

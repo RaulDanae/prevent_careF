@@ -73,6 +73,7 @@
         <?php include '../partials/nuevo_vit.php'; ?>
 
         <?php include '../partials/footer.php'; ?>
+        <?php include '../partials/modal_info.php'; ?>
 
         <script>
             const PERFIL_USUARIO = "<?= $_SESSION['perfil'] ?? '' ?>";
@@ -81,7 +82,17 @@
         </script>
 
         <script src= '../assets/js/vit.js'></script>
+        <script src = "<?= BASE_URL ?>/assets/js/comun.js"></script>
 
     </body>
 
 </html>
+
+<script>
+    const INFO_MODULO = `
+        <p><strong>Toma de Signos Vitales</strong></p>
+        <p>Se registran los signos Vitales del Colaborador.</p>
+        <p>Presion Sistolica, Presion Diastolica, Frecuencia Cardiaca y Oxigenacion.</p>
+        <p>Se exporta datos de las tablas.</p>
+    `;
+</script>

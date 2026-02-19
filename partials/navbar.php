@@ -34,11 +34,10 @@
           </li>
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" id="acciones" role="button" data-bs-toggle="dropdown"
-               aria-expanded="false">Acciones
+               aria-expanded="false">Usuarios
             </a>
             <ul class="dropdown-menu" aria-labelledby="CD">
-              <li><a href="../views/FCargaGral.php" class="dropdown-item" >Carga General</a></li>
-              <li><a href="../views/FDescarga.php" class="dropdown-item" >Descargar</a></li>
+              <li><a href="../views/fALBA.php" class="dropdown-item" >Alta o Bajas</a></li>
             </ul>                            
           </li>
           <li class="nav-item dropdown">
@@ -46,7 +45,7 @@
                aria-expanded="false">About
             </a>
             <ul class="dropdown-menu" aria-labelledby="AC">
-              <li><a href="../views/fA.php" class="dropdown-item">Acerca de</a></li>
+              <li><a href="#" class="dropdown-item" id="btnAcercaDe">Acerca de</a></li>
             </ul>
           </li>
         </ul>

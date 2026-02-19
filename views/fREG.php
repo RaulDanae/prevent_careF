@@ -80,6 +80,7 @@
         <?php include '../partials/nuevo_reg.php'; ?>
 
         <?php include '../partials/footer.php'; ?>
+        <?php include '../partials/modal_info.php'; ?>
 
         <script>
             const PERFIL_USUARIO = "<?= $_SESSION['perfil'] ?? '' ?>";
@@ -88,7 +89,21 @@
         </script>
 
         <script src= '../assets/js/reg.js'></script>
+        <script src = "<?= BASE_URL ?>/assets/js/comun.js"></script>
 
     </body>
 
 </html>
+
+<script>
+    const INFO_MODULO = `
+        <p><strong>Registros</strong></p>
+        <p>Se registran los datos del paciente.</p>
+        <p>Compañia, Clave del Empleado, Nombre del colaborador, Fecha Nacimiento, Genero, CURP, Email, RFC, Edad, Aviso Privacidad, Consentimiento Informado, Observaciones.</p>
+        <p>De estos campos ya vienen prellenados de compañia a Email</p>
+        <p>Aqui se puede dar de alta y editar registros</p>
+        <p>Se imprimen los codigos de barras.</p>
+        <p>Se importan archivos de excel.</p>
+        <p>Se exporta datos de las tablas.</p>
+    `;
+</script>

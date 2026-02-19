@@ -7,9 +7,7 @@
     ================================ */
 
     require_once __DIR__ . '/../config/config.php';
-    require_once ROOT_PATH . '/middleware/auth.php';
     require_once ROOT_PATH . '/config/database1.php';
-    authorizeDataTable(['Adminis', 'Supervi', 'Pulmvit']);
 
     $conn = conn(); // Es obligatorio
 
@@ -41,23 +39,26 @@
     $where = [];
     $params = [];
 
+    if (!in_array($perfil, ['Adminis', 'Supervi'])) {
+
+        $where[] = "t1.usuario = ?";
+        $params[] = $usuario;
+    }
+
     /* ===============================
         5. FILTROS DE BÚSQUEDA
     ================================ */
     $searchValue       = $_POST['search']['value'] ?? '';
 
-    // Condición fija
-    $where[] = "t1.rfc <> ''";
-
-    // COndificones variables
     if ($searchValue !== '') {
         $where[] = "(
-            t1.colaborador LIKE ? OR
-            t1.curp LIKE ? OR
-            t1.id_reg LIKE ?
+            t1.nombre LIKE ? OR 
+            t1.usuario LIKE ? OR
+            t2.perfil LIKE ? OR 
+            t1.estatus LIKE ?  
         )";
 
-        for ($i = 0; $i < 3; $i++){
+        for ($i = 0; $i < 4; $i++){
             $params[] = "%$searchValue%";
         }
     }
@@ -78,13 +79,13 @@
     /* ===============================
         7. TOTAL DE REGISTROS (SIN FILTRO)
     ================================ */
-    $stmtTotal = $conn->query("SELECT COUNT(*) FROM pacientes");
+    $stmtTotal = $conn->query("SELECT COUNT(*) FROM staff");
     $recordsTotal = (int)$stmtTotal->fetchColumn();
 
     /* ===============================
         8. TOTAL DE REGISTROS FILTRADOS
     ================================ */    
-    $sqlFiltered = "SELECT COUNT(*) FROM pacientes t1 $whereSQL";
+    $sqlFiltered = "SELECT COUNT(*) FROM staff t1 LEFT JOIN perfiles t2 ON t1.perfil = t2.id $whereSQL";
     $stmtFiltered = $conn->prepare($sqlFiltered);
     $stmtFiltered->execute($params);
     $recordsFiltered = (int)$stmtFiltered->fetchColumn();
@@ -94,39 +95,21 @@
     ================================ */    
     $sqlData = "
     SELECT
-        t1.curp,
-        t1.colaborador,
-        t1.genero,
-        t1.fec_nac,
-        t2.peso,
-        t2.talla,
-        t1.edad,
-        t3.fvc,
-        t3.fev1,
-        t3.fev1_fvc,
-        t3.obs_pul,
-        t3.fpul,
-        t3.hpul,
-        t3.uspul
-    FROM pacientes t1
-    LEFT JOIN tcorporal t2 ON t1.curp = t2.curp
-    LEFT JOIN fpulmonar t3 ON t1.curp = t3.curp
+        t1.id,
+        t1.nombre,
+        t1.usuario,
+        t2.perfil,
+        t1.estatus,
+        t1.fec_reg
+    FROM staff t1
+    LEFT JOIN perfiles t2 ON t1.perfil = t2.id
     $whereSQL
     ORDER BY t1.id DESC
     LIMIT $start, $length
     ";
 
-    $searchParams = [];
-
-    if ($searchValue !== '') {
-        for ($i = 0; $i < 10; $i++) {
-            $searchParams[] = "%$searchValue%";
-        }
-    }
-
     $stmt = $conn->prepare($sqlData);
     $stmt->execute($params);
-    $bindIndex = 1;
 
     /* ===============================
         10. ARMADO DE DATA
@@ -136,11 +119,25 @@
 
     while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
-        $curp = $fila['curp'];
+        $id = $fila['id'];
+
+        // Guardamos el usuario antes de modificar el array
+        $usuarioFila = $fila['usuario'];
+
+        unset($fila['id']);
 
         $btnEditar = '';
-        $btnEditar = '<button class="btn btn-warning btn-sm btnEditar" data-curp="'.$curp.'"><i class="fa fa-pencil"></i></button>';
 
+        // SOlo mostrar boton si: Es administrador o supervisor, caso contrario solo puede con su usuario
+        if (in_array($perfil, ['Adminis', 'Supervi']) || $usuarioFila === $usuario) {
+
+            $btnEditar = '<button class="btn btn-warning btn-sm btnEditar" data-id="'.$id.'">
+                            <i class="fa fa-pencil"></i>
+                        </button>';
+
+        }        
+
+        // Limpieza de espacios 
         foreach ($fila as &$valor) {
             if (is_string($valor)) {
                 $valor = preg_replace('/\s+/', ' ', trim($valor));

@@ -73,6 +73,7 @@
         <?php include '../partials/nuevo_pulm.php'; ?>
 
         <?php include '../partials/footer.php'; ?>
+        <?php include '../partials/modal_info.php'; ?>
 
         <script>
             const PERFIL_USUARIO = "<?= $_SESSION['perfil'] ?? '' ?>";
@@ -81,7 +82,17 @@
         </script>
 
         <script src= '../assets/js/pulm.js'></script>
+        <script src = "<?= BASE_URL ?>/assets/js/comun.js"></script>
 
     </body>
 
 </html>
+
+<script>
+    const INFO_MODULO = `
+        <p><strong>Capacidad Pulmonar</strong></p>
+        <p>Se registran los parametros de capacidad Pulmonar.</p>
+        <p>FVC, FEV1 y FEV1_FVC.</p>
+        <p>Se exporta datos de las tablas.</p>
+    `;
+</script>

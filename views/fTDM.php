@@ -73,6 +73,7 @@
         <?php include '../partials/nuevo_mue.php'; ?>
 
         <?php include '../partials/footer.php'; ?>
+        <?php include '../partials/modal_info.php'; ?>
 
         <script>
             const PERFIL_USUARIO = "<?= $_SESSION['perfil'] ?? '' ?>";
@@ -81,7 +82,16 @@
         </script>
 
         <script src= '../assets/js/mue.js'></script>
+        <script src = "<?= BASE_URL ?>/assets/js/comun.js"></script>
 
     </body>
 
 </html>
+
+<script>
+    const INFO_MODULO = `
+        <p><strong>Toma de Muestras de Laboratorio</strong></p>
+        <p>Se registran que se le tomaran las muestras de laboratorio al colaborador.</p>
+        <p>Se exporta datos de las tablas.</p>
+    `;
+</script>

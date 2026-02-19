@@ -371,3 +371,14 @@ tr.row-baja > td {
     background-color: #d1e7dd !important;
     color: #0f5132 !important;
 }
+
+.modal-info-custom {
+    background: linear-gradient(135deg, #e7eda6, #cce46f);
+    color: rgb(3, 3, 3);
+    border-radius: 15px;
+}
+
+.modal-info-custom .modal-header,
+.modal-info-custom .modal-footer {
+    border: none;
+}

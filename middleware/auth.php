@@ -19,7 +19,7 @@
             exit;
         }
 
-        if (!empty($rolesPermitidos) && !in_array($_SESSION['perfil'], $rolesPermitidos)) {
+        if (!empty($rolesPermitidos) && !in_array($_SESSION['perfil'], $rolesPermitidos, true)) {
             http_response_code(403);
             echo json_encode([
                 'status' => 'error',
@@ -38,7 +38,7 @@
             exit;
         }
 
-        if (!empty($rolesPermitidos) && !in_array($_SESSION['perfil'], $rolesPermitidos)) {
+        if (!empty($rolesPermitidos) && !in_array($_SESSION['perfil'], $rolesPermitidos, true)) {
             header('Location: /prevent_care/views/menu.php');
             exit;
         }

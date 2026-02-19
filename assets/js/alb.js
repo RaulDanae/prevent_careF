@@ -1,9 +1,9 @@
 // Hace llamado a la tabla y aplica paginacion -->
-  let tabla_registros
+  let tabla_alba
 
   $(document).ready(function(){
 
-    tabla_registros = $('#tabla-reg').DataTable({
+    tabla_alba = $('#tabla-alb').DataTable({
       scrollX: true,
       autoWidth: true,
       responsive: false,
@@ -17,7 +17,7 @@
       },
 
       "ajax": {
-        url: "../partials/rellreg.php",
+        url: "../partials/rellalb.php",
         type: "POST",
         },
 
@@ -34,7 +34,7 @@
         {
           extend: "excelHtml5",
           className: 'buttons-excel d-none', //Oculto
-          title: 'Actualizacion',
+          title: 'Usuarios',
           exportOptions: {
             columns: ':not(:first-child)', // No se exporta la columna Editar
             modifier: {
@@ -48,6 +48,14 @@
         this.api().columns.adjust();
       },
 
+      rowCallback: function(row, data){
+
+        if(data[4] === 0) {
+            $(row).addClass('fila-baja');
+        }
+
+      },
+
       initComplete: function() {
         this.api().columns.adjust();
       }
@@ -56,67 +64,32 @@
 
     // Boton Buscar
     $('#btn_search').click(function() {
-      tabla_registros.draw();
+      tabla_alba.draw();
     })
 
     // Boton Descargar
     $('#btndescargar').on('click', function () {
-      tabla_registros.button('.buttons-excel').trigger();
+      tabla_alba.button('.buttons-excel').trigger();
     });
 
   });
 
-
 /////////////////////////////////// Modulo Nuevo /////////////////////////////////////////////////
-
-//////////////////////////////// Calcular Edad //////////////////////////////////////////////////
-
-function calcularEdadEntreFechas(fechaNacimiento, fechaRegistro) {
-    if (!fechaNacimiento || !fechaRegistro) return '';
-
-    const nacimiento = new Date(fechaNacimiento);
-    const registro = new Date(fechaRegistro);
-
-    if (isNaN(nacimiento) || isNaN(registro)) return '';
-
-    let edad = registro.getFullYear() - nacimiento.getFullYear();
-    const mes = registro.getMonth() - nacimiento.getMonth();
-
-    if (mes < 0 || (mes === 0 && registro.getDate() < nacimiento.getDate())) {
-        edad--;
-    }
-
-    return edad >= 0 ? edad : '';
-}
-
-function actualizarEdad() {
-    const fnacimiento = $('#fnacimiento').val();
-    const fregistro = $('#fregistro').val();
-
-    if (!fnacimiento || !fregistro) return;
-
-    const edad = calcularEdadEntreFechas(fnacimiento, fregistro);
-    $('#edad').val(edad);
-}
-
-$('#fnacimiento').on('change', actualizarEdad);
-$('#fregistro').on('change', actualizarEdad);
-
 
 ///////////////////////////Modal Salir //////////////////////////////////////////////////////////
 $(document).on('click', '#modalNuevo .btn-close', function () {
     this.blur();              // ← quitar foco del botón cerrar
-    document.getElementById('btnNuevoM').focus(); // ← devolver foco
+    document.getElementById('btndescargar').focus(); // ← devolver foco
 });
 
-const btnOpen = document.getElementById('btnNuevoM');
+const btnOpen = document.getElementById('btndescargar');
 
 $('#modalNuevo').on('hide.bs.modal', function () {
     btnOpen.focus();
 });
-/////////////////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////// Para resetear el modal al dar click en nuevo /////////////////////
+
 $('#btnNuevoM').on('click', function () {
 
     //  RESET TOTAL DE ESTADO
@@ -148,27 +121,19 @@ $('#btnNuevoM').on('click', function () {
     $('#modalNuevo').modal('show');
 });
 
-////////////////////////////////////////////////////////////////////////////////////////////////
-
 /////////////////////////// Se resetea el modal despues de cerrarlo /////////////////////////////
+
 $('#modalNuevo').on('hidden.bs.modal', function () {
 
     // Limpieza final por seguridad
     $('#formWizard')[0].reset();
+
+    $('#nom, #uss, #perfil, #estatus').prop('disabled', false);
+
     $('#summaryContent').empty().hide();
 
     wizardMode = 'create';
     editMemberId = null;
-});
-////////////////////////////////////////////////////////////////////////////////////////////////
-
-//////////////////////////Grupo Id/////////////////////////////////////
-$('#compania').on('change', function () {
-
-    //if (wizardMode === 'edit') return;
-
-    const cod_comp = $(this).find(':selected').data('grupo') || '';
-    $('#cod_comp').val(cod_comp);
 });
 
 /////////////////////////////////////////////////////////////////////
@@ -283,56 +248,15 @@ $('#modalNuevo').on('shown.bs.modal', function () {
 
     if (wizardMode === 'edit') return; // PAra que no borre en editar
 
-    //////////////////////////////////////////////////////////////////////////////////
-    ///////////////// Calcular fecha y hora de registro en nuevo./////////////////////////////
-    const $fregistro = $('#fregistro');
-    const $hregistro = $('#hregistro');
-
-    const now = new Date();
-
-    // Fecha actual en formato YYYY-MM-DD (requerido por input[type=date])
-     const fechaHoy = now.toISOString().slice(0, 10);
-
-    // Hora actual HH:MM
-     const horaActual = now.toTimeString().slice(0, 5);
-
-    // Solo asignar si están vacíos
-     if (!$fregistro.val()) {
-         $fregistro.val(fechaHoy);
-     }
-
-     if (!$hregistro.val()) {
-        $hregistro.val(horaActual);
-     }
-    /////////////////////////////////////////////////////////////////////////////////
-
-    // 2. Bloqueo de cajas de texto
-    const PERFIL = (PERFIL_USUARIO || '').toLowerCase();
-
-    $('#cod_comp')
-        .prop('readonly', true);
-    $('#edad')
-        .prop('readonly', true);
-    
 });
+
 
 function buildSummary() {
     const summary = [
-        { label: 'Codigo Compañia', value: $('#cod_comp').val() },
-        { label: 'Compañia', value: $('#compania option:selected').text() },
-        { label: 'Clave', value: $('#clave').val() },
-        { label: 'Colaborador', value: $('#colaborador').val() },
-        { label: 'Fec Nacimiento', value: $('#fnacimiento').val() },
-        { label: 'Genero', value: $('#genero option:selected').text() },
-        { label: 'CURP', value: $('#curp').val() },
-        { label: 'Email', value: $('#email').val() },
-        { label: 'RFC', value: $('#rfc').val() },
-        { label: 'Edad', value: $('#edad').val() },
-        { label: 'Privacidad', value: $('#privacidad option:selected').text() },
-        { label: 'Consentimiento', value: $('#consentimiento option:selected').text() },
-        { label: 'Observaciones', value: $('#observaciones').val() },
-        { label: 'Fec Registro', value: $('#fregistro').val() },
-        { label: 'Hor Registro', value: $('#hregistro').val() }
+        { label: 'Nombre', value: $('#nom').val() },
+        { label: 'Usuario', value: $('#uss').val() },
+        { label: 'Perfil', value: $('#perfil option:selected').text() },
+        { label: 'Estatus', value: $('#estatus option:selected').text() }
     ];
 
     let html = '';
@@ -351,18 +275,72 @@ function buildSummary() {
 
     $('#summaryContent').html(html).show();
 }
-    
 
-/// GUARDAR CLIENTE //////
+
+///////////////////////// Validacion de password ///////////////////////////////////
+
+const idInput = document.getElementById("id");
+const p1 = document.getElementById("pas1");
+const p2 = document.getElementById("pas2");
+const icon = document.getElementById("iconValidacion");
+const btnNext = document.getElementById("btnNext");
+
+function validarPasswords() {
+
+  const esEdicion = idInput.value !== "";
+  const v1 = p1.value.trim();
+  const v2 = p2.value.trim();
+
+  // Si es creacion el password es obligatorio
+  if (!esEdicion) {
+
+    if (v1 === "" && v2 === "") {
+        icon.style.display = "none";
+        btnNext.disabled = false;
+        return;
+    }
+
+    if (v1.value !== v2.value) {
+      btnNext.disabled = true;
+      return;
+    }
+
+
+  } else {
+
+    // Si es edicion -> solo validar si escriben algo
+    if(v1 !== "" & v2 !== "") {
+      if (v1.value !== v2.value){
+        btnNext.disabled = true
+        return;
+      }
+    }
+  }
+
+    icon.style.display = "inline";
+
+    if (v1 === v2) {
+        icon.className = "fa-solid fa-check text-success";
+        btnNext.disabled = false;
+    } else {
+        icon.className = "fa-solid fa-xmark text-danger";
+        btnNext.disabled = true;
+    }
+
+
+}
+
+p1.addEventListener("keyup", validarPasswords);
+p2.addEventListener("keyup", validarPasswords);
+
+
+///////////////////////////// GUARDAR CLIENTE /////////////////////////////
 
 $('#formWizard').on('submit', function (e) {
     e.preventDefault();   
 
     // Seguridad: solo permitir envío en último paso
     if (currentStep !== totalSteps) return;
-
-    // Removemos el nombre de la empresa ya que no lo necesitamos
-    $('#compania').removeAttr('name');
 
     $('#ajaxError').addClass('hidden').empty();
 
@@ -377,8 +355,8 @@ $('#formWizard').on('submit', function (e) {
 
     $.ajax({
         url: wizardMode === 'edit'
-          ? '../save/update_colaborador.php' 
-          : '../save/guardar_colaborador.php',
+          ? '../save/update_alba.php' 
+          : '../save/guardar_alba.php',
         type: 'POST',
         data: $(this).serialize(),
         dataType: 'json',
@@ -389,16 +367,16 @@ $('#formWizard').on('submit', function (e) {
 
                 alertify.success(
                   wizardMode === 'edit'
-                    ? 'Registro actualizado'
-                    : 'Registro guardado'
+                    ? 'Usuario actualizado'
+                    : 'Usuario guardado'
                 );
 
                 // Cerrar modal
                 $('#modalNuevo').modal('hide');
 
                 // Refrescar DataTable si existe
-                if ($.fn.DataTable.isDataTable('#tabla-reg')) {
-                    $('#tabla-reg').DataTable().ajax.reload(null, false);
+                if ($.fn.DataTable.isDataTable('#tabla-alb')) {
+                    $('#tabla-alb').DataTable().ajax.reload(null, false);
                 }
 
             } else {
@@ -423,35 +401,25 @@ $('#formWizard').on('submit', function (e) {
     });
 });
 
-
+///////////////////////// EDICION //////////////////////////////
 
 let userProfile =  (PERFIL_USUARIO || '').toLowerCase();
 
-$('#tabla-reg').on('click', '.btnEditar', function () {
+$('#tabla-alb').on('click', '.btnEditar', function () {
 
     wizardMode = 'edit';
     editId = $(this).data('id');
 
-    $('#myModalLabel').text('Editar Cliente');
+    $('#myModalLabel').text('Editar Usuario');
     $('#btnSave').text('Actualizar');
 
-    cargarDatosColaborador(editId);
+    cargarDatosUsuario(editId);
 });
 
-function cargarDatosColaborador(Id) {
+function cargarDatosUsuario(Id) {
 
-    ///////////////// Calcular fecha y hora de registro en nuevo./////////////////////////////
-    const $fregistro = $('#fregistro');
-    const $hregistro = $('#hregistro');
-
-    const now = new Date();
-    const fechaHoy = now.toLocaleDateString('en-CA'); // YYYY-MM-DD local
-    const horaActual = now.toTimeString().slice(0, 5);
-
-    /////////////////////////////////////////////////////////////////////////////////
-
-    $.ajax({
-        url: '../config/get_registro.php',
+        $.ajax({
+        url: '../config/get_usuario.php',
         type: 'POST',
         dataType: 'json',
         data: { id: Id },
@@ -461,26 +429,27 @@ function cargarDatosColaborador(Id) {
 
             // Paso 1
             $('#id').val(data.id);
-            $('#cod_comp').val(data.cod_comp);
-            $('#compania').val(data.compania);
+            $('#nom').val(data.nombre);
+            $('#uss').val(data.usuario);
+            $('#perfil').val(data.perfil);
+            $('#estatus').val(data.estatus);
 
-            // Paso 2
-            $('#clave').val(data.clave);
-            $('#colaborador').val(data.colaborador);
-            $('#fnacimiento').val(data.fec_nac);
-            $('#genero').val(data.genero);
-            $('#curp').val(data.curp);
-            $('#email').val(data.email);
-            $('#rfc').val(data.rfc || data.curp);
-            $('#edad').val(data.edad);
-            $('#privacidad').val(data.aprivacidad);
-            $('#consentimiento').val(data.cinformado);
-            $('#observaciones').val(data.obs_reg);
-            $fregistro.val(data.fregistro || fechaHoy);
-            $hregistro.val(data.hregistro || horaActual);
+            const esAdmin = (userProfile === 'adminis' || userProfile === 'supervi');
 
-            // CALCULAR EDAD AL ABRIR
-            actualizarEdad();
+            if (!esAdmin) {
+                // Bloquear todos los campos menos contraseña
+                $('#nom').prop('disabled', true);
+                $('#uss').prop('disabled', true);
+                $('#perfil').prop('disabled', true);
+                $('#estatus').prop('disabled', true);
+            } else {
+                // Desbloquear todos los campos
+                $('#nom').prop('disabled', false);
+                $('#uss').prop('disabled', false);
+                $('#perfil').prop('disabled', false);
+                $('#estatus').prop('disabled', false);
+
+            }
 
             // Estado inicial del wizard
             currentStep = 1;
@@ -493,91 +462,5 @@ function cargarDatosColaborador(Id) {
             showStep(currentStep);
         }
     });
+
 }
-
-/////////////////////////// Para importar registros //////////////////////////////////
-
-///// PAra que abra la ventana de carga de archivos ////////
-$(document).on('click', '#btnExcel', function () {
-    $('#excelFile').click();
-});
-/////////////////////////////////////////////////////////////
-
-//////// AJAX para importar el registro ////////////////////
-$('#excelFile').on('change', function () {
-
-    let archivo = this.files[0];
-
-    if (!archivo) return;
-
-    let formData = new FormData();
-    formData.append('excel', archivo);
-
-    $.ajax({
-        url: '../save/importar_excel.php',
-        type: 'POST',
-        data: formData,
-        contentType: false,
-        processData: false,
-        dataType: 'json',
-        beforeSend() {
-            console.log('Subiendo...');
-        },
-        success(resp) {
-
-            if (!resp.success) {
-                alertify.error(resp.message);
-                return;
-            }
-
-            // Mostrar resumen
-            mostrarResumenAlertify(resp.resumen);
-
-            // Se puede ver el log en consola
-            if (resp.log && resp.log.length > 0) {
-
-                console.table(resp.log);
-            }
-        },
-
-        error(err) {
-            alertify.error('Error de comunicacion con el servidor');
-            console.error(err);
-        }
-    });
-});
-
-function mostrarResumenAlertify(resumen) {
-
-    let html = `
-        <div style="text-align:left">
-            <p><strong>Resultado de la carga:</strong></p>
-            <ul>
-                <li>🟢 Altas: <strong>${resumen.altas}</strong></li>
-                <li>🔵 Actualizaciones: <strong>${resumen.actualizados}</strong></li>
-                <li>🔴 Errores: <strong>${resumen.errores}</strong></li>
-            </ul>
-        </div>
-    `;
-
-    alertify.alert('Carga de Excel', html);
-}
-
-
-/////////////////////// IMPRIMIR BRAZALETES //////////////////////////////////////////
-
-$(document).on('click', '.btnPrint', function () {
-    const id = $(this).data('id');
-
-    const w = window.open(
-        '../partials/imprimir_brazalete.php?id=' + id,
-        '_blank',
-        'width=500,height=200'
-    );
-
-    w.focus();
-});
-
-
-
-

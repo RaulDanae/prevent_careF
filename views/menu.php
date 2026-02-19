@@ -76,9 +76,27 @@
     </main>
     <script src = "<?= BASE_URL ?>/assets/js/main.js"></script>
     <script src = "<?= BASE_URL ?>/assets/js/menu.js"></script>
+    <script src = "<?= BASE_URL ?>/assets/js/comun.js"></script>
+    
     <?php include '../partials/footer.php'; ?>
+    <?php include '../partials/modal_info.php'; ?>
 
 </body>
 </html>
 
-
+<script>
+    const INFO_MODULO = `
+        <p><strong>Menu</strong></p>
+        <p>Aqui se accede a los diferentes modulos del aplicativo:</p>
+        <p>Registro.</p>
+        <p>Signos Vitales.</p>
+        <p>Toma de Muestras.</p>
+        <p>Composicion Corporal.</p>
+        <p>Salud Nutricional.</p>
+        <p>Capacidad Auditiva.</p>
+        <p>Capacidad Pulmonar.</p>
+        <p>Agudeza Visual.</p>
+        <p>Activacion Fisica.</p>
+        <p>Relajacion.</p>
+    `;
+</script>

@@ -73,6 +73,7 @@
         <?php include '../partials/nuevo_aud.php'; ?>
 
         <?php include '../partials/footer.php'; ?>
+        <?php include '../partials/modal_info.php'; ?>
 
         <script>
             const PERFIL_USUARIO = "<?= $_SESSION['perfil'] ?? '' ?>";
@@ -81,7 +82,17 @@
         </script>
 
         <script src= '../assets/js/aud.js'></script>
+        <script src = "<?= BASE_URL ?>/assets/js/comun.js"></script>
 
     </body>
 
 </html>
+
+<script>
+    const INFO_MODULO = `
+        <p><strong>Capacidad Auditiva</strong></p>
+        <p>Se registran los datos de capacidad auditiva del colaborador.</p>
+        <p>Oido Drecho, Oido Izquierdo, COnsuta Auditiva.</p>
+        <p>Se exporta datos de las tablas.</p>
+    `;
+</script>

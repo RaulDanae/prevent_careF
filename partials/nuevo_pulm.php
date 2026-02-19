@@ -21,7 +21,7 @@
                 </div>
              </div>
 
-            <form id="formWizard">
+            <form id="formWizard" novalidate>
                 <div class="modal-body">
 
                     <!-- Paso 1 -->
@@ -67,13 +67,17 @@
                     <!-- Paso 2 -->
                      <div class="step" data-step="2">
                         <div class="row mb-2">
-                            <div class="col-md-12">
-                                <label for="asistencia" class="etiquetaL">Asistencia</label>
-                                <select class="form-control" name="asistencia" id="asistencia" required>
-                                    <option selected class="form-control" value = ""></option>
-                                    <option value="SI">SI</option>
-                                    <option value="NO">NO</option>
-                                </select>
+                            <div class="col-md-4">
+                                <label for="fvc" class="etiquetaL">FVC</label>
+                                <input type="number" class="form-control" name="fvc" id="fvc" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="fev1" class="etiquetaL">FEV1</label>
+                                <input type="number" class="form-control" name="fev1" id="fev1" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="fevfvc" class="etiquetaL">FEV1_FVC</label>
+                                <input type="number" class="form-control" name="fevfvc" id="fevfvc" required>
                             </div>
                         </div>
                         <div class="row mb-2">

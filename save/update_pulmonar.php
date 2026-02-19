@@ -35,10 +35,12 @@
 
         $stmt = $conn -> prepare("
             INSERT INTO fpulmonar (
-                curp, acudiop, obs_pul, fpul, hpul, uspul    
-                ) VALUES (?,?,?,?,?,?) AS new
+                curp, fvc, fev1, fev1_fvc, obs_pul, fpul, hpul, uspul    
+                ) VALUES (?,?,?,?,?,?,?,?) AS new
             ON DUPLICATE KEY UPDATE
-                acudiop = new.acudiop,
+                fvc = new.fvc,
+                fev1 = new.fev1,
+                fev1_fvc = new.fev1_fvc,
                 obs_pul = new.obs_pul,
                 fpul = new.fpul,
                 hpul = new.hpul,
@@ -47,7 +49,9 @@
 
         $stmt -> execute([
             $curp,
-            $in['asistencia'],
+            $in['fvc'],
+            $in['fev1'],
+            $in['fevfvc'],
             $in['observaciones'] ?? null,
             date('Y-m-d'),
             date('H:i:s'),

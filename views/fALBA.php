@@ -4,12 +4,12 @@
     require_once ROOT_PATH . '/middleware/auth.php';
     require_once ROOT_PATH . '/controllers/AfiliadosController.php';
     require_once ROOT_PATH . '/controllers/MenuController.php';
-    authorize(['Adminis', 'Supervi']);
+    authorize(['Adminis', 'Supervi', 'Avisual', 'Snutric', 'Afisica', 'Ccorpor', 'Tmuestr', 'Svitale', 'Pulmvit']);
 
     $perfil  = $_SESSION['perfil'] ?? null;
     $nombre  = $_SESSION['nombre'] ?? null;   // Nombre
     $usuario = $_SESSION['usuario'] ?? null; // Usuario
-    $modulo = 'Relajacion';
+    $modulo = 'Altas o Bajas';
 
     $registros = AfiliadosController::getRegistros(
         $perfil,
@@ -18,6 +18,13 @@
     );
 
     $menuItems = MenuController::getMenuByPerfil($perfil);
+
+    // Cargamos las variables de MySQL
+    require_once "../config/database.php";
+    $conn = conn();
+    $query = "SELECT t1.Id, t1.perfil FROM perfiles t1 ORDER BY t1.Id ASC";
+    $perfile = $conn -> query($query);
+
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +42,7 @@
     <link rel="stylesheet" type = "text/css" href="/prevent_care/assets/libs/css/alertify.min.css">
     <link rel="stylesheet" type = "text/css" href="/prevent_care/assets/libs/css/default.min.css">
     <link rel="stylesheet" type = "text/css" href="/prevent_care/assets/libs/css/buttons.dataTables.min.css">
-    <link rel="stylesheet" type = "text/css" href="/prevent_care/assets/css/mainrel.css">
+    <link rel="stylesheet" type = "text/css" href="/prevent_care/assets/css/main.css">
     <!-- <link rel="stylesheet" type = "text/css" href="/prevent_care/assets/css/menu.css"> -->
     <!-- /CSS -->
     <!-- JS -->
@@ -50,7 +57,7 @@
     <!-- /JS -->
 
 
-    <title>Relajacion</title>
+    <title>Altas o Bajas</title>
     
     </head>
 
@@ -64,13 +71,13 @@
 
                     <?php include '../partials/busquedas.php'; ?>
 
-                    <?php include '../partials/trelax.php'; ?>
+                    <?php include '../partials/talba.php'; ?>
 
                 </div>
             </div>
         </div>
 
-        <?php include '../partials/nuevo_relax.php'; ?>
+        <?php include '../partials/nuevo_alb.php'; ?>
 
         <?php include '../partials/footer.php'; ?>
         <?php include '../partials/modal_info.php'; ?>
@@ -81,7 +88,7 @@
             const GRUPO_USUARIO = "<?= $_SESSION['usuario'] ?? '' ?>";
         </script>
 
-        <script src= '../assets/js/relax.js'></script>
+        <script src= '../assets/js/alb.js'></script>
         <script src = "<?= BASE_URL ?>/assets/js/comun.js"></script>
 
     </body>
@@ -90,8 +97,9 @@
 
 <script>
     const INFO_MODULO = `
-        <p><strong>Relajacion</strong></p>
-        <p>Se registra que el paciente acudio al modulo.</p>
+        <p><strong>Alta o Baja de Usuario</strong></p>
+        <p>Aqui se dan de alta a los Usuarios y los permisos que tendran en la aplicacion.</p>
+        <p>NOmbre, Usuario, Contraseña, Perfil, y Estatus.</p>
         <p>Se exporta datos de las tablas.</p>
     `;
 </script>

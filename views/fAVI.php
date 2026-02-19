@@ -73,6 +73,7 @@
         <?php include '../partials/nuevo_vis.php'; ?>
 
         <?php include '../partials/footer.php'; ?>
+        <?php include '../partials/modal_info.php'; ?>
 
         <script>
             const PERFIL_USUARIO = "<?= $_SESSION['perfil'] ?? '' ?>";
@@ -81,7 +82,17 @@
         </script>
 
         <script src= '../assets/js/vis.js'></script>
+        <script src = "<?= BASE_URL ?>/assets/js/comun.js"></script>
 
     </body>
 
 </html>
+
+<script>
+    const INFO_MODULO = `
+        <p><strong>Capacidad Visual</strong></p>
+        <p>Se registra los datos de las purebas visuales del Colaborador.</p>
+        <p>Distancia de Ojo Derecho, Distancia de Ojo Izquierdo, Agudeza Visual Ojo Derecho, Agudeza Visual Ojo Izquierdo, Lentes para ver de Lejos, Lentes para ver de Cerca, Consulta Oftalmologo.</p>
+        <p>Se exporta datos de las tablas.</p>
+    `;
+</script>

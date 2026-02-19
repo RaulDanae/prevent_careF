@@ -73,6 +73,7 @@
         <?php include '../partials/nuevo_fis.php'; ?>
 
         <?php include '../partials/footer.php'; ?>
+        <?php include '../partials/modal_info.php'; ?>
 
         <script>
             const PERFIL_USUARIO = "<?= $_SESSION['perfil'] ?? '' ?>";
@@ -81,7 +82,16 @@
         </script>
 
         <script src= '../assets/js/fis.js'></script>
+        <script src = "<?= BASE_URL ?>/assets/js/comun.js"></script>
 
     </body>
 
 </html>
+
+<script>
+    const INFO_MODULO = `
+        <p><strong>Actividad Fisica</strong></p>
+        <p>Se registra si asistio al modulo de Actividad Fisica el Colaborador.</p>
+        <p>Se exporta datos de las tablas.</p>
+    `;
+</script>

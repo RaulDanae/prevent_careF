@@ -73,6 +73,7 @@
         <?php include '../partials/nuevo_nutr.php'; ?>
 
         <?php include '../partials/footer.php'; ?>
+        <?php include '../partials/modal_info.php'; ?>
 
         <script>
             const PERFIL_USUARIO = "<?= $_SESSION['perfil'] ?? '' ?>";
@@ -81,7 +82,16 @@
         </script>
 
         <script src= '../assets/js/nutr.js'></script>
+        <script src = "<?= BASE_URL ?>/assets/js/comun.js"></script>
 
     </body>
 
 </html>
+
+<script>
+    const INFO_MODULO = `
+        <p><strong>Nutricion</strong></p>
+        <p>Se registra si el paciente asistio al modulo de Nutricion.</p>
+        <p>Se exporta datos de las tablas.</p>
+    `;
+</script>
