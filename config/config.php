@@ -5,7 +5,7 @@
     // Detectar si estamos en Azure
     if (isset($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'azurewebsites.net') !== false) {
     
-        defina('BASE_URL', '');
+        define('BASE_URL', '');
 
     } else {
 

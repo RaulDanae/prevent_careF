@@ -43,7 +43,7 @@
                     <p>Accede a tu plataforma de trabajo</p>
                 </div>
 
-                <form action="auth/valida.php" method="POST" role="form">
+                <form action="<?= BASE_URL ?>/auth/valida.php" method="POST" role="form">
                     <label>Usuario</label>
                     <input type="text" name="usuario" required>
 
