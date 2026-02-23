@@ -33,6 +33,10 @@
     $stmt->bind_param("s", $username);
     $stmt->execute();
 
+    if ($stmt->error) {
+        die("SQL Error: " . $stmt->error);
+    }
+
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
 
@@ -49,5 +53,3 @@
 
     header("Location: " . BASE_URL . "/views/menu.php");
     exit();
-
-?>

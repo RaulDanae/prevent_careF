@@ -185,9 +185,15 @@ $('.step-item').on('click', function () {
 //////////////////////////// SUMMARY ////////////////////////////////////////
 function buildSummary() {
     const summary = [
-        { label: 'Oido Derecho', value: $('#oidod').val() },
-        { label: 'Oido Izquierdo', value: $('#oidoi').val() },
-        { label: 'Consulta', value: $('#consulta').val() },
+        { label: 'Oido Derecho 0.5kHz', value: $('#od_500').val() },
+        { label: 'Oido Derecho 1kHz', value: $('#od_1000').val() },
+        { label: 'Oido Derecho 2kHz', value: $('#od_2000').val() },
+        { label: 'Oido Derecho 4kHz', value: $('#od_4000').val() },
+        { label: 'Oido Izquierdo 0.5kHz', value: $('#oi_500').val() },
+        { label: 'Oido Izquierdo 1kHz', value: $('#oi_1000').val() },
+        { label: 'Oido Izquierdo 2kHz', value: $('#oi_2000').val() },
+        { label: 'Oido Izquierdo 4kHz', value: $('#oi_4000').val() },
+        { label: 'Requiere Consulta Audiologica', value: $('#consulta').val() },
         { label: 'Observaciones', value: $('#observaciones').val() }
     ];
 
@@ -241,8 +247,14 @@ function cargarDatosColaborador(CURP) {
             $('#fnacimiento').val(data.fec_nac);
 
             // Paso 2
-            $('#oidod').val(data.oidoder);
-            $('#oidoi').val(data.oidoizq);
+            $('#od_500').val(data.od_500);
+            $('#od_1000').val(data.od_1000);
+            $('#od_2000').val(data.od_2000);
+            $('#od_4000').val(data.od_4000);
+            $('#oi_500').val(data.oi_500);
+            $('#oi_1000').val(data.oi_1000);
+            $('#oi_2000').val(data.oi_2000);
+            $('#oi_4000').val(data.oi_4000);
             $('#consulta').val(data.consultaud);
             $('#observaciones').val(data.obs_aud);
 
@@ -320,4 +332,18 @@ $('#formWizard').on('submit', function (e) {
             $('#saveSpinner').addClass('hidden');
         }
     });
-});  
+});
+
+///////////////////////////// Bloquea que escriban numero mayor a 50 /////////////////////////////////
+$('input[type="number"]').on('input', function() {
+
+    let min = parseInt($(this).attr('min'));
+    let max = parseInt($(this).attr('max'));
+    let value = parseInt($(this).val());
+
+    if (!isNaN(value)) {
+        if (value < min) $(this).val(min);
+        if (value > max) $(this).val(max);
+    }
+
+});

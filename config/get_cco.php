@@ -14,7 +14,7 @@
     $conn = conn(); // 👈 aquí obtienes el PDO
 
     $stmt = $conn->prepare(
-        "SELECT t1.curp, t1.colaborador, t1.genero, t1.fec_nac, t1.email, t1.edad, t2.telefono, t2.celular, t2.peso, t2.peso, 
+        "SELECT t1.curp, t1.colaborador, t1.genero, t1.fec_nac, t1.email, t1.edad, t2.celular, t2.peso, t2.peso, 
                 t2.talla, t2.marcapasos, t2.obs_corpo
          FROM pacientes t1
          LEFT JOIN tcorporal t2 ON t1.curp = t2.curp

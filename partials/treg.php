@@ -14,8 +14,10 @@
                 <th>Email</th>
                 <th>RFC</th>
                 <th>Edad</th>
-                <th>Privacidad</th>
-                <th>Informado</th>
+                <th>Aviso Privacidad</th>
+                <th>Consentimiento Informado</th>
+                <th>Hora Toma Muestras</th>
+                <th>Hora Feria</th>
                 <th>Observaciones</th>
                 <th>F_Modifica</th>
                 <th>H_Modifica</th>

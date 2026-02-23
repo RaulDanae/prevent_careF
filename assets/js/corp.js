@@ -185,7 +185,6 @@ $('.step-item').on('click', function () {
 //////////////////////////// SUMMARY ////////////////////////////////////////
 function buildSummary() {
     const summary = [
-        { label: 'Telefono', value: $('#telefono').val() },
         { label: 'Celular', value: $('#celular').val() },
         { label: 'Peso', value: $('#peso').val() },
         { label: 'Talla', value: $('#talla').val() },
@@ -245,7 +244,6 @@ function cargarDatosColaborador(CURP) {
             $('#edad').val(data.edad);
 
             // Paso 2
-            $('#telefono').val(data.telefono);
             $('#celular').val(data.celular);
             $('#peso').val(data.peso);
             $('#talla').val(data.talla);

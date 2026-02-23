@@ -112,6 +112,16 @@
                             </div>
                         </div>
                         <div class="row mb-2">
+                            <div class="col-md-4">
+                                <label for="hrtomamuestra" class="etiquetaL">Hora de toma de muestras</label>
+                                <input type="time" class="form-control" name="hrtomamuestra" id="hrtomamuestra" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="hrferia" class="etiquetaL">Hora Feria</label>
+                                <input type="time" class="form-control" name="hrferia" id="hrferia" required>
+                            </div>                            
+                        </div>
+                        <div class="row mb-2">
                             <div class="col-md-12">
                                 <label for="observaciones" class="etiquetaL">Observaciones</label>
                                 <textarea class="form-control" name = "observaciones" id = "observaciones" rows="2" ></textarea>

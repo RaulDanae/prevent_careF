@@ -103,5 +103,3 @@
             'message' => $e -> getMessage()
         ]);
     }
-
-?>

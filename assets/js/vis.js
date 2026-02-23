@@ -68,6 +68,19 @@
 
 /////////////////////////////////// Modulo Nuevo /////////////////////////////////////////////////
 
+/////// Agrega Valor 20 en distancia de ojo derecho e izquierdo si estan vacios/////////////////////
+$('#modalNuevo').on('shown.bs.modal', function () {
+
+    if (!$('#dojod').val()) {
+        $('#dojod').val(20);
+    }
+
+    if (!$('#dojoi').val()) {
+        $('#dojoi').val(20);
+    }
+
+});
+
 ///////////////////////////Modal Salir //////////////////////////////////////////////////////////
 $('#modalNuevo').on('hide.bs.modal', function () {
     const btnOpen = document.getElementById('btnNuevoM');
@@ -185,13 +198,13 @@ $('.step-item').on('click', function () {
 //////////////////////////// SUMMARY ////////////////////////////////////////
 function buildSummary() {
     const summary = [
-        { label: 'Dist Ojo Derecho', value: $('#dojod').val() },
-        { label: 'Dist Ojo Izquierdo', value: $('#dojoi').val() },
-        { label: 'Agudeza V Der', value: $('#agudezavd').val() },
-        { label: 'Agudeza V Izq', value: $('#agudezavi').val() },
-        { label: 'Lentes de Lejos', value: $('#lentesl').val() },
-        { label: 'Lentes de Cerca', value: $('#lentesc').val() },
-        { label: 'Consulta Oftalmo', value: $('#consultaof').val() },
+        { label: 'Distancia Ojo Derecho', value: $('#dojod').val() },
+        { label: 'Distancia Ojo Izquierdo', value: $('#dojoi').val() },
+        { label: 'Agudeza Visual Ojo Derecho', value: $('#agudezavd').val() },
+        { label: 'Agudeza Visual Ojo Izquierdo', value: $('#agudezavi').val() },
+        { label: 'Requiere Lentes para ver de Lejos', value: $('#lentesl').val() },
+        { label: 'Requiere Lentes para ver de Cerca', value: $('#lentesc').val() },
+        { label: 'Requiere Consulta Oftalmologica', value: $('#consultaof').val() },
         { label: 'Observaciones', value: $('#observaciones').val() }
     ];
 

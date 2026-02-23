@@ -185,9 +185,10 @@ $('.step-item').on('click', function () {
 //////////////////////////// SUMMARY ////////////////////////////////////////
 function buildSummary() {
     const summary = [
-        { label: 'FVC', value: $('#fvc').val() },
-        { label: 'FEV1', value: $('#fev1').val() },
-        { label: 'FEV1_FVC', value: $('#fevfvc').val() },
+        { label: 'FVC (% Pred)', value: $('#fvc').val() },
+        { label: 'FEV1 (% Pred)', value: $('#fev1').val() },
+        { label: 'FEV1_FVC (% Pred)', value: $('#fevfvc').val() },
+        { label: 'Requiere consulta Neumologo', value: $('#consultaneum').val()},
         { label: 'Observaciones', value: $('#observaciones').val() }
     ];
 
@@ -247,6 +248,7 @@ function cargarDatosColaborador(CURP) {
             $('#fvc').val(data.fvc);
             $('#fev1').val(data.fev1);
             $('#fevfvc').val(data.fev1_fvc);
+            $('#consultaneum').val(data.consultaneum);
             $('#observaciones').val(data.obs_pul);
 
             // Estado inicial del wizard

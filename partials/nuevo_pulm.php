@@ -68,16 +68,26 @@
                      <div class="step" data-step="2">
                         <div class="row mb-2">
                             <div class="col-md-4">
-                                <label for="fvc" class="etiquetaL">FVC</label>
+                                <label for="fvc" class="etiquetaL">FVC (% Pred)</label>
                                 <input type="number" class="form-control" name="fvc" id="fvc" required>
                             </div>
                             <div class="col-md-4">
-                                <label for="fev1" class="etiquetaL">FEV1</label>
+                                <label for="fev1" class="etiquetaL">FEV1 (% Pred)</label>
                                 <input type="number" class="form-control" name="fev1" id="fev1" required>
                             </div>
                             <div class="col-md-4">
-                                <label for="fevfvc" class="etiquetaL">FEV1_FVC</label>
+                                <label for="fevfvc" class="etiquetaL">FEV1_FVC (% Pred)</label>
                                 <input type="number" class="form-control" name="fevfvc" id="fevfvc" required>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-4">
+                                <label for="consultaneum" class="etiquetaL">Requiere consulta de Neumologia</label>
+                                <select class="form-control" name="consultaneum" id="consultaneum" required>
+                                    <option selected class="form-control" value = ""></option>
+                                    <option value="SI">SI</option>
+                                    <option value="NO">NO</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row mb-2">

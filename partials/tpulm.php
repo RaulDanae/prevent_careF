@@ -11,9 +11,10 @@
                 <th>Peso</th>
                 <th>Talla</th>
                 <th>Edad</th>
-                <th>FVC</th>
-                <th>FEV1</th>
-                <th>FEV1_FVC</th>
+                <th>FVC (%Pred)</th>
+                <th>FEV1 (%Pred)</th>
+                <th>FEV1_FVC (%Pred)</th>
+                <th>Consulta Neum</th>
                 <th>Observacion</th>
                 <th>F_Modifica</th>
                 <th>H_Modifica</th>

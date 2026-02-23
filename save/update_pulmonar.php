@@ -35,12 +35,13 @@
 
         $stmt = $conn -> prepare("
             INSERT INTO fpulmonar (
-                curp, fvc, fev1, fev1_fvc, obs_pul, fpul, hpul, uspul    
-                ) VALUES (?,?,?,?,?,?,?,?) AS new
+                curp, fvc, fev1, fev1_fvc, consultaneum, obs_pul, fpul, hpul, uspul    
+                ) VALUES (?,?,?,?,?,?,?,?,?) AS new
             ON DUPLICATE KEY UPDATE
                 fvc = new.fvc,
                 fev1 = new.fev1,
                 fev1_fvc = new.fev1_fvc,
+                consultaneum = new.consultaneum,
                 obs_pul = new.obs_pul,
                 fpul = new.fpul,
                 hpul = new.hpul,
@@ -52,6 +53,7 @@
             $in['fvc'],
             $in['fev1'],
             $in['fevfvc'],
+            $in['consultaneum'],
             $in['observaciones'] ?? null,
             date('Y-m-d'),
             date('H:i:s'),
@@ -106,5 +108,3 @@
             'message' => $e -> getMessage()
         ]);
     }
-
-?>

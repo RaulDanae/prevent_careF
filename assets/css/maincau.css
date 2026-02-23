@@ -374,3 +374,9 @@ tr.row-baja > td {
 .modal-info-custom .modal-footer {
     border: none;
 }
+
+
+.tabla-audiometria .form-control {
+    border: none;
+    box-shadow: none;
+}

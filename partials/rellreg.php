@@ -15,6 +15,7 @@
         http_response_code(500);
         exit('Error de conexión a la base de datos');
     }
+ 
 
     /* ===============================
         2. PARÁMETROS DE DATATABLES
@@ -101,6 +102,8 @@
         t1.edad,
         t1.aprivacidad,
         t1.cinformado,
+        t1.hrtomamuestra,
+        t1.hrferia,
         t1.obs_reg,
         t1.fregistro,
         t1.hregistro,
@@ -161,5 +164,3 @@
         "recordsFiltered" => $recordsFiltered,
         "data"            => $data
     ], JSON_UNESCAPED_UNICODE);
-
-?>

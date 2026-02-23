@@ -64,24 +64,20 @@
                      <div class="step" data-step="2">
                         <div class="row mb-2">
                             <div class="col-md-6">
-                                <label for="telefono" class="etiquetaL">Telefono</label>
-                                <input type="text" class="form-control" name="telefono" id="telefono" required>
-                            </div>
-                            <div class="col-md-6">
                                 <label for="celular" class="etiquetaL">Celular</label>
                                 <input type="text" class="form-control" name="celular" id="celular" required>
                             </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label for="peso" class="etiquetaL">Peso</label>
                                 <input type="number" class="form-control" name="peso" id="peso" required>
                             </div>
-                            <div class="col-md-4">
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-6">
                                 <label for="talla" class="etiquetaL">Talla</label>
                                 <input type="number" class="form-control" name="talla" id="talla" required>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label for="marcapasos" class="etiquetaL">Marcapasos</label>
                                 <select class="form-control" name="marcapasos" id="marcapasos" required>
                                     <option selected class="form-control" value = ""></option>

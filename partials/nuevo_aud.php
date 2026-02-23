@@ -52,19 +52,77 @@
 
                     <!-- Paso 2 -->
                      <div class="step" data-step="2">
-                        <div class="row mb-2">
-                            <div class="col-md-6">
-                                <label for="oidod" class="etiquetaL">Oido Derecho</label>
-                                <input type="number" class="form-control" name="oidod" id="oidod" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="oidoi" class="etiquetaL">Oido Izquierdo</label>
-                                <input type="number" class="form-control" name="oidoi" id="oidoi" required>
-                            </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered tabla-audimetria text-center align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Decibeles</th>
+                                        <th>Oído Derecho</th>
+                                        <th>Oído Izquierdo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>0.5 kHz</td>
+                                        <td>
+                                            <input type="number" class="form-control"
+                                                name="od_500" id="od_500"
+                                                min="0" max="50" step="1">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control"
+                                                name="oi_500" id="oi_500"
+                                                min="0" max="50" step="1">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>1 kHz</td>
+                                        <td>
+                                            <input type="number" class="form-control"
+                                                name="od_1000" id="od_1000"
+                                                min="0" max="50" step="1">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control"
+                                                name="oi_1000" id="oi_1000"
+                                                min="0" max="50" step="1">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>2 kHz</td>
+                                        <td>
+                                            <input type="number" class="form-control"
+                                                name="od_2000" id="od_2000"
+                                                min="0" max="50" step="1">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control"
+                                                name="oi_2000" id="oi_2000"
+                                                min="0" max="50" step="1">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>4 kHz</td>
+                                        <td>
+                                            <input type="number" class="form-control"
+                                                name="od_4000" id="od_4000"
+                                                min="0" max="50" step="1">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control"
+                                                name="oi_4000" id="oi_4000"
+                                                min="0" max="50" step="1">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="row mb-2">
                             <div class="col-md-6">
-                                <label for="consulta" class="etiquetaL">Consulta Auditiva</label>
+                                <label for="consulta" class="etiquetaL">Requiere Consulta Audiologica</label>
                                 <select class="form-control" name="consulta" id="consulta" required>
                                     <option selected class="form-control" value = ""></option>
                                     <option value="SI">SI</option>

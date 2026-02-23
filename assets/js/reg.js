@@ -330,6 +330,8 @@ function buildSummary() {
         { label: 'Edad', value: $('#edad').val() },
         { label: 'Privacidad', value: $('#privacidad option:selected').text() },
         { label: 'Consentimiento', value: $('#consentimiento option:selected').text() },
+        { label: 'Hora de toma de muestras', value: $('#hrtomamuestra').val() },
+        { label: 'Hora de Feria', value: $('#hrferia').val() },
         { label: 'Observaciones', value: $('#observaciones').val() },
         { label: 'Fec Registro', value: $('#fregistro').val() },
         { label: 'Hor Registro', value: $('#hregistro').val() }
@@ -475,6 +477,8 @@ function cargarDatosColaborador(Id) {
             $('#edad').val(data.edad);
             $('#privacidad').val(data.aprivacidad);
             $('#consentimiento').val(data.cinformado);
+            $('#hrtomamuestra').val(data.hrtomamuestra);
+            $('#hrferia').val(data.hrferia);
             $('#observaciones').val(data.obs_reg);
             $fregistro.val(data.fregistro || fechaHoy);
             $hregistro.val(data.hregistro || horaActual);

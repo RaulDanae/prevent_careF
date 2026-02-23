@@ -9,7 +9,6 @@
                 <th>Genero</th>
                 <th>F_Nacimiento</th>
                 <th>Email</th>
-                <th>Telefono</th>
                 <th>Celular</th>
                 <th>Edad</th>
                 <th>Peso</th>

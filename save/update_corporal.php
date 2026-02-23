@@ -35,10 +35,9 @@
 
         $stmt = $conn -> prepare("
             INSERT INTO tcorporal (
-                curp, telefono, celular, peso, talla, marcapasos, obs_corpo, fcorpo, hcorpo, uscorpo          
-                ) VALUES (?,?,?,?,?,?,?,?,?,?) AS new
+                curp, celular, peso, talla, marcapasos, obs_corpo, fcorpo, hcorpo, uscorpo          
+                ) VALUES (?,?,?,?,?,?,?,?,?) AS new
             ON DUPLICATE KEY UPDATE
-                telefono = new.telefono,
                 celular = new.celular,
                 peso = new.peso,
                 talla = new.talla,
@@ -51,7 +50,6 @@
 
         $stmt -> execute([
             $curp,
-            $in['telefono'],
             $in['celular'],
             $in['peso'],
             $in['talla'],
@@ -110,5 +108,3 @@
             'message' => $e -> getMessage()
         ]);
     }
-
-?>

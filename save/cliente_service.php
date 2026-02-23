@@ -115,5 +115,3 @@
 
         $resumen['actualizados']++;
     }      
-
-?>

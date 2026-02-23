@@ -8,8 +8,14 @@
                 <th>Nombre</th>
                 <th>Genero</th>
                 <th>F_Nacimiento</th>
-                <th>Oido Derecho</th>
-                <th>Oido Izquierdo</th>
+                <th>Oido Der 0.5kHz</th>
+                <th>Oido Der 1kHz</th>
+                <th>Oido Der 2kHz</th>
+                <th>Oido Der 4kHz</th>
+                <th>Oido Izq 0.5kHz</th>
+                <th>Oido Izq 1kHz</th>
+                <th>Oido Izq 2kHz</th>
+                <th>Oido Izq 4kHz</th>
                 <th>Consulta Aud</th>
                 <th>Observacion</th>
                 <th>F_Modifica</th>

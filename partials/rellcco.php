@@ -99,7 +99,6 @@
         t1.genero,
         t1.fec_nac,
         t1.email,
-        t2.telefono,
         t2.celular,
         t1.edad,
         t2.peso,
@@ -162,5 +161,3 @@
         "recordsFiltered" => $recordsFiltered,
         "data"            => $data
     ], JSON_UNESCAPED_UNICODE);
-
-?>

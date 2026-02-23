@@ -104,6 +104,7 @@
         t3.fvc,
         t3.fev1,
         t3.fev1_fvc,
+        t3.consultaneum,
         t3.obs_pul,
         t3.fpul,
         t3.hpul,
@@ -162,5 +163,3 @@
         "recordsFiltered" => $recordsFiltered,
         "data"            => $data
     ], JSON_UNESCAPED_UNICODE);
-
-?>

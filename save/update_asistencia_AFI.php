@@ -49,5 +49,3 @@
             'message' => 'Error del servidor'
         ]);
     }
-
-?>

@@ -64,35 +64,37 @@
                         </div>
                         <div class="row mb-2">
                             <div class="col-md-6">
-                                <label for="agudezavd" class="etiquetaL">Agudeza Vis O Derecho</label>
+                                <label for="agudezavd" class="etiquetaL">Agudeza Visual Ojo Derecho</label>
                                 <input type="number" class="form-control" name="agudezavd" id="agudezavd" required>
                             </div>
                             <div class="col mb-6">
-                                <label for="agudezavi" class="etiquetaL">Agudeza Vis O Izquierdo</label>
+                                <label for="agudezavi" class="etiquetaL">Agudeza Visual Ojo Izquierdo</label>
                                 <input type="number" class="form-control" name="agudezavi" id="agudezavi" required>
                             </div>
                         </div>
                         <div class="row mb-2">
                             <div class="col-md-6">
-                                <label for="lentesl" class="etiquetaL">Lentes para ver de Lejos</label>
+                                <label for="lentesl" class="etiquetaL">Requiere Lentes para ver de Lejos</label>
                                 <select class="form-control" name="lentesl" id="lentesl" required>
                                     <option selected class="form-control" value = ""></option>
                                     <option value="SI">SI</option>
                                     <option value="NO">NO</option>
+                                    <option value="NO EVALUADO">NO EVALUADO</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label for="lentesc" class="etiquetaL">Lentes para ver de Cerca</label>
+                                <label for="lentesc" class="etiquetaL">Requiere Lentes para ver de Cerca</label>
                                 <select class="form-control" name="lentesc" id="lentesc" required>
                                     <option selected class="form-control" value = ""></option>
                                     <option value="SI">SI</option>
                                     <option value="NO">NO</option>
+                                    <option value="NO EVALUADO">NO EVALUADO</option>
                                 </select>
                             </div>
                         </div>
                         <div class="row mb-2">
                             <div class="col-md-6">
-                                <label for="consultaof" class="etiquetaL">Consulta Oftalmologica</label>
+                                <label for="consultaof" class="etiquetaL">Requiere Consulta Oftalmologica</label>
                                 <select class="form-control" name="consultaof" id="consultaof" required>
                                     <option selected class="form-control" value = ""></option>
                                     <option value="SI">SI</option>

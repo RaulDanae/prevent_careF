@@ -156,5 +156,3 @@
         "recordsFiltered" => $recordsFiltered,
         "data"            => $data
     ], JSON_UNESCAPED_UNICODE);
-
-?>

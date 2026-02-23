@@ -13,6 +13,11 @@
             throw new Exception('Sesión no válida');
         }
 
+        // PAra cuando lleguen valores '' a caja de texto numerico se convierta en null
+        function n($v) {
+            return ($v === '' || $v === null) ? null : $v;
+        }
+
         $in = $_POST;
 
         file_put_contents('debug_curp.txt', print_r($_POST, true));
@@ -35,11 +40,17 @@
 
         $stmt = $conn -> prepare("
             INSERT INTO tauditivo (
-                curp, oidoder, oidoizq, consultaaud, obs_aud, faud, haud, usaud      
-                ) VALUES (?,?,?,?,?,?,?,?) AS new
+                curp, od_500, od_1000, od_2000, od_4000, oi_500, oi_1000, oi_2000, oi_4000, consultaaud, obs_aud, faud, haud, usaud      
+                ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?) AS new
             ON DUPLICATE KEY UPDATE
-                oidoder = new.oidoder,
-                oidoizq = new.oidoizq,
+                od_500 = new.od_500,
+                od_1000 = new.od_1000,
+                od_2000 = new.od_2000,
+                od_4000 = new.od_4000,
+                oi_500 = new.oi_500,
+                oi_1000 = new.oi_1000,
+                oi_2000 = new.oi_2000,
+                oi_4000 = new.oi_4000,
                 consultaaud = new.consultaaud,
                 obs_aud = new.obs_aud,
                 faud = new.faud,
@@ -49,8 +60,14 @@
 
         $stmt -> execute([
             $curp,
-            $in['oidod'],
-            $in['oidoi'],
+            n($in['od_500']),
+            n($in['od_1000']),
+            n($in['od_2000']),
+            n($in['od_4000']),
+            n($in['oi_500']),
+            n($in['oi_1000']),
+            n($in['oi_2000']),
+            n($in['oi_4000']),
             $in['consulta'],
             $in['observaciones'] ?? null,
             date('Y-m-d'),
@@ -68,6 +85,8 @@
         ]);
 
     } catch (PDOException $e) {
+
+//        die($e->getMessage());
 
         // Si hay transaccion activa, deshacer cambios
         if (isset($conn) && $conn -> inTransaction()) {
@@ -106,5 +125,3 @@
             'message' => $e -> getMessage()
         ]);
     }
-
-?>

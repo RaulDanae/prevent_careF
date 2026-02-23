@@ -98,8 +98,14 @@
         t1.colaborador,
         t1.genero,
         t1.fec_nac,
-        t2.oidoder,
-        t2.oidoizq,
+        t2.od_500,
+        t2.od_1000,
+        t2.od_2000,
+        t2.od_4000,
+        t2.oi_500,
+        t2.oi_1000,
+        t2.oi_2000,
+        t2.oi_4000,
         t2.consultaaud,
         t2.obs_aud,
         t2.faud,
@@ -158,5 +164,3 @@
         "recordsFiltered" => $recordsFiltered,
         "data"            => $data
     ], JSON_UNESCAPED_UNICODE);
-
-?>

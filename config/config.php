@@ -12,5 +12,3 @@
         define('BASE_URL', '/prevent-care');
 
     }
-
-?>
