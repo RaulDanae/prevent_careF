@@ -42,7 +42,7 @@
         // VALIDACIÓN DE CAMPOS OBLIGATORIOS
         $required = [
             'cod_comp', 'clave', 'colaborador', 'fnacimiento', 'genero', 'curp', 'email', 'rfc',
-            'edad', 'privacidad', 'consentimiento', 'hrtomamuestra', 'hrferia', 'fregistro', 'hregistro'
+            'edad', 'privacidad', 'consentimiento', 'fregistro', 'hregistro'
         ];
 
         foreach ($required as $f) {
@@ -70,7 +70,7 @@
         $stmt = $conn -> prepare("
             UPDATE pacientes SET
                 id_reg = ?, cod_comp = ?, clave = ?, colaborador = ?, fec_nac = ?, genero = ?, 
-                curp = ?, email = ?, rfc = ?, edad = ?, aprivacidad = ?, cinformado = ?, hrtomamuestra = ?, hrferia = ?, 
+                curp = ?, email = ?, celular = ?, rfc = ?, edad = ?, aprivacidad = ?, cinformado = ?, hrtomamuestra = ?, hrferia = ?, 
                 obs_reg = ?, fregistro = ?, hregistro = ?, usregistro = ?
             WHERE id = ?
         ");
@@ -84,12 +84,13 @@
             $in['genero'],
             $upper($in['curp']),
             $lower($in['email']),
+            $in['celular'],
             $upper($in['rfc']),
             $in['edad'],
             $in['privacidad'],
             $in['consentimiento'],
-            $in['hrtomamuestra'],
-            $in['hrferia'],
+            nullIfEmpty($in['hrtomamuestra'] ?? null),
+            nullIfEmpty($in['hrferia'] ?? null),
             nullIfEmpty($in['observaciones'] ?? null),
             validDate($in['fregistro']),
             $in['hregistro'],

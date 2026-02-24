@@ -99,7 +99,7 @@
         t1.genero,
         t1.fec_nac,
         t1.email,
-        t2.celular,
+        t1.celular,
         t1.edad,
         t2.peso,
         t2.talla,

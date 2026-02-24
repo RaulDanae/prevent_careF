@@ -1,17 +1,14 @@
 Array
 (
-    [curp] => PEPA10061979HJ10
-    [nombre] => PETER PARKERS
-    [genero] => M
-    [fnacimiento] => 1985-06-10
-    [od_500] => 10
-    [oi_500] => 40
-    [od_1000] => 10
-    [oi_1000] => 45
-    [od_2000] => 20
-    [oi_2000] => 
-    [od_4000] => 
-    [oi_4000] => 10
-    [consulta] => NO
-    [observaciones] => 
+    [curp] => RODU20081969
+    [nombre] => ROCIO DURCAL
+    [genero] => F
+    [fnacimiento] => 1969-08-20
+    [email] => rocio@mail.com
+    [edad] => 56
+    [celular] => 787878787878
+    [peso] => 58
+    [talla] => 164
+    [marcapasos] => NO
+    [observaciones] => p
 )

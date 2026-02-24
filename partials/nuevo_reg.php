@@ -86,14 +86,19 @@
                         </div>
                         <div class="row mb-2">
                             <div class="col-md-4">
+                                <label for="edad" class="etiquetaL">Edad</label>
+                                <input type="number" class="form-control" name="edad" id="edad" readonly>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="celular" class="etiquetaL">Celular</label>
+                                <input type="number" class="form-control" name="celular" id="celular">
+                            </div>
+                            <div class="col-md-4">
                                 <label for="rfc" class="etiquetaL">RFC</label>
                                 <input type="text" class="form-control" name="rfc" id="rfc" required>
                             </div>
-                            <div class="col-md-4">
-                                <label for="edad" class="etiquetaL">Edad</label>
-                                <input type="number" class="form-control" name="edad" id="edad" readonly>
-                                </select>
-                            </div>
+                        </div>
+                        <div class="row mb-2">
                             <div class="col-md-2">
                                 <label for="privacidad" class="etiquetaL">Aviso Privacidad</label>
                                 <select class="form-control" name="privacidad" id="privacidad" required>
@@ -110,16 +115,14 @@
                                     <option value="NO">NO</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="row mb-2">
                             <div class="col-md-4">
                                 <label for="hrtomamuestra" class="etiquetaL">Hora de toma de muestras</label>
-                                <input type="time" class="form-control" name="hrtomamuestra" id="hrtomamuestra" required>
+                                <input type="time" class="form-control" name="hrtomamuestra" id="hrtomamuestra">
                             </div>
                             <div class="col-md-4">
                                 <label for="hrferia" class="etiquetaL">Hora Feria</label>
-                                <input type="time" class="form-control" name="hrferia" id="hrferia" required>
-                            </div>                            
+                                <input type="time" class="form-control" name="hrferia" id="hrferia">
+                            </div> 
                         </div>
                         <div class="row mb-2">
                             <div class="col-md-12">

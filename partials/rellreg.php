@@ -100,6 +100,7 @@
         t1.email,
         t1.rfc,
         t1.edad,
+        t1.celular,
         t1.aprivacidad,
         t1.cinformado,
         t1.hrtomamuestra,

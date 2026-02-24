@@ -35,10 +35,9 @@
 
         $stmt = $conn -> prepare("
             INSERT INTO tcorporal (
-                curp, celular, peso, talla, marcapasos, obs_corpo, fcorpo, hcorpo, uscorpo          
-                ) VALUES (?,?,?,?,?,?,?,?,?) AS new
+                curp, peso, talla, marcapasos, obs_corpo, fcorpo, hcorpo, uscorpo          
+                ) VALUES (?,?,?,?,?,?,?,?) AS new
             ON DUPLICATE KEY UPDATE
-                celular = new.celular,
                 peso = new.peso,
                 talla = new.talla,
                 marcapasos = new.marcapasos,
@@ -50,7 +49,6 @@
 
         $stmt -> execute([
             $curp,
-            $in['celular'],
             $in['peso'],
             $in['talla'],
             $in['marcapasos'],
@@ -58,6 +56,16 @@
             date('Y-m-d'),
             date('H:i:s'),
             $_SESSION['usuario']
+        ]);
+
+        $stmtcel = $conn -> prepare("
+            UPDATE pacientes SET celular = ?
+            WHERE curp = ?
+        ");
+
+        $stmtcel -> execute([
+            $in['celular'],
+            $curp
         ]);
 
         // COMMIT

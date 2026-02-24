@@ -90,20 +90,20 @@
 
             // Saltar encabezados reales
             if (
-                strtoupper(trim($f['A'])) === 'Compania' ||
-                strtoupper(trim($f['C'])) === 'Colaborador' ||
-                strtoupper(trim($f['E'])) === 'Género' ||
-                strtoupper(trim($f['F'])) === 'CURP'
+                strtoupper(trim((string)($f['A'] ?? ''))) === 'Compania' ||
+                strtoupper(trim((string)($f['C'] ?? ''))) === 'Colaborador' ||
+                strtoupper(trim((string)($f['E'] ?? ''))) === 'Género' ||
+                strtoupper(trim((string)($f['F'] ?? ''))) === 'CURP'
             ) {
                 continue;
             }
             
             // Saltar filas completamente vacías
             if (
-                trim($f['A']) === '' &&
-                trim($f['C']) === '' &&
-                trim($f['E']) === '' &&
-                trim($f['F']) === ''
+                trim((string)($f['A'] ?? '')) === '' &&
+                trim((string)($f['C'] ?? '')) === '' &&
+                trim((string)($f['E'] ?? '')) === '' &&
+                trim((string)($f['F'] ?? '')) === ''
             ) {
                 continue;
             }
@@ -112,13 +112,14 @@
 
                 // -------- MAPEO DE COLUMNAS --------
                 $data = [
-                    'compania'      => strtoupper(trim($f['A'])),
-                    'clave'         => trim($f['B']),
-                    'colaborador'   => strtoupper(trim($f['C'])),
-                    'fnacimiento'   => trim($f['D']),
-                    'genero'        => trim($f['E']),
-                    'curp'          => strtoupper(trim($f['F'])),
-                    'email'         => trim($f['G'])
+                    'compania'      => strtoupper(trim((string)($f['A'] ?? ''))),
+                    'clave'         => trim((string)($f['B'] ?? '')),
+                    'colaborador'   => strtoupper(trim((string)($f['C'] ?? ''))),
+                    'fnacimiento'   => trim((string)($f['D'] ?? '')),
+                    'genero'        => trim((string)($f['E'] ?? '')),
+                    'curp'          => strtoupper(trim((string)($f['F'] ?? ''))),
+                    'email'         => trim((string)($f['G'] ?? '')),
+                    'celular'       => trim((string)($f['H'] ?? ''))
                 ];
 
                 // Validación mínima

@@ -328,6 +328,7 @@ function buildSummary() {
         { label: 'Email', value: $('#email').val() },
         { label: 'RFC', value: $('#rfc').val() },
         { label: 'Edad', value: $('#edad').val() },
+        { label: 'Celular', value: $('#celular').val() },
         { label: 'Privacidad', value: $('#privacidad option:selected').text() },
         { label: 'Consentimiento', value: $('#consentimiento option:selected').text() },
         { label: 'Hora de toma de muestras', value: $('#hrtomamuestra').val() },
@@ -475,6 +476,7 @@ function cargarDatosColaborador(Id) {
             $('#email').val(data.email);
             $('#rfc').val(data.rfc || data.curp);
             $('#edad').val(data.edad);
+            $('#celular').val(data.celular);
             $('#privacidad').val(data.aprivacidad);
             $('#consentimiento').val(data.cinformado);
             $('#hrtomamuestra').val(data.hrtomamuestra);

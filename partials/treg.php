@@ -14,6 +14,7 @@
                 <th>Email</th>
                 <th>RFC</th>
                 <th>Edad</th>
+                <th>Celular</th>
                 <th>Aviso Privacidad</th>
                 <th>Consentimiento Informado</th>
                 <th>Hora Toma Muestras</th>

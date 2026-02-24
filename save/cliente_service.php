@@ -68,9 +68,9 @@
         $stmt = $conn->prepare("
             INSERT INTO pacientes (
                 id_reg, cod_comp, clave, colaborador, 
-                fec_nac, genero, curp, email
+                fec_nac, genero, curp, email, celular
             ) VALUES (
-                ?,?,?,?,?,?,?,?
+                ?,?,?,?,?,?,?,?,?
             )
         ");
 
@@ -82,7 +82,8 @@
             $fechafinal,
             $data['genero'],
             $data['curp'],
-            $data['email']
+            $data['email'],
+            $data['celular']
         ]);
 
         $resumen['altas']++;
@@ -98,7 +99,7 @@
 
         $stmt = $conn -> prepare("
             UPDATE pacientes SET
-                colaborador = ?, fec_nac = ?, genero = ?, curp = ?, email = ?
+                colaborador = ?, fec_nac = ?, genero = ?, curp = ?, email = ?, celular = ?
             WHERE id_reg = ? AND cod_comp = ? AND clave = ?
         ");
 
@@ -108,6 +109,7 @@
             $data['genero'],
             $data['curp'],
             $data['email'],
+            $data['celular'],
             $idreg,
             $idcomp,
             $data['clave']
