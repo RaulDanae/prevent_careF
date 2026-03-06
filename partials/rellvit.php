@@ -9,7 +9,7 @@
     require_once __DIR__ . '/../config/config.php';
     require_once ROOT_PATH . '/middleware/auth.php';
     require_once ROOT_PATH . '/config/database1.php';
-    authorizeDataTable(['Adminis', 'Supervi', 'Svitale', 'Pulmvit']);
+    authorizeDataTable(['Adminis', 'Supervi', 'Svitale', 'Comodin']);
 
     $conn = conn(); // Es obligatorio
 

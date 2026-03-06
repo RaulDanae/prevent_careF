@@ -19,14 +19,14 @@
                     'icon'  => 'fas fa-stethoscope',
                     'color' => 'green',
                     'url'   => BASE_URL . '/views/fTSV.php',
-                    'roles' => ['Adminis', 'Supervi', 'Svitale', 'Pulmvit']
+                    'roles' => ['Adminis', 'Supervi', 'Svitale', 'Comodin']
                 ],
                 [
                     'title' => 'Toma de Muestras',
                     'icon'  => 'fas fa-syringe',
                     'color' => 'blue',
                     'url'   => BASE_URL . '/views/fTDM.php',
-                    'roles' => ['Adminis', 'Supervi', 'Tmuestr']
+                    'roles' => ['Adminis', 'Supervi', 'Tmuestr', 'Comodin']
                 ],
                 [
                     'title' => 'Composicion Corporal',
@@ -47,21 +47,21 @@
                     'icon'  => 'fas fa-ear-deaf',
                     'color' => 'blue',
                     'url'   => BASE_URL . '/views/fCAU.php',
-                    'roles' => ['Adminis', 'Supervi']
+                    'roles' => ['Adminis', 'Supervi', 'Cauditiva', 'Comodin']
                 ],
                 [
                     'title' => 'Capacidad Pulmonar',
                     'icon'  => 'fas fa-lungs',
                     'color' => 'pink',
                     'url'   => BASE_URL . '/views/fCPU.php',
-                    'roles' => ['Adminis', 'Supervi', 'Pulmvit']
+                    'roles' => ['Adminis', 'Supervi', 'Pulmvit', 'Comodin']
                 ],
                 [
                     'title' => 'Agudeza Visual',
                     'icon'  => 'fas fa-eye',
                     'color' => 'cyan',
                     'url'   => BASE_URL . '/views/fAVI.php',
-                    'roles' => ['Adminis', 'Supervi', 'Avisual']
+                    'roles' => ['Adminis', 'Supervi', 'Avisual', 'Comodin']
                 ],
                 [
                     'title' => 'Activacion Fisica',
@@ -75,7 +75,7 @@
                     'icon'  => 'fas fa-bed',
                     'color' => 'gray',
                     'url'   => BASE_URL . '/views/fREL.php',
-                    'roles' => ['Adminis', 'Supervi']
+                    'roles' => ['Adminis', 'Supervi', 'Relajacion']
                 ],
             ];
 

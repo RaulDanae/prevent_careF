@@ -39,7 +39,7 @@
             }
 
             // 3️⃣ Obtener datos del paciente (PHP)
-            const res = await fetch(`<?= BASE_URL ?>/ajax/imprimir_pacientes.php?id=${id}`);
+            const res = await fetch(`imprimir_pacientes.php?id=${id}`);
             const data = await res.json();
 
             // 4️⃣ Construir ZPL (VISIBLE – SIN ROTAR)

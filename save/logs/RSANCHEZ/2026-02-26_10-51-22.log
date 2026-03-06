@@ -1,0 +1,38 @@
+USUARIO: RSANCHEZ
+FECHA : 2026-02-26 10:51:22
+============================================================
+Fila 5 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:45:00 AM' for column 'hrtomamuestra' at row 1
+Fila 7 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:45:00 AM' for column 'hrtomamuestra' at row 1
+Fila 15 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:00:00 AM' for column 'hrtomamuestra' at row 1
+Fila 19 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:00:00 AM' for column 'hrtomamuestra' at row 1
+Fila 20 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:45:00 AM' for column 'hrtomamuestra' at row 1
+Fila 24 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:45:00 AM' for column 'hrtomamuestra' at row 1
+Fila 30 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:30:00 AM' for column 'hrtomamuestra' at row 1
+Fila 31 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:30:00 AM' for column 'hrtomamuestra' at row 1
+Fila 37 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:45:00 AM' for column 'hrtomamuestra' at row 1
+Fila 38 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:45:00 AM' for column 'hrtomamuestra' at row 1
+Fila 39 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:45:00 AM' for column 'hrtomamuestra' at row 1
+Fila 40 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:30:00 AM' for column 'hrtomamuestra' at row 1
+Fila 41 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:30:00 AM' for column 'hrtomamuestra' at row 1
+Fila 43 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:45:00 AM' for column 'hrtomamuestra' at row 1
+Fila 44 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:00:00 AM' for column 'hrtomamuestra' at row 1
+Fila 45 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:30:00 AM' for column 'hrtomamuestra' at row 1
+Fila 48 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:30:00 AM' for column 'hrtomamuestra' at row 1
+Fila 49 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:30:00 AM' for column 'hrtomamuestra' at row 1
+Fila 50 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '12:00:00 PM' for column 'hrferia' at row 1
+Fila 52 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:45:00 AM' for column 'hrtomamuestra' at row 1
+Fila 53 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:30:00 AM' for column 'hrtomamuestra' at row 1
+Fila 61 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:45:00 AM' for column 'hrtomamuestra' at row 1
+Fila 62 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:30:00 AM' for column 'hrtomamuestra' at row 1
+Fila 64 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:30:00 AM' for column 'hrtomamuestra' at row 1
+Fila 65 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:30:00 AM' for column 'hrtomamuestra' at row 1
+Fila 69 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:45:00 AM' for column 'hrtomamuestra' at row 1
+Fila 71 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:45:00 AM' for column 'hrtomamuestra' at row 1
+Fila 72 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:45:00 AM' for column 'hrtomamuestra' at row 1
+Fila 73 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:30:00 AM' for column 'hrtomamuestra' at row 1
+Fila 74 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:15:00 AM' for column 'hrtomamuestra' at row 1
+Fila 77 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:30:00 AM' for column 'hrtomamuestra' at row 1
+Fila 78 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:45:00 AM' for column 'hrtomamuestra' at row 1
+Fila 80 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:00:00 AM' for column 'hrtomamuestra' at row 1
+Fila 84 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:30:00 AM' for column 'hrtomamuestra' at row 1
+Fila 88 | SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect time value: '8:45:00 AM' for column 'hrtomamuestra' at row 1

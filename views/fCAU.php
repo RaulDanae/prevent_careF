@@ -4,7 +4,7 @@
     require_once ROOT_PATH . '/middleware/auth.php';
     require_once ROOT_PATH . '/controllers/AfiliadosController.php';
     require_once ROOT_PATH . '/controllers/MenuController.php';
-    authorize(['Adminis', 'Supervi']);
+    authorize(['Adminis', 'Supervi', 'Cauditiva', 'Comodin']);
 
     $perfil  = $_SESSION['perfil'] ?? null;
     $nombre  = $_SESSION['nombre'] ?? null;   // Nombre

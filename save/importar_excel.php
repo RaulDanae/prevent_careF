@@ -119,7 +119,9 @@
                     'genero'        => trim((string)($f['E'] ?? '')),
                     'curp'          => strtoupper(trim((string)($f['F'] ?? ''))),
                     'email'         => trim((string)($f['G'] ?? '')),
-                    'celular'       => trim((string)($f['H'] ?? ''))
+                    'celular'       => trim((string)($f['H'] ?? '')),
+                    'hrtomamuestra' => trim((string)($f['I'] ?? '')),
+                    'hrferia'       => trim((string)($f['J'] ?? ''))
                 ];
 
                 // Validación mínima

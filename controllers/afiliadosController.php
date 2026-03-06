@@ -9,7 +9,8 @@
 
             $rolesPermitidos = [
                 'Adminis','Supervi','Avisual','Snutric',
-                'Afisica','Ccorpor','Tmuestr','Svitale','Pulmvit'
+                'Afisica','Ccorpor','Tmuestr','Svitale',
+                'Pulmvit', 'Comodin', 'Cauditiva', 'Relajacion'
             ];
 
 
