@@ -51,5 +51,13 @@
     $_SESSION['usuario']    = $user['usuario'];
     $_SESSION['perfil']     = $user['perfil'];
 
-    header("Location: " . BASE_URL . "/views/menu.php");
+    /* Redirección según perfil */
+    if ($user['perfil'] == 'Laboratorio') {
+        header("Location: " . BASE_URL . "/views/menuE.php");
+        exit();
+    } else {
+        header("Location: " . BASE_URL . "/views/menu.php");
+        exit();
+    }
+
     exit();

@@ -12,7 +12,7 @@
 
     <!-- Nuevo -->
     <!-- Nuevo (solo admin) -->
-    <?php if (in_array($perfil, ['Adminis', 'Supervi']) && $modulo === 'Registro'): ?>
+    <?php if (in_array($perfil, ['Adminis', 'Supervi', 'Laboratorio']) && in_array($modulo, ['Registro', 'Estudios'])): ?>
      <button
       type="button"
       id="btnNuevoM"
