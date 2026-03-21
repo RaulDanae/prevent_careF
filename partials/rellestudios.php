@@ -9,7 +9,7 @@
     require_once __DIR__ . '/../config/config.php';
     require_once ROOT_PATH . '/middleware/auth.php';
     require_once ROOT_PATH . '/config/database1.php';
-    authorizeDataTable(['Laboratorio']);
+    authorizeDataTable(['Laboratorio', 'Caplab']);
 
     $conn = conn(); // Es obligatorio
 
@@ -51,7 +51,7 @@
         $where[] = "(
             t1.clave LIKE ? OR
             t1.nombre LIKE ? OR
-            t3.nombre LIKE ?
+            t4.nombre LIKE ?
         )";
 
         for ($i = 0; $i < 3; $i++){
@@ -101,6 +101,7 @@
     ================================ */    
     $sqlData = "
     SELECT
+        t1.id,
         t1.clave,
         t1.nombre,
         (t4.nombre) perfil,
@@ -153,10 +154,11 @@
 
     while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
-        $clave = $fila['clave'];
+        $id = $fila['id'];
+        unset($fila['id']);
 
         $btnEditar = '';
-        $btnEditar = '<button class="btn btn-warning btn-sm btnEditar" data-clave="'.$clave.'"><i class="fa fa-pencil"></i></button>';
+        $btnEditar = '<button class="btn btn-warning btn-sm btnEditar" data-id="'.$id.'"><i class="fa fa-pencil"></i></button>';
 
         foreach ($fila as &$valor) {
             if (is_string($valor)) {

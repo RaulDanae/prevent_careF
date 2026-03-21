@@ -12,7 +12,7 @@
 
     <!-- Nuevo -->
     <!-- Nuevo (solo admin) -->
-    <?php if (in_array($perfil, ['Adminis', 'Supervi', 'Laboratorio']) && in_array($modulo, ['Registro', 'Estudios'])): ?>
+    <?php if (in_array($perfil, ['Adminis', 'Supervi']) && $modulo === 'Registro'): ?>
      <button
       type="button"
       id="btnNuevoM"
@@ -37,7 +37,7 @@
        accept=".xlsx,.xls"
        style="display:none">
 
-    <?php elseif (in_array($perfil, ['Adminis', 'Supervi']) && $modulo === 'Altas o Bajas'): ?>
+    <?php elseif (in_array($perfil, ['Adminis', 'Supervi', 'Laboratorio', 'Caplab']) && in_array($modulo, ['Altas o Bajas', 'Estudios'])): ?>
      <button
       type="button"
       id="btnNuevoM"

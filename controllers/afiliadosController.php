@@ -11,7 +11,7 @@
                 'Adminis','Supervi','Avisual','Snutric',
                 'Afisica','Ccorpor','Tmuestr','Svitale',
                 'Pulmvit', 'Comodin', 'Cauditiva', 'Relajacion',
-                'Laboratorio'
+                'Laboratorio', 'Caplab'
             ];
 
 

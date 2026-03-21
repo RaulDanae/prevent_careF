@@ -14,6 +14,8 @@
 
                 <div class="modal-body">
 
+                    <input type="hidden" name="id_estudio"> <!-- Caja oculta que obtiene el id del estudio -->
+
                     <!-- CLAVE / ESTUDIO -->
                     <div class="row mb-3">
                         <div class="col-md-4">

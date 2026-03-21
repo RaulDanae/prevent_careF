@@ -3,11 +3,11 @@
 
     $input = json_decode(file_get_contents("php://input"), true);
 
-    $clave = $_POST['clave'] ?? $input['clave'] ?? '';
+    $id = $input['id'] ?? null;
 
-    if (!$clave) {
+    if (!$id) {
         http_response_code(400);
-        echo json_encode(['error' => 'Clave requerida']);
+        echo json_encode(['error' => 'Id requerido']);
         exit;
     }
 
@@ -17,9 +17,9 @@
     $stmt = $conn->prepare("
         SELECT id, clave, nombre, usuario 
         FROM estudios 
-        WHERE clave = ?
+        WHERE id = ?
     ");
-    $stmt->execute([$clave]);
+    $stmt->execute([$id]);
     $estudio = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if(!$estudio){
@@ -106,6 +106,7 @@
 
     // Datos finales
     echo json_encode([
+        "id" => $estudio['id'],
         "clave" => $estudio['clave'],
         "nombre" => $estudio['nombre'],
         "perfiles" => $perfiles,

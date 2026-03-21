@@ -50,7 +50,7 @@
           Bienvenid@ <?= $_SESSION['nombre'] ?>
       </div>
       <div>
-        <a href="<?= BASE_URL ?>/views/menu.php" class="btn btn-danger">
+        <a href="<?= BASE_URL ?>/views/menuE.php" class="btn btn-danger">
           Salir
         </a>
 <!--        <button type="button" class="btn btn-danger" action="../middleware/logout.php">

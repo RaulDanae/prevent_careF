@@ -12,14 +12,14 @@
                     'icon'  => 'fa-solid fa-x-ray',
                     'color' => 'black',
                     'url'   =>  BASE_URL . '/views/fEST.php',
-                    'roles' => ['Laboratorio']
+                    'roles' => ['Laboratorio', 'Caplab']
                 ],
                 [
                     'title' => 'Recepcion',
                     'icon'  => 'fa-solid fa-box',
                     'color' => 'green',
                     'url'   => BASE_URL . '/views/fREC.php',
-                    'roles' => ['Laboratorio']
+                    'roles' => ['Laboratorio', 'Caplab']
                 ],
             ];
 

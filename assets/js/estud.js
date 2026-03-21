@@ -320,6 +320,7 @@ function armarEstudio(){
     });
 
     let estudio = {
+        id_estudio: $('input[name="id_estudio"]').val(),
         clave: $('input[name="cestudio"]').val(),
         nombre: $('input[name="nomestudio"]').val(),
         perfiles: perfiles,
@@ -370,9 +371,6 @@ $('#formEstudio').on('submit', function (e) {
 
     let data = armarEstudio();
 
-    console.log("Existe select:", $('#perfilest').length);
-    console.log("Val:", $('#perfilest').val());
-    console.log("Options:", $('#perfilest option').length);
 
     if(!data.perfiles || data.perfiles.length === 0){
         alertify.error("Debes seleccionar al menos un perfil");
@@ -512,11 +510,11 @@ function validarTraslapesEdad(){
 
 
 ///////////////////////////////// EDITAR ///////////////////////////////////////
-let editClave = null;
+let editId = null;
 $('#tabla-estud').on('click', '.btnEditar', function () {
 
     EstudioMode = 'edit';
-    editClave = $(this).attr('data-clave');
+    editId = $(this).attr('data-id');
 
     $('#myModalLabel').text('Editar Estudio');
 
@@ -526,23 +524,26 @@ $('#tabla-estud').on('click', '.btnEditar', function () {
 
     // Espera a que el modal este listo
     setTimeout(() => {
-        cargarDatosEstudios(editClave);
+        cargarDatosEstudios(editId);
     }, 150);   
 
 });
 
 
-function cargarDatosEstudios(clave) {
+function cargarDatosEstudios(id) {
 
     $.ajax({
         url: BASE_URL + '/config/get_estud.php',
         type: 'POST',
-        data: JSON.stringify({ clave: clave }),
+        data: JSON.stringify({ id: id }),
         contentType: "application/json",
         dataType: 'json',
 
 
         success: function (data) {
+
+            // Campo oculto
+            $('input[name="id_estudio"]').val(data.id);
 
             // Datos Generales
             $('input[name="cestudio"]').val(data.clave);

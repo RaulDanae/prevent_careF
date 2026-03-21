@@ -52,7 +52,7 @@
     $_SESSION['perfil']     = $user['perfil'];
 
     /* Redirección según perfil */
-    if ($user['perfil'] == 'Laboratorio') {
+    if ($user['perfil'] == 'Laboratorio' || $user['perfil'] == 'Caplab') {
         header("Location: " . BASE_URL . "/views/menuE.php");
         exit();
     } else {

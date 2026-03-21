@@ -9,7 +9,7 @@
     $perfil  = $_SESSION['perfil'] ?? null;
     $nombre  = $_SESSION['nombre'] ?? null;   // Nombre
     $usuario = $_SESSION['usuario'] ?? null; // Usuario
-    $modulo = 'Estudios';
+    $modulo = 'Recepcion';
 
     $registros = AfiliadosController::getRegistros(
         $perfil,

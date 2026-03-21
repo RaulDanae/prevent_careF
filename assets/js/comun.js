@@ -56,7 +56,7 @@ function initCatalogos(context = document){
             dropdownParent: $select.closest('.modal'),
             theme: "bootstrap-5",
             width: '100%',
-            tags: true,
+            tags: puedeCrearCatalogos,
             minimumInputLength: 0, // Para que no haga busquedas hasta colocar 2 digitos
             closeOnSelect: !$select.prop('multiple'),  // PAra que no se cierre la ventana mientras seleccionas perfiles
             allowClear: true,
