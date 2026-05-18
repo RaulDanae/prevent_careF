@@ -4,12 +4,14 @@
     require_once ROOT_PATH . '/middleware/auth.php';
     require_once ROOT_PATH . '/controllers/AfiliadosController.php';
     require_once ROOT_PATH . '/controllers/MenuController.php';
+    require_once ROOT_PATH . '/controllers/BusquedaController.php';
     authorize(['Adminis', 'Supervi', 'Cauditiva', 'Comodin']);
 
     $perfil  = $_SESSION['perfil'] ?? null;
     $nombre  = $_SESSION['nombre'] ?? null;   // Nombre
     $usuario = $_SESSION['usuario'] ?? null; // Usuario
-    $modulo = 'Capacidad Auditiva';
+    $nomevento  = $_SESSION['nomevento'] ?? null; // Evento
+    $modulo = 'capacidad_auditiva';
 
     $registros = AfiliadosController::getRegistros(
         $perfil,
@@ -17,7 +19,10 @@
         $usuario
     );
 
-    $menuItems = MenuController::getMenuByPerfil($perfil);
+    $tipo_menu = 'capacidad_auditiva'; 
+
+    $menuItems = MenuController::getMenuByPerfil($perfil, $tipo_menu);
+    $acciones = BusquedaController::getAcciones($perfil, $modulo);
 ?>
 
 <!DOCTYPE html>
@@ -79,6 +84,7 @@
             const PERFIL_USUARIO = "<?= $_SESSION['perfil'] ?? '' ?>";
             const GRUPO_NOMBRE = "<?= $_SESSION['nombre'] ?? '' ?>";
             const GRUPO_USUARIO = "<?= $_SESSION['usuario'] ?? '' ?>";
+            const EVENTO_NOMBRE = "<?= $_SESSION['id_evento'] ?? '' ?>";
             const BASE_URL = "<?= BASE_URL ?>";
         </script>
 

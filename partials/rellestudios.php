@@ -9,7 +9,7 @@
     require_once __DIR__ . '/../config/config.php';
     require_once ROOT_PATH . '/middleware/auth.php';
     require_once ROOT_PATH . '/config/database1.php';
-    authorizeDataTable(['Laboratorio', 'Caplab']);
+    authorizeDataTable(['Adminis', 'Supervi', 'Laboratorio', 'Caplab']);
 
     $conn = conn(); // Es obligatorio
 
@@ -34,6 +34,7 @@
     $perfil = $_SESSION['perfil'] ?? '';
     $nombre = $_SESSION['nombre'] ?? '';
     $usuario = $_SESSION['usuario'] ?? '';
+    $id_evento = $_SESSION['id_evento'] ?? '';
 
     /* ===============================
         4. FILTROS BASE POR PERFIL
@@ -104,19 +105,7 @@
         t1.id,
         t1.clave,
         t1.nombre,
-        (t4.nombre) perfil,
-        (t8.nombre) metodologia,
         (t6.nombre) unidades,
-        (t9.nombre) muestra,
-        (t7.nombre) recipientes,
-        t5.genero,
-        t5.edad_min,
-        t5.edad_max,
-        t5.valor_bajo,
-        t5.limite_inf,
-        t5.limite_sup,
-        t5.valor_alto,
-        t5.valor_critico,
         t1.f_creacion,
         t1.f_modifica,
         t1.usuario
@@ -129,6 +118,7 @@
     LEFT JOIN trecipientes t7 ON t3.id_recipiente = t7.id
     LEFT JOIN tmetodologias t8 ON t3.id_metodologia = t8.id
     LEFT JOIN tipomuestras t9 ON t3.id_muestra = t9.id 
+    GROUP BY t1.id, t1.clave, t1.nombre, (t6.nombre), t1.f_creacion, t1.f_modifica, t1.usuario
     $whereSQL
     ORDER BY t1.id DESC
     LIMIT $start, $length

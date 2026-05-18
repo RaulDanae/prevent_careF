@@ -27,9 +27,7 @@
       ],
 
       dom:      
-         "<'row mb-2'<'col-md-6'l><'col-md-6 text-end'f>>" +
-         "rt" +
-         "<'row'<'col-md-6'i><'col-md-6'p>>",
+         '<"d-flex justify-content-between align-items-center"l f>rtip',
       buttons: [
         {
           extend: "excelHtml5",
@@ -68,8 +66,9 @@
     })
 
     // Boton Descargar
-    $('#btndescargar').on('click', function () {
-      tabla_alba.button('.buttons-excel').trigger();
+    $(document).on('click', '.js-activar-excel', function (e) {
+        e.preventDefault();
+        tabla_alba.button('.buttons-excel').trigger();
     });
 
   });
@@ -77,15 +76,26 @@
 /////////////////////////////////// Modulo Nuevo /////////////////////////////////////////////////
 
 ///////////////////////////Modal Salir //////////////////////////////////////////////////////////
-$(document).on('click', '#modalNuevo .btn-close', function () {
-    this.blur();              // ← quitar foco del botón cerrar
-    document.getElementById('btndescargar').focus(); // ← devolver foco
+function safeFocus(selector) {
+    const el = document.querySelector(selector);
+    if (el) el.focus();
+}
+
+$('#modalNuevo').on('hidden.bs.modal', function () {
+    if (document.querySelector('#btndescargar')) {
+        safeFocus('#btndescargar');
+    } else {
+        safeFocus('#btnNuevoM'); // fallback
+    }
 });
 
 const btnOpen = document.getElementById('btndescargar');
 
 $('#modalNuevo').on('hide.bs.modal', function () {
-    btnOpen.focus();
+    const $btn = $('#btnNuevoM');
+    if ($btn.length) {
+        $btn.trigger('focus');
+    }
 });
 
 //////////////////////// Para resetear el modal al dar click en nuevo /////////////////////
@@ -256,7 +266,8 @@ function buildSummary() {
         { label: 'Nombre', value: $('#nom').val() },
         { label: 'Usuario', value: $('#uss').val() },
         { label: 'Perfil', value: $('#perfil option:selected').text() },
-        { label: 'Estatus', value: $('#estatus option:selected').text() }
+        { label: 'Estatus', value: $('#estatus option:selected').text() },
+        { label: 'Evento', value: $('#evento option:selected').text() },
     ];
 
     let html = '';
@@ -433,6 +444,7 @@ function cargarDatosUsuario(Id) {
             $('#uss').val(data.usuario);
             $('#perfil').val(data.perfil);
             $('#estatus').val(data.estatus);
+            $('#evento').val(data.id_evento);
 
             const esAdmin = (userProfile === 'adminis' || userProfile === 'supervi');
 
@@ -442,12 +454,14 @@ function cargarDatosUsuario(Id) {
                 $('#uss').prop('disabled', true);
                 $('#perfil').prop('disabled', true);
                 $('#estatus').prop('disabled', true);
+                $('#evento').prop('disabled', true);
             } else {
                 // Desbloquear todos los campos
                 $('#nom').prop('disabled', false);
                 $('#uss').prop('disabled', false);
                 $('#perfil').prop('disabled', false);
                 $('#estatus').prop('disabled', false);
+                $('#evento').prop('disabled', false);
 
             }
 

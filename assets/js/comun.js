@@ -45,21 +45,23 @@ function initCatalogos(context = document){
 
         const $select = $(this);
 
-        if ($select.hasClass("select2-hidden-accessible")) {
-            return;
+        if ( $select.data('select2')) {
+            $select.select2('destroy');
         }
 
+        const puedeCrearCatalogos = (PERFIL_USUARIO === 'Adminis' || PERFIL_USUARIO === 'Supervi');
         const tabla = $select.data("tabla");
 
         $select.select2({
 
-            dropdownParent: $select.closest('.modal'),
+            dropdownParent: $('#modalNuevo'),
             theme: "bootstrap-5",
             width: '100%',
             tags: puedeCrearCatalogos,
             minimumInputLength: 0, // Para que no haga busquedas hasta colocar 2 digitos
             closeOnSelect: !$select.prop('multiple'),  // PAra que no se cierre la ventana mientras seleccionas perfiles
-            allowClear: true,
+            allowClear: !$select.prop('multiple'),
+            placeholder: 'Seleccione opcion',
 
             ajax: {
                 url: BASE_URL + '/save/catalogo_buscar.php',
@@ -99,19 +101,19 @@ function initCatalogos(context = document){
 
 }
 
-$(document).on('select2:close', '.catalogo-select', function () {
+//$(document).on('select2:close', '.catalogo-select', function () {
 
-    const select = $(this);
-    const data = select.select2('data');
+//    const select = $(this);
+//    const data = select.select2('data');
 
     // SI el registro creado es un "tag nuevo"
-    if (data.length && data[0].nuevo) {
+//    if (data.some(d => d.nuevo)) {
 
-        select.val(null).trigger('change');
+//        select.val(null).trigger('change');
 
-    }
+//    }
 
-});
+//});
 
 
 
@@ -121,19 +123,24 @@ $(document).on('select2:select', '.catalogo-select', function(e){
     const tabla = $(this).data("tabla");
     const select = $(this);
 
+    if(!tabla) return;
+
     if(data.nuevo){
 
         $.post(BASE_URL + '/save/catalogo_insert.php', {
-
             tabla: tabla,
             nombre: data.text
-
         }, function(res){
+
+            if(!res.id){
+                alertify.error("No se pudo guardar el perfil");
+                return;
+            }
 
             const option = new Option(data.text, res.id, true, true);
 
             select.append(option).trigger('change');
-
+            
         }, "json");
 
     }

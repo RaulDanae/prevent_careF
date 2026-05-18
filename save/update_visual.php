@@ -15,12 +15,12 @@
 
         $in = $_POST;
 
-        file_put_contents('debug_curp.txt', print_r($_POST, true));
-        if (empty($in['curp'])) {
-            throw new Exception('CURP del registro no recibido');
+        file_put_contents('debug_evento.txt', print_r($_POST, true));
+        if (empty($in['idpaeven'])) {
+            throw new Exception('Id del evento no recibido');
         }
 
-        $curp = trim($in['curp']);
+        $idpaeven = trim($in['idpaeven']);
 
         // Establecer zona horaria
         date_default_timezone_set('America/Mexico_City');
@@ -35,25 +35,23 @@
 
         $stmt = $conn -> prepare("
             INSERT INTO tvisual (
-                curp, dojoder, dojoizq, avojod, avojoi, lenteslej, lentescer, consultaoft, obs_ofta, fofta, hofta, usofta    
-                ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) AS new
+                id_paciente_evento, dojoder, dojoizq, avojod, avojoi, lenteslej, lentescer, consultaoft, obs_ofta, usofta    
+                ) VALUES (?,?,?,?,?,?,?,?,?,?)
             ON DUPLICATE KEY UPDATE
-                dojoder = new.dojoder,
-                dojoizq = new.dojoizq,
-                avojod = new.avojod,
-                avojoi = new.avojoi,
-                lenteslej = new.lenteslej,
-                lentescer = new.lentescer,
-                consultaoft = new.consultaoft,
-                obs_ofta = new.obs_ofta,
-                fofta = new.fofta,
-                hofta = new.hofta,
-                usofta = new.usofta 
+                dojoder = VALUES(dojoder),
+                dojoizq = VALUES(dojoizq),
+                avojod = VALUES(avojod),
+                avojoi = VALUES(avojoi),
+                lenteslej = VALUES(lenteslej),
+                lentescer = VALUES(lentescer),
+                consultaoft = VALUES(consultaoft),
+                obs_ofta = VALUES(obs_ofta),
+                usofta = VALUES(usofta) 
 
         ");
 
         $stmt -> execute([
-            $curp,
+            $idpaeven,
             $in['dojod'],
             $in['dojoi'],
             $in['agudezavd'],
@@ -62,8 +60,6 @@
             $in['lentesc'],
             $in['consultaof'],
             $in['observaciones'] ?? null,
-            date('Y-m-d'),
-            date('H:i:s'),
             $_SESSION['usuario']
         ]);
 

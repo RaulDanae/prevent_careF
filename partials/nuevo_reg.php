@@ -28,19 +28,27 @@
                     <!-- Paso 1 -->
                      <div class="step" data-step="1">
                         <div class="row mb-2">
-                            <div class="col-md-2">
-                                <label for="cod_comp" class="etiquetaL">Cod Compañia</label>
-                                <input type="text" class="form-control" name="cod_comp" id="cod_comp" maxlength="5" readonly>
-                            </div>
-                            <div class="col-md-10">
+                            <div class="col-md-6">
                                 <label for="compania" class="etiquetaL">Compañia</label>
                                 <select class="form-control" name="compania" id="compania" required>
                                     <option selected class="form-control" value=""></option>
                                     <?php WHILE($row = $compania -> fetch_assoc()) { ?>
                                         <option 
-                                            value= "<?php echo htmlspecialchars($row['compania']); ?>"
-                                            data-grupo="<?php echo $row['id_comp']; ?>">
-                                            <?php echo htmlspecialchars($row['compania']); ?>
+                                            value= "<?= $row['id_comp']; ?>">
+                                            <?= htmlspecialchars($row['compania']); ?>
+                                        </option>
+                                    <?php  } ?>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="sucurs" class="etiquetaL">Sucursal</label>
+                                <select class="form-control" name="sucurs" id="sucurs" disabled required>
+                                    <option selected class="form-control" value=""></option>
+                                    <?php WHILE($row = $sucursal -> fetch_assoc()) { ?>
+                                        <option 
+                                            value= "<?= $row['id_sucursal']; ?>"
+                                            data-comp="<?= $row['id_comp']; ?>">
+                                            <?= htmlspecialchars($row['nombre_sucursal']); ?>
                                         </option>
                                     <?php  } ?>
                                 </select>
@@ -77,7 +85,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="curp" class="etiquetaL">CURP</label>
-                                <input type="text" class="form-control" name="curp" id="curp">
+                                <input type="text" class="form-control" name="curp" id="curp" maxlength="18">
                             </div>
                             <div class="col-md-4">
                                 <label for="email" class="etiquetaL">Email</label>
@@ -91,53 +99,26 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="celular" class="etiquetaL">Celular</label>
-                                <input type="number" class="form-control" name="celular" id="celular">
+                                <input type="number" class="form-control" name="celular" id="celular" maxlength="10" pattern="\d{10}" inputmode="numeric">
                             </div>
                             <div class="col-md-4">
                                 <label for="rfc" class="etiquetaL">RFC</label>
-                                <input type="text" class="form-control" name="rfc" id="rfc" required>
+                                <input type="text" class="form-control" name="rfc" id="rfc" maxlength="13">
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col-md-2">
-                                <label for="privacidad" class="etiquetaL">Aviso Privacidad</label>
-                                <select class="form-control" name="privacidad" id="privacidad" required>
-                                    <option selected class="form-control" value = ""></option>
-                                    <option value="SI">SI</option>
-                                    <option value="NO">NO</option>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <label for="concentimiento" class="etiquetaL">C Informado</label>
-                                <select class="form-control" name="consentimiento" id="consentimiento" required>
-                                    <option selected class="form-control" value = ""></option>
-                                    <option value="SI">SI</option>
-                                    <option value="NO">NO</option>
-                                </select>
-                            </div>
                             <div class="col-md-4">
-                                <label for="hrtomamuestra" class="etiquetaL">Hora de toma de muestras</label>
-                                <input type="time" class="form-control" name="hrtomamuestra" id="hrtomamuestra">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="hrferia" class="etiquetaL">Hora Feria</label>
-                                <input type="time" class="form-control" name="hrferia" id="hrferia">
-                            </div> 
-                        </div>
+                                <label for="activo" class="etiquetaL">Activo</label>
+                                <select class="form-control" name="activo" id="activo" required>
+                                    <option selected value="1">SI</option>
+                                    <option value="0">NO</option>
+                                </select>
+                            </div>                            
+                        </div>    
                         <div class="row mb-2">
                             <div class="col-md-12">
                                 <label for="observaciones" class="etiquetaL">Observaciones</label>
                                 <textarea class="form-control" name = "observaciones" id = "observaciones" rows="2" ></textarea>
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-md-4">
-                                <label for="fregistro" class="etiquetaL">Fecha Registro</label>
-                                <input type="date" class="form-control" name="fregistro" id="fregistro" required>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="hregistro" class="etiquetaL">Hora Registro</label>
-                                <input type="time" class="form-control" name="hregistro" id="hregistro" required>
                             </div>
                         </div>
                      </div>    

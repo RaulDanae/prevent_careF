@@ -15,12 +15,12 @@
 
         $in = $_POST;
 
-        file_put_contents('debug_curp.txt', print_r($_POST, true));
-        if (empty($in['curp'])) {
-            throw new Exception('CURP del registro no recibido');
+        file_put_contents('debug_evento.txt', print_r($_POST, true));
+        if (empty($in['idpaeven'])) {
+            throw new Exception('Id del evento no recibido');
         }
 
-        $curp = trim($in['curp']);
+        $idpaeven = trim($in['idpaeven']);
 
         // Establecer zona horaria
         date_default_timezone_set('America/Mexico_City');
@@ -35,23 +35,19 @@
 
         $stmt = $conn -> prepare("
             INSERT INTO trelax (
-                curp, acudiorel, obs_relax, frelax, hrelax, usrelax  
-                ) VALUES (?,?,?,?,?,?) AS new
+                id_paciente_evento, acudiorel, obs_relax, usrelax  
+                ) VALUES (?,?,?,?)
             ON DUPLICATE KEY UPDATE
-                acudiorel = new.acudiorel,
-                obs_relax = new.obs_relax,
-                frelax = new.frelax,
-                hrelax = new.hrelax,
-                usrelax = new.usrelax 
+                acudiorel = VALUES(acudiorel),
+                obs_relax = VALUES(obs_relax),
+                usrelax = VALUES(usrelax) 
 
         ");
 
         $stmt -> execute([
-            $curp,
+            $idpaeven,
             $in['asistencia'],
             $in['observaciones'] ?? null,
-            date('Y-m-d'),
-            date('H:i:s'),
             $_SESSION['usuario']
         ]);
 

@@ -4,12 +4,13 @@
     require_once ROOT_PATH . '/middleware/auth.php';
     require_once ROOT_PATH . '/controllers/AfiliadosController.php';
     require_once ROOT_PATH . '/controllers/MenuController.php';
-    authorize(['Adminis', 'Supervi', 'Avisual', 'Snutric', 'Afisica', 'Ccorpor', 'Tmuestr', 'Svitale', 'Pulmvit']);
+    require_once ROOT_PATH . '/controllers/BusquedaController.php';
+    authorize(['Adminis', 'Supervi', 'Avisual', 'Snutric', 'Afisica', 'Ccorpor', 'Cauditiva', 'Tmuestr', 'Svitale', 'Pulmvit', 'Comodin', 'Relajacion', 'Laboratorio', 'Caplab']);
 
     $perfil  = $_SESSION['perfil'] ?? null;
     $nombre  = $_SESSION['nombre'] ?? null;   // Nombre
     $usuario = $_SESSION['usuario'] ?? null; // Usuario
-    $modulo = 'Altas o Bajas';
+    $modulo = 'alba';
 
     $registros = AfiliadosController::getRegistros(
         $perfil,
@@ -17,13 +18,19 @@
         $usuario
     );
 
-    $menuItems = MenuController::getMenuByPerfil($perfil);
+    $tipo_menu = 'alba'; 
+
+    $menuItems = MenuController::getMenuByPerfil($perfil, $tipo_menu);
+    $acciones = BusquedaController::getAcciones($perfil, $modulo);
 
     // Cargamos las variables de MySQL
     require_once "../config/database.php";
     $conn = conn();
     $query = "SELECT t1.Id, t1.perfil FROM perfiles t1 ORDER BY t1.Id ASC";
     $perfile = $conn -> query($query);
+
+    $query1 = "SELECT t1.id_evento, t1.nomevento FROM eventos t1 ORDER BY t1.id_evento ASC";
+    $evento = $conn -> query($query1);
 
 ?>
 

@@ -1,0 +1,9 @@
+USUARIO: RSANCHEZ
+FECHA : 2026-04-23 11:47:53
+============================================================
+Fila 2 | SQLSTATE[HY000]: General error: 1366 Incorrect integer value: 'INSTITUTO DEL SEGURO SOCIAL' for column 'cod_comp' at row 1
+Fila 3 | SQLSTATE[HY000]: General error: 1366 Incorrect integer value: 'INSTITUTO DEL SEGURO SOCIAL' for column 'cod_comp' at row 1
+Fila 4 | SQLSTATE[HY000]: General error: 1366 Incorrect integer value: 'INSTITUTO DEL SEGURO SOCIAL' for column 'cod_comp' at row 1
+Fila 5 | SQLSTATE[HY000]: General error: 1366 Incorrect integer value: 'INSTITUTO DEL SEGURO SOCIAL' for column 'cod_comp' at row 1
+Fila 6 | SQLSTATE[HY000]: General error: 1366 Incorrect integer value: 'INSTITUTO DEL SEGURO SOCIAL' for column 'cod_comp' at row 1
+Fila 7 | SQLSTATE[HY000]: General error: 1366 Incorrect integer value: 'INSTITUTO DEL SEGURO SOCIAL' for column 'cod_comp' at row 1

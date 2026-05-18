@@ -34,7 +34,9 @@
                         <div class="col-md-12">
                             <label class="form-label">Perfiles</label>
 
-                            <select id="perfilest" name="perfilest[]" class="catalogo-select" data-tabla="perfilestudios"  multiple required></select>
+                            <select id="perfilest" name="perfilest[]" class="catalogo-select" data-tabla="perfilestudios"  multiple required>
+                                <option value=""></option>
+                            </select>
 
                         </div>
                     </div>
@@ -89,19 +91,27 @@
                 <div class="row mb-3">
                     <div class="col-md-3">
                         <label>Metodología</label>
-                        <select name="metodologia[]" class="catalogo-select" data-tabla="tmetodologias"></select>
+                        <select name="metodologia[]" class="catalogo-select" data-tabla="tmetodologias">
+                            <option value=""></option>
+                        </select>
                     </div>
                     <div class="col-md-3">
                         <label>Unidad</label>
-                        <select name="unidad[]" class="catalogo-select" data-tabla="tunidades"></select>
+                        <select name="unidad[]" class="catalogo-select" data-tabla="tunidades">
+                            <option value=""></option>
+                        </select>
                     </div>
                     <div class="col-md-3">
                         <label>Muestra</label>
-                        <select name="muestra[]" class="catalogo-select" data-tabla="tipomuestras"></select>
+                        <select name="muestra[]" class="catalogo-select" data-tabla="tipomuestras">
+                            <option value=""></option>
+                        </select>
                     </div>
                     <div class="col-md-3">
                         <label>Recipiente</label>
-                        <select name="recipiente[]" class="catalogo-select" data-tabla="trecipientes"></select>
+                        <select name="recipiente[]" class="catalogo-select" data-tabla="trecipientes">
+                            <option value=""></option>
+                        </select>
                     </div>
                 </div>
 
@@ -135,11 +145,11 @@
                             </td>
                             <td><input type="number" name="edad_min[]" class="form-control"></td>
                             <td><input type="number" name="edad_max[]" class="form-control"></td>
-                            <td><input type="number" name="valor_bajo[]" class="form-control"></td>
-                            <td><input type="number" name="lim_inf[]" class="form-control"></td>
-                            <td><input type="number" name="lim_sup[]" class="form-control"></td>
-                            <td><input type="number" name="valor_alto[]" class="form-control"></td>
-                            <td><input type="number" name="valor_critico[]" class="form-control"></td>
+                            <td><input type="number" name="valor_bajo[]" class="form-control" step="0.01"></td>
+                            <td><input type="number" name="lim_inf[]" class="form-control" step="0.01"></td>
+                            <td><input type="number" name="lim_sup[]" class="form-control" step="0.01"></td>
+                            <td><input type="number" name="valor_alto[]" class="form-control" step="0.01"></td>
+                            <td><input type="number" name="valor_critico[]" class="form-control" step="0.01"></td>
                             <td>
                                 <button type="button" class="btn btn-warning btn-sm eliminarFila" data-bs-toggle="tooltip"
                                                       data-bs-placement="top" title="Elimina rango">

@@ -15,12 +15,12 @@
 
         $in = $_POST;
 
-        file_put_contents('debug_curp.txt', print_r($_POST, true));
-        if (empty($in['curp'])) {
-            throw new Exception('CURP del registro no recibido');
+        file_put_contents('debug_evento.txt', print_r($_POST, true));
+        if (empty($in['idpaeven'])) {
+            throw new Exception('Id del evento no recibido');
         }
 
-        $curp = trim($in['curp']);
+        $idpaeven = trim($in['idpaeven']);
 
         // Establecer zona horaria
         date_default_timezone_set('America/Mexico_City');
@@ -35,37 +35,23 @@
 
         $stmt = $conn -> prepare("
             INSERT INTO tcorporal (
-                curp, peso, talla, marcapasos, obs_corpo, fcorpo, hcorpo, uscorpo          
-                ) VALUES (?,?,?,?,?,?,?,?) AS new
+                id_paciente_evento, peso, talla, marcapasos, obs_corpo, uscorpo          
+                ) VALUES (?,?,?,?,?,?)
             ON DUPLICATE KEY UPDATE
-                peso = new.peso,
-                talla = new.talla,
-                marcapasos = new.marcapasos,
-                obs_corpo = new.obs_corpo,
-                fcorpo = new.fcorpo,
-                hcorpo = new.hcorpo,
-                uscorpo = new.uscorpo 
+                peso = VALUES(peso),
+                talla = VALUES(talla),
+                marcapasos = VALUES(marcapasos),
+                obs_corpo = VALUES(obs_corpo),
+                uscorpo = VALUES(uscorpo) 
         ");
 
         $stmt -> execute([
-            $curp,
+            $idpaeven,
             $in['peso'],
             $in['talla'],
             $in['marcapasos'],
             $in['observaciones'] ?? null,
-            date('Y-m-d'),
-            date('H:i:s'),
             $_SESSION['usuario']
-        ]);
-
-        $stmtcel = $conn -> prepare("
-            UPDATE pacientes SET celular = ?
-            WHERE curp = ?
-        ");
-
-        $stmtcel -> execute([
-            $in['celular'],
-            $curp
         ]);
 
         // COMMIT

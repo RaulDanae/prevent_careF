@@ -49,7 +49,41 @@
       },
 
       initComplete: function() {
+
+        const tabla = this.api();
+
         this.api().columns.adjust();
+
+        // 1. Quitar evento default de DataTables
+        $('#tabla-cco_filter input').off();
+
+        // 2. Agregar tu propio control
+        $('#tabla-cco_filter input').on('input', function () {
+
+        let val = $(this).val().trim();
+
+        // Detectar solo códigos tipo EV000123
+        let match = val.match(/^EV0*\d+$/i);
+
+        if (match) {
+            let limpio = val
+                .replace(/^EV/i, '')
+                .replace(/^0+/, '');
+                
+                // Reemplazar en el input
+                $(this).val(limpio);
+
+                // Buscar ya limpio
+                tabla.search(limpio).draw();
+
+            } else {
+                
+                // Búsqueda normal
+                tabla.search(val).draw();
+            }
+
+        });                
+
       }
 
     });
@@ -60,8 +94,9 @@
     })
 
     // Boton Descargar
-    $('#btndescargar').on('click', function () {
-      tabla_corporal.button('.buttons-excel').trigger();
+    $(document).on('click', '.js-activar-excel', function (e) {
+        e.preventDefault();
+        tabla_corporal.button('.buttons-excel').trigger();
     });
 
   });
@@ -185,7 +220,6 @@ $('.step-item').on('click', function () {
 //////////////////////////// SUMMARY ////////////////////////////////////////
 function buildSummary() {
     const summary = [
-        { label: 'Celular', value: $('#celular').val() },
         { label: 'Peso', value: $('#peso').val() },
         { label: 'Talla', value: $('#talla').val() },
         { label: 'Marcapasos', value: $('#marcapasos').val() },
@@ -217,26 +251,26 @@ let userProfile =  (PERFIL_USUARIO || '').toLowerCase();
 $('#tabla-cco').on('click', '.btnEditar', function () {
 
     wizardMode = 'edit';
-    editcurp = $(this).data('curp');
+    editidpaceven = $(this).data('idpacienteevento');
 
     $('#myModalLabel').text('Editar Vitales');
     $('#btnSave').text('Actualizar');
 
-    cargarDatosColaborador(editcurp);
+    cargarDatosColaborador(editidpaceven);
 });
 
-function cargarDatosColaborador(CURP) {
+function cargarDatosColaborador(editidpaceven) {
     $.ajax({
         url: BASE_URL + '/config/get_cco.php',
         type: 'POST',
         dataType: 'json',
-        data: { curp: CURP },
+        data: { editidpaceven: editidpaceven },
         success: function (data) {
 
             wizardMode = 'edit';
 
             // Paso 1
-            $('#curp').val(data.curp);
+            $('#idpaeven').val(data.id_paciente_evento);
             $('#nombre').val(data.colaborador);
             $('#genero').val(data.genero);
             $('#fnacimiento').val(data.fec_nac);

@@ -41,8 +41,8 @@
 
         // VALIDACIÓN DE CAMPOS OBLIGATORIOS
         $required = [
-            'cod_comp', 'clave', 'colaborador', 'fnacimiento', 'genero', 'curp', 'email', 'rfc',
-            'edad', 'privacidad', 'consentimiento', 'fregistro', 'hregistro'
+            'compania', 'sucurs', 'clave', 'colaborador', 'fnacimiento', 'genero', 
+            'curp', 'email', 'rfc'
         ];
 
         foreach ($required as $f) {
@@ -62,22 +62,16 @@
         // Iniciar transaccion
         $conn -> beginTransaction();
 
-        // Id compuestos
-        $claveform = str_pad($in['clave'], 5, '0', STR_PAD_LEFT);
-
-        $id_compuesto = "{$in['cod_comp']}$claveform";
-
         $stmt = $conn -> prepare("
             UPDATE pacientes SET
-                id_reg = ?, cod_comp = ?, clave = ?, colaborador = ?, fec_nac = ?, genero = ?, 
-                curp = ?, email = ?, celular = ?, rfc = ?, edad = ?, aprivacidad = ?, cinformado = ?, hrtomamuestra = ?, hrferia = ?, 
-                obs_reg = ?, fregistro = ?, hregistro = ?, usregistro = ?
+                cod_comp = ?, id_sucursal = ?, clave = ?, colaborador = ?, fec_nac = ?, 
+                genero = ?, curp = ?, email = ?, celular = ?, rfc = ?, activo = ?, obs_reg = ?, usregistro = ?
             WHERE id = ?
         ");
 
         $stmt -> execute([
-            $id_compuesto,
-            $in['cod_comp'],
+            $in['compania'],
+            $in['sucurs'],
             $in['clave'],
             $upper($in['colaborador']),
             validDate($in['fnacimiento']),
@@ -85,15 +79,9 @@
             $upper($in['curp']),
             $lower($in['email']),
             $in['celular'],
-            $upper($in['rfc']),
-            $in['edad'],
-            $in['privacidad'],
-            $in['consentimiento'],
-            nullIfEmpty($in['hrtomamuestra'] ?? null),
-            nullIfEmpty($in['hrferia'] ?? null),
+            nullIfEmpty($upper($in['rfc']) ?? null),
+            $in['activo'],
             nullIfEmpty($in['observaciones'] ?? null),
-            validDate($in['fregistro']),
-            $in['hregistro'],
             $_SESSION['usuario'],
             $id
           

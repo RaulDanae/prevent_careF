@@ -20,12 +20,12 @@
 
         $in = $_POST;
 
-        file_put_contents('debug_curp.txt', print_r($_POST, true));
-        if (empty($in['curp'])) {
-            throw new Exception('CURP del registro no recibido');
+        file_put_contents('debug_evento.txt', print_r($_POST, true));
+        if (empty($in['idpaeven'])) {
+            throw new Exception('Id del evento no recibido');
         }
 
-        $curp = trim($in['curp']);
+        $idpaeven = trim($in['idpaeven']);
 
         // Establecer zona horaria
         date_default_timezone_set('America/Mexico_City');
@@ -40,26 +40,24 @@
 
         $stmt = $conn -> prepare("
             INSERT INTO tauditivo (
-                curp, od_500, od_1000, od_2000, od_4000, oi_500, oi_1000, oi_2000, oi_4000, consultaaud, obs_aud, faud, haud, usaud      
-                ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?) AS new
+                id_paciente_evento, od_500, od_1000, od_2000, od_4000, oi_500, oi_1000, oi_2000, oi_4000, consultaaud, obs_aud, usaud      
+                ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
             ON DUPLICATE KEY UPDATE
-                od_500 = new.od_500,
-                od_1000 = new.od_1000,
-                od_2000 = new.od_2000,
-                od_4000 = new.od_4000,
-                oi_500 = new.oi_500,
-                oi_1000 = new.oi_1000,
-                oi_2000 = new.oi_2000,
-                oi_4000 = new.oi_4000,
-                consultaaud = new.consultaaud,
-                obs_aud = new.obs_aud,
-                faud = new.faud,
-                haud = new.haud,
-                usaud = new.usaud
+                od_500 = VALUES(od_500),
+                od_1000 = VALUES(od_1000),
+                od_2000 = VALUES(od_2000),
+                od_4000 = VALUES(od_4000),
+                oi_500 = VALUES(oi_500),
+                oi_1000 = VALUES(oi_1000),
+                oi_2000 = VALUES(oi_2000),
+                oi_4000 = VALUES(oi_4000),
+                consultaaud = VALUES(consultaaud),
+                obs_aud = VALUES(obs_aud),
+                usaud = VALUES(usaud)
         ");
 
         $stmt -> execute([
-            $curp,
+            $idpaeven,
             n($in['od_500']),
             n($in['od_1000']),
             n($in['od_2000']),
@@ -70,8 +68,6 @@
             n($in['oi_4000']),
             $in['consulta'],
             $in['observaciones'] ?? null,
-            date('Y-m-d'),
-            date('H:i:s'),
             $_SESSION['usuario']
         ]);
 

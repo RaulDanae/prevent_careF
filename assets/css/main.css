@@ -11,7 +11,8 @@ html, body {
 
 body {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
+    overflow-y: auto; 
 }
 
 .container {
@@ -91,7 +92,7 @@ input {
 }
 
 button {
-    width: 100%;
+    
     background: #0072ce;
     color: #fff;
     padding: 12px;
@@ -455,4 +456,143 @@ tr.row-baja > td {
 .modal-info-custom .modal-header,
 .modal-info-custom .modal-footer {
     border: none;
+}
+
+
+/* Contenedor de check box de sucursales */
+.sucursales-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.sucursal-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #f8f9fa;
+
+    font-size: 13px;
+    cursor: pointer;
+
+    width: calc(33% - 8px); /* para tener 3 check box por linea */
+}
+
+/* checkbox más pequeño */
+.sucursal-item input {
+    transform: scale(0.9);
+    margin: 0;
+}
+
+/* efecto visual seleccionado */
+.sucursal-item input:checked + span {
+    font-weight: 500;
+    color: #0d6efd;
+}
+
+.sucursal-item:hover {
+    background: #e9ecef;
+}
+
+.perfil-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #f1f3f5;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    padding: 4px 8px;          /* más compacto */
+    font-size: 13px;           /* texto pequeño */
+    color: #2c3e50;
+    white-space: nowrap;       /* evita saltos */
+}
+
+.perfil-chip input[type="checkbox"] {
+    transform: scale(0.85);    /* checkbox más pequeño */
+}
+
+.perfil-chip span {
+    display: inline;
+    font-weight: 500;
+}
+
+.perfil-chip .btnEliminarPerfil {
+    background: transparent;
+    border: none;
+    color: #6c757d;
+    font-size: 14px;
+    padding: 0 4px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.perfil-chip .btnEliminarPerfil:hover {
+    color: #dc3545; /* rojo suave al hover */
+}
+
+
+.perfil-chip:has(input:checked) {   /* Se marca cuando se seleccione */
+    background: #e7f1ff;
+    border-color: #b6d4fe;
+    color: #0d6efd;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.tablaEstudios {
+    min-width: 800px;
+}
+
+.tablaEstudios input {
+    min-width: 300px;
+}
+
+.tablaEstudios thead th {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 2;
+}
+
+.modal-footer {
+    background: white;
+    z-index: 10;
+}
+
+.login-card button {
+    width: 100%;
+}
+
+.modal-body {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+
+/* Son colores para pintar las celdas de la agenda */ 
+
+.bg-verde-suave {
+    background-color: #d4edda !important;
+    color: #155724 !important;
+}
+
+.bg-amarillo-suave {
+    background-color: #fff3cd !important;
+    color: #856404 !important;
+}
+
+.bg-rojo-suave {
+    background-color: #f8d7da !important;
+    color: #721c24 !important;
+}
+
+.bg-azul-suave {
+    background-color: #d1ecf1 !important;
+    color: #0c5460 !important;
 }

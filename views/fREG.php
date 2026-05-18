@@ -4,12 +4,13 @@
     require_once ROOT_PATH . '/middleware/auth.php';
     require_once ROOT_PATH . '/controllers/AfiliadosController.php';
     require_once ROOT_PATH . '/controllers/MenuController.php';
+    require_once ROOT_PATH . '/controllers/BusquedaController.php';
     authorize(['Adminis', 'Supervi']);
 
     $perfil  = $_SESSION['perfil'] ?? null;
     $nombre  = $_SESSION['nombre'] ?? null;   // Nombre
     $usuario = $_SESSION['usuario'] ?? null; // Usuario
-    $modulo = 'Registro';
+    $modulo = 'registro';
 
     $registros = AfiliadosController::getRegistros(
         $perfil,
@@ -17,13 +18,20 @@
         $usuario
     );
 
-    $menuItems = MenuController::getMenuByPerfil($perfil);
+    $tipo_menu = 'registro'; 
+
+    $menuItems = MenuController::getMenuByPerfil($perfil, $tipo_menu);
+    $acciones = BusquedaController::getAcciones($perfil, $modulo);
 
     // Cargamos las variables de MySQL
     require_once "../config/database.php";
     $conn = conn();
+
     $query = "SELECT t1.id_comp, t1.compania FROM compania t1 ORDER BY t1.id_comp ASC";
     $compania = $conn -> query($query);
+
+    $query1 = "SELECT t1.id_sucursal, t1.nombre_sucursal, t1.id_comp FROM sucursal t1 ORDER BY t1.id_sucursal ASC";
+    $sucursal = $conn -> query($query1);
 
 ?>
 

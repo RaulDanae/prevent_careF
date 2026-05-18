@@ -28,8 +28,8 @@
                      <div class="step" data-step="1">
                         <div class="row mb-2">
                             <div class="col-md-4">
-                                <label for="curp" class="etiquetaL">CURP</label>
-                                <input type="text" class="form-control" name="curp" id="curp" readonly>
+                                <label for="idpaeven" class="etiquetaL">Id Paciente Evento</label>
+                                <input type="text" class="form-control" name="idpaeven" id="idpaeven" readonly>
                             </div>
                             <div class="col-md-8">
                                 <label for="nombre" class="etiquetaL">Nombre</label>

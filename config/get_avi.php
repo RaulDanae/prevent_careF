@@ -3,25 +3,26 @@
 
     header('Content-Type: application/json; charset=utf-8');
 
-    $curp = $_POST['curp'] ?? '';
+    $editidpaceven = $_POST['editidpaceven'] ?? '';
 
-    if (!$curp) {
+    if (!$editidpaceven) {
         http_response_code(400);
-        echo json_encode(['error' => 'CURP requerido']);
+        echo json_encode(['error' => 'Id de paciente por evento requerido']);
         exit;
     }
 
     $conn = conn(); // 👈 aquí obtienes el PDO
 
     $stmt = $conn->prepare(
-        "SELECT t1.curp, t1.colaborador, t1.genero, t1.fec_nac, t2.dojoder, t2.dojoizq, 
-                t2.avojod, t2.avojoi, t2.lenteslej, t2.lentescer, t2.consultaoft, t2.obs_ofta
+        "SELECT t2.id_paciente_evento, t1.colaborador, t1.genero, t1.fec_nac, t3.dojoder, t3.dojoizq, 
+                t3.avojod, t3.avojoi, t3.lenteslej, t3.lentescer, t3.consultaoft, t3.obs_ofta
          FROM pacientes t1
-         LEFT JOIN tvisual t2 ON t1.curp = t2.curp
-         WHERE t1.curp = ?"
+         LEFT JOIN paciente_evento t2 ON t1.id = t2.id_paciente
+         LEFT JOIN tvisual t3 ON t2.id_paciente_evento = t3.id_paciente_evento
+         WHERE t2.id_paciente_evento = ?"
     );
 
-    $stmt->execute([$curp]);
+    $stmt->execute([$editidpaceven]);
 
     echo json_encode($stmt->fetch());
 

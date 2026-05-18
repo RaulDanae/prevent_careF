@@ -91,9 +91,10 @@
             // Saltar encabezados reales
             if (
                 strtoupper(trim((string)($f['A'] ?? ''))) === 'Compania' ||
-                strtoupper(trim((string)($f['C'] ?? ''))) === 'Colaborador' ||
-                strtoupper(trim((string)($f['E'] ?? ''))) === 'Género' ||
-                strtoupper(trim((string)($f['F'] ?? ''))) === 'CURP'
+                strtoupper(trim((string)($f['B'] ?? ''))) === 'Sucursal' ||
+                strtoupper(trim((string)($f['D'] ?? ''))) === 'Colaborador' ||
+                strtoupper(trim((string)($f['F'] ?? ''))) === 'Género' ||
+                strtoupper(trim((string)($f['G'] ?? ''))) === 'CURP'
             ) {
                 continue;
             }
@@ -101,9 +102,10 @@
             // Saltar filas completamente vacías
             if (
                 trim((string)($f['A'] ?? '')) === '' &&
-                trim((string)($f['C'] ?? '')) === '' &&
-                trim((string)($f['E'] ?? '')) === '' &&
-                trim((string)($f['F'] ?? '')) === ''
+                trim((string)($f['B'] ?? '')) === '' &&
+                trim((string)($f['D'] ?? '')) === '' &&
+                trim((string)($f['F'] ?? '')) === '' &&
+                trim((string)($f['G'] ?? '')) === ''
             ) {
                 continue;
             }
@@ -113,19 +115,19 @@
                 // -------- MAPEO DE COLUMNAS --------
                 $data = [
                     'compania'      => strtoupper(trim((string)($f['A'] ?? ''))),
-                    'clave'         => trim((string)($f['B'] ?? '')),
-                    'colaborador'   => strtoupper(trim((string)($f['C'] ?? ''))),
-                    'fnacimiento'   => trim((string)($f['D'] ?? '')),
-                    'genero'        => trim((string)($f['E'] ?? '')),
-                    'curp'          => strtoupper(trim((string)($f['F'] ?? ''))),
-                    'email'         => trim((string)($f['G'] ?? '')),
-                    'celular'       => trim((string)($f['H'] ?? '')),
-                    'hrtomamuestra' => trim((string)($f['I'] ?? '')),
-                    'hrferia'       => trim((string)($f['J'] ?? ''))
+                    'sucursal'      => strtoupper(trim((string)($f['B'] ?? ''))),
+                    'clave'         => trim((string)($f['C'] ?? '')),
+                    'colaborador'   => strtoupper(trim((string)($f['D'] ?? ''))),
+                    'fnacimiento'   => trim((string)($f['E'] ?? '')),
+                    'genero'        => trim((string)($f['F'] ?? '')),
+                    'curp'          => strtoupper(trim((string)($f['G'] ?? ''))),
+                    'email'         => trim((string)($f['H'] ?? '')),
+                    'celular'       => trim((string)($f['I'] ?? '')),
+                    'activo'        => trim((string)($f['J'] ?? ''))
                 ];
 
                 // Validación mínima
-                if (!$data['compania'] || !$data['clave'] || !$data['colaborador'] || !$data['fnacimiento'] || !$data['genero'] || !$data['curp'] || !$data['email']) {
+                if (!$data['compania'] || !$data['sucursal'] || !$data['clave'] || !$data['colaborador'] || !$data['fnacimiento'] || !$data['genero'] || !$data['curp'] || !$data['email'] || !$data['celular'] || !$data['activo']) {
                     $resumen['errores']++;
                     $logErrores[] = [
                         'fila' => $i,
@@ -134,6 +136,7 @@
                     continue;
                 }
 
+                // Consulta de compañias
                 $stmt = $conn->prepare("
                     SELECT t1.id_comp
                     FROM compania t1
@@ -143,14 +146,46 @@
                     $data['compania']
                 ]);
 
-                // 1. Limpiamos y formateamos la clave con 5 dígitos inmediatamente
-                $claveFormateada = str_pad($data['clave'], 5, "0", STR_PAD_LEFT);
-                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                // Consulta de sucursales
+                $stmtsuc = $conn->prepare("
+                    SELECT t1.id_sucursal
+                    FROM sucursal t1
+                    WHERE t1.nombre_sucursal = ?");
 
-                if ($row) {
-                    $idcomp = $row['id_comp'];
-                    $idreg = $idcomp . $claveFormateada;
+                $stmtsuc->execute([
+                    $data['sucursal']
+                ]);
+
+                // Obtenemos resuesta de sucursal y compañia
+                $rowComp = $stmt->fetch(PDO::FETCH_ASSOC);
+                $rowSuc = $stmtsuc->fetch(PDO::FETCH_ASSOC);
+
+                $activotxt = $data['activo'];
+
+                $activotxt = strtoupper(trim($data['activo']));
+
+                // quitar acentos
+                $activotxt = str_replace(['Á','É','Í','Ó','Ú'], ['A','E','I','O','U'], $activotxt);
+
+                // quitar espacios invisibles
+                $activotxt = preg_replace('/\s+/', '', $activotxt);
+
+                // Convertir activo
+                if (in_array($activotxt, ['SI', '1'])) {
+                    $data['activo'] = 1;
+                } elseif (in_array($activotxt, ['NO', '0'])) {
+                    $data['activo'] = 0;
                 } else {
+                    $resumen['errores']++;
+                    $logErrores[] = [
+                        'fila' => $i,
+                        'razon' => 'Valor Activo invalido: ['.$data['activotxt'].']'
+                    ];
+                    continue;
+                }
+
+                // Verificamos si encontro compañia
+                if (!$rowComp) {
                     $resumen['errores']++;
                     $logErrores[] = [
                         'fila' => $i,
@@ -158,6 +193,19 @@
                     ];
                     continue;
                 }
+
+                // Verificamos si encontro sucursal
+                if (!$rowSuc) {
+                    $resumen['errores']++;
+                    $logErrores[] = [
+                        'fila' => $i,
+                        'razon' => 'La sucursal no existe'
+                    ];
+                    continue;
+                }
+
+                $data['compania'] = $rowComp['id_comp'];
+                $data['sucursal'] = $rowSuc['id_sucursal'];
 
                 // Validar fecha de nacimiento
                 $meses = [
@@ -215,8 +263,17 @@
                     continue;
                 }
 
+                if (strtotime($fechafinal) > time()) {
+                    $resumen['errores']++;
+                    $logErrores[] = [
+                        'fila' => $i,
+                        'razon' => 'La fecha de nacimiento no puede ser futura'
+                    ];
+                    continue;
+                }
+
                 // SERVICIO 
-                $resultado = procesarCliente($conn, $data, $resumen, $idcomp, $idreg, $fechafinal);
+                $resultado = procesarCliente($conn, $data, $resumen, $fechafinal, $usuario);
 
                 if (!is_array($resultado) || !isset($resultado['ok'])) {
                     $resumen['errores']++;

@@ -1,0 +1,9 @@
+USUARIO: RSANCHEZ
+FECHA : 2026-04-23 12:02:56
+============================================================
+Fila 2 | SQLSTATE[HY000]: General error: 1364 Field 'activo' doesn't have a default value
+Fila 3 | SQLSTATE[HY000]: General error: 1364 Field 'activo' doesn't have a default value
+Fila 4 | SQLSTATE[HY000]: General error: 1364 Field 'activo' doesn't have a default value
+Fila 5 | SQLSTATE[HY000]: General error: 1364 Field 'activo' doesn't have a default value
+Fila 6 | SQLSTATE[HY000]: General error: 1364 Field 'activo' doesn't have a default value
+Fila 7 | SQLSTATE[HY000]: General error: 1364 Field 'activo' doesn't have a default value

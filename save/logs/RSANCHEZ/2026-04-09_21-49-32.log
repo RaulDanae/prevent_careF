@@ -1,0 +1,8 @@
+USUARIO: RSANCHEZ
+FECHA : 2026-04-09 21:49:32
+============================================================
+Fila 2 | SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', AND clave = ?' at line 3
+Fila 3 | SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', AND clave = ?' at line 3
+Fila 4 | SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', AND clave = ?' at line 3
+Fila 5 | SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', AND clave = ?' at line 3
+Fila 6 | SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', AND clave = ?' at line 3

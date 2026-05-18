@@ -1,28 +1,31 @@
+
 <?php
     require_once '../config/database1.php';
 
     header('Content-Type: application/json; charset=utf-8');
 
-    $curp = $_POST['curp'] ?? '';
+    $editidpaceven = $_POST['editidpaceven'] ?? '';
 
-    if (!$curp) {
+    if (!$editidpaceven) {
         http_response_code(400);
-        echo json_encode(['error' => 'CURP requerido']);
+        echo json_encode(['error' => 'Id de paciente por evento requerido']);
         exit;
     }
 
     $conn = conn(); // 👈 aquí obtienes el PDO
 
     $stmt = $conn->prepare(
-        "SELECT t1.curp, t1.colaborador, t1.genero, t1.fec_nac, t3.peso, t3.talla, t1.edad, 
-                t2.fvc, t2.fev1, t2.fev1_fvc, t2.consultaneum, t2.obs_pul
-         FROM pacientes t1
-         LEFT JOIN fpulmonar t2 ON t1.curp = t2.curp
-         LEFT JOIN tcorporal t3 ON t1.curp = t3.curp
-         WHERE t1.curp = ?"
+        "SELECT t2.id_paciente_evento, t1.colaborador, t1.genero, t1.fec_nac, t4.peso, t4.talla, 
+                IFNULL(TIMESTAMPDIFF(YEAR, t1.fec_nac, CURDATE()), '') AS edad, t3.fvc, t3.fev1, 
+                t3.fev1_fvc, t3.consultaneum, t3.obs_pul
+         FROM `pacientes` t1
+         LEFT JOIN paciente_evento t2 ON t1.id = t2.id_paciente
+         LEFT JOIN fpulmonar t3 ON t2.id_paciente_evento = t3.id_paciente_evento
+         LEFT JOIN tcorporal t4 ON t2.id_paciente_evento= t4.id_paciente_evento
+         WHERE t2.id_paciente_evento = ?"
     );
 
-    $stmt->execute([$curp]);
+    $stmt->execute([$editidpaceven]);
 
     echo json_encode($stmt->fetch());
 

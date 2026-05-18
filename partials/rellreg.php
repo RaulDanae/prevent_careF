@@ -48,12 +48,13 @@
     if ($searchValue !== '') {
         $where[] = "(
             t1.colaborador LIKE ? OR 
-            t1.id_reg LIKE ? OR
             t1.curp LIKE ? OR 
-            t1.email LIKE ?  
+            t1.email LIKE ? OR
+            t2.nomcom LIKE ? OR
+            t3.nombre_sucursal LIKE ? 
         )";
 
-        for ($i = 0; $i < 4; $i++){
+        for ($i = 0; $i < 5; $i++){
             $params[] = "%$searchValue%";
         }
     }
@@ -80,7 +81,11 @@
     /* ===============================
         8. TOTAL DE REGISTROS FILTRADOS
     ================================ */    
-    $sqlFiltered = "SELECT COUNT(*) FROM pacientes t1 $whereSQL";
+    $sqlFiltered = "SELECT COUNT(*) 
+                    FROM pacientes t1 
+                    LEFT JOIN compania t2 ON t1.cod_comp = t2.id_comp
+                    LEFT JOIN sucursal t3 ON t1.id_sucursal = t3.id_sucursal
+                    $whereSQL";
     $stmtFiltered = $conn->prepare($sqlFiltered);
     $stmtFiltered->execute($params);
     $recordsFiltered = (int)$stmtFiltered->fetchColumn();
@@ -92,25 +97,24 @@
     SELECT
         t1.id,
         t2.nomcom,
-        t1.id_reg,
+        t3.nombre_sucursal,
+        t1.clave,
         t1.colaborador,
         t1.fec_nac,
         t1.genero,
         t1.curp,
         t1.email,
         t1.rfc,
-        t1.edad,
+        IFNULL(TIMESTAMPDIFF(YEAR, t1.fec_nac, CURDATE()), '') AS edad,
         t1.celular,
-        t1.aprivacidad,
-        t1.cinformado,
-        t1.hrtomamuestra,
-        t1.hrferia,
+        IF(t1.activo = '1', 'SI', 'NO'),
         t1.obs_reg,
-        t1.fregistro,
-        t1.hregistro,
+        t1.fecha_creacion,
+        t1.fecha_modificacion,
         t1.usregistro
     FROM pacientes t1
     LEFT JOIN compania t2 ON t1.cod_comp = t2.id_comp
+    LEFT JOIN sucursal t3 ON t1.id_sucursal = t3.id_sucursal
     $whereSQL
     ORDER BY t1.id DESC
     LIMIT $start, $length
@@ -140,9 +144,7 @@
         unset($fila['id']);
 
         $btnEditar = '';
-        $btnImprim = '';
         $btnEditar = '<button class="btn btn-warning btn-sm btnEditar" data-id="'.$id.'"><i class="fa fa-pencil"></i></button>';
-        $btnImprim = '<button class="btn btn-success btn-sm btnPrint" data-id="'.$id.'"><i class="fa fa-print"></i></button>';
 
         foreach ($fila as &$valor) {
             if (is_string($valor)) {
@@ -152,7 +154,7 @@
         unset($valor);
 
 
-        $data[] = array_merge([$btnEditar, $btnImprim], array_values($fila));
+        $data[] = array_merge([$btnEditar], array_values($fila));
 
     }
 

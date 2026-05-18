@@ -5,6 +5,12 @@
 header('Content-Type: application/json');
 require_once __DIR__ . '/../config/database1.php';
 
+// Funciones utilitarias
+
+function nullIfEmpty($v) {
+    return ($v === '' || $v === null) ? null : $v;
+}
+
 $conn = conn();
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -103,8 +109,8 @@ try {
         foreach ($config['rangos'] as $r) {
 
             if (
-                empty($r['genero']) ||
-                empty($r['edad_min']) ||
+                empty($r['genero']) &&
+                empty($r['edad_min']) &&
                 empty($r['edad_max'])
             ) {
                 continue;
@@ -119,13 +125,13 @@ try {
             $stmt->execute([
                 $config_id,
                 $r['genero'],
-                $r['edad_min'],
-                $r['edad_max'],
-                $r['valor_bajo'],
-                $r['lim_inf'],
-                $r['lim_sup'],
-                $r['valor_alto'],
-                $r['valor_critico'],
+                nullIfEmpty($r['edad_min']),
+                nullIfEmpty($r['edad_max']),
+                nullIfEmpty($r['valor_bajo']),
+                nullIfEmpty($r['lim_inf']),
+                nullIfEmpty($r['lim_sup']),
+                nullIfEmpty($r['valor_alto']),
+                nullIfEmpty($r['valor_critico']),
                 $orden_rango
             ]);
 

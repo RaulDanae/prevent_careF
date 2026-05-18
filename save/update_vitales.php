@@ -15,12 +15,12 @@
 
         $in = $_POST;
 
-        file_put_contents('debug_curp.txt', print_r($_POST, true));
-        if (empty($in['curp'])) {
-            throw new Exception('CURP del registro no recibido');
+        file_put_contents('debug_evento.txt', print_r($_POST, true));
+        if (empty($in['idpaeven'])) {
+            throw new Exception('Id del evento no recibido');
         }
 
-        $curp = trim($in['curp']);
+        $idpaeven = trim($in['idpaeven']);
 
         // Establecer zona horaria
         date_default_timezone_set('America/Mexico_City');
@@ -35,27 +35,24 @@
 
         $stmt = $conn -> prepare("
             INSERT INTO tvitales (
-                curp, psistolica, pdiastolica, fcardiaca, oxigenacion, obs_vital, fvital, hvital, usvital           
-                ) VALUES (?,?,?,?,?,?,?,?,?)
+                id_paciente_evento, psistolica, pdiastolica, fcardiaca, oxigenacion, obs_vital, usvital           
+                ) VALUES (?,?,?,?,?,?,?)
             ON DUPLICATE KEY UPDATE
                 psistolica = VALUES(psistolica),
                 pdiastolica = VALUES(pdiastolica),
                 fcardiaca = VALUES(fcardiaca),
                 oxigenacion = VALUES(oxigenacion),
                 obs_vital = VALUES(obs_vital),
-                hvital = VALUES(hvital),
                 usvital = VALUES(usvital)
         ");
 
         $stmt -> execute([
-            $curp,
+            $idpaeven,
             $in['sistolica'],
             $in['diastolica'],
             $in['cardiaca'],
             $in['oxigenacion'],
             $in['observaciones'] ?? null,
-            date('Y-m-d'),
-            date('H:i:s'),
             $_SESSION['usuario'],
         ]);
 

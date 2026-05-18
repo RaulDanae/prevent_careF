@@ -1,64 +1,47 @@
-<?php
-
-  $perfil  = $_SESSION['perfil'] ?? null;
-  $modulo = $modulo ?? null;
-
-?>
-
-
-<!-- Menu Busquedas -->
 <form id="formGral" class="busqueda-barra">
-  <div class="busqueda-flex">
+  <div class="d-flex align-items-center position-relative">
 
-    <!-- Nuevo -->
-    <!-- Nuevo (solo admin) -->
-    <?php if (in_array($perfil, ['Adminis', 'Supervi']) && $modulo === 'Registro'): ?>
-     <button
-      type="button"
-      id="btnNuevoM"
-      class="btn btn-primary btn-sm btn-toolbar"
-      data-bs-toggle="modal"
-      data-bs-target="#modalNuevo"
-      title="Nuevo">
-      <i class="fa fa-plus"></i>
-     </button>
+    <!-- BOTONES (ahora a la izquierda) -->
+    <div class="d-flex gap-2">
+      <?php foreach ($acciones as $accion): ?>
 
-    <!-- Carga de archivos -->
-     <button
-      type="button"
-      id="btnExcel"
-      class="btn btn-primary btn-sm btn-toolbar"
-      title="Carga">
-      <i class="fa fa-file-import"></i>
-     </button>      
+        <?php if ($accion['id'] === 'nuevo'): ?>
+          <button type="button"
+            class="btn btn-primary btn-sm btn-toolbar"
+            data-bs-toggle="modal"
+            data-bs-target="<?= $accion['modal'] ?>">
+            <i class="<?= $accion['icon'] ?>"></i>
+          </button>
 
-     <input type="file"
-       id="excelFile"
-       accept=".xlsx,.xls"
-       style="display:none">
+        <?php elseif ($accion['id'] === 'excel'): ?>
+          <button type="button"
+            class="btn btn-primary btn-sm btn-toolbar js-subir-excel"
+            id="btnExcel">
+            <i class="<?= $accion['icon'] ?>"></i>
+          </button>
 
-    <?php elseif (in_array($perfil, ['Adminis', 'Supervi', 'Laboratorio', 'Caplab']) && in_array($modulo, ['Altas o Bajas', 'Estudios'])): ?>
-     <button
-      type="button"
-      id="btnNuevoM"
-      class="btn btn-primary btn-sm btn-toolbar"
-      data-bs-toggle="modal"
-      data-bs-target="#modalNuevo"
-      title="Nuevo">
-      <i class="fa fa-plus"></i>
-     </button>
+          <input type="file"
+            id="excelFile"
+            accept=".xlsx,.xls"
+            style="display:none">
 
+        <?php elseif ($accion['id'] === 'descargar'): ?>
+          <button type="button"
+            class="btn btn-primary btn-sm btn-toolbar js-activar-excel">
+            <i class="<?= $accion['icon'] ?>"></i>
+          </button>
+
+        <?php endif; ?>
+
+      <?php endforeach; ?>
+    </div>
+
+    <!-- EVENTO CENTRADO -->
+    <?php if (!empty($nomevento)): ?>
+      <div class="position-absolute start-50 translate-middle-x fw-bold">
+        Evento: <?= htmlspecialchars($nomevento) ?>
+      </div>
     <?php endif; ?>
-
-    <!-- Descargar -->
-     <button
-      type="button"
-      class="btn btn-primary btn-sm btn-toolbar js-activar-excel"
-      id="btndescargar"
-      title="Descargar">
-      <i class="fa fa-download"></i>
-    </button>
 
   </div>
 </form>
-<!-- /Menu Busquedas -->

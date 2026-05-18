@@ -3,13 +3,14 @@
     require_once '../config/config.php';
     require_once ROOT_PATH . '/middleware/auth.php';
     require_once ROOT_PATH . '/controllers/AfiliadosController.php';
-    require_once ROOT_PATH . '/controllers/MenuControllerE.php';
-    authorize(['Laboratorio', 'Caplab']);
+    require_once ROOT_PATH . '/controllers/MenuController.php';
+    require_once ROOT_PATH . '/controllers/BusquedaController.php';
+    authorize(['Adminis', 'Supervi', 'Laboratorio', 'Caplab']);
 
     $perfil  = $_SESSION['perfil'] ?? null;
     $nombre  = $_SESSION['nombre'] ?? null;   // Nombre
     $usuario = $_SESSION['usuario'] ?? null; // Usuario
-    $modulo = 'Estudios';
+    $modulo = 'laboratorio';
 
     $registros = AfiliadosController::getRegistros(
         $perfil,
@@ -17,7 +18,10 @@
         $usuario
     );
 
-    $menuItems = MenuController::getMenuByPerfil($perfil);   
+    $tipo_menu = 'laboratorio'; 
+
+    $menuItems = MenuController::getMenuByPerfil($perfil, $tipo_menu);
+    $acciones = BusquedaController::getAcciones($perfil, $modulo);  
 
     // Estas lineas son para que solo el perfil de laboratorios pueda agregar datos al catalogo de perfiles, unidades, metodologias, etc.
     $puedeCrearCatalogos = ($perfil == 'Laboratorio');

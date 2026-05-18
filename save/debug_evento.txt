@@ -1,0 +1,9 @@
+Array
+(
+    [idpaeven] => 139
+    [nombre] => KEICY DUTTON
+    [genero] => M
+    [fnacimiento] => 1989-02-15
+    [asistencia] => SI
+    [observaciones] => 
+)

@@ -50,14 +50,47 @@
 
       rowCallback: function(row, data){
 
-        if(data[5] === "SI") {
+        if(data[4] === "SI") {
             $(row).addClass('fila-asistencia');
         }
 
       },
 
       initComplete: function() {
+
+        const tabla = this.api();
+
         this.api().columns.adjust();
+
+        // 1. Quitar evento default de DataTables
+        $('#tabla-rel_filter input').off();
+
+        // 2. Agregar tu propio control
+        $('#tabla-rel_filter input').on('input', function () {
+
+        let val = $(this).val().trim();
+
+        // Detectar solo códigos tipo EV000123
+        let match = val.match(/^EV0*\d+$/i);
+
+        if (match) {
+            let limpio = val
+                .replace(/^EV/i, '')
+                .replace(/^0+/, '');
+                
+                // Reemplazar en el input
+                $(this).val(limpio);
+
+                // Buscar ya limpio
+                tabla.search(limpio).draw();
+
+            } else {
+                
+                // Búsqueda normal
+                tabla.search(val).draw();
+            }
+
+        });
 
         // Mover input arriba del buscador, (tiene que ser aqui para que se genere cuando la tabla ya fue dibujada)
         $('#tabla-rel_filter').prepend(`
@@ -75,6 +108,16 @@
         $('#asistenciaSCAN').on('keypress', function(e){
             if(e.which === 13){ // ENTER
                 let codigo = $(this).val().trim();
+
+                // Normalizar el codigo
+                let match = codigo.match(/^EV0*\d+$/i);
+
+                if (match) {
+                    codigo = codigo
+                        .replace(/^EV/i, '')
+                        .replace(/^0+/, '');
+                }
+
                 $(this).val('');
 
                 if(codigo !== ''){
@@ -93,8 +136,9 @@
     })
 
     // Boton Descargar
-    $('#btndescargar').on('click', function () {
-      tabla_relax.button('.buttons-excel').trigger();
+    $(document).on('click', '.js-activar-excel', function (e) {
+        e.preventDefault();
+        tabla_relax.button('.buttons-excel').trigger();
     });
 
   });
@@ -247,26 +291,26 @@ let userProfile =  (PERFIL_USUARIO || '').toLowerCase();
 $('#tabla-rel').on('click', '.btnEditar', function () {
 
     wizardMode = 'edit';
-    editcurp = $(this).data('curp');
+    editidpaceven = $(this).data('idpacienteevento');
 
-    $('#myModalLabel').text('Editar Vitales');
+    $('#myModalLabel').text('Editar Relax');
     $('#btnSave').text('Actualizar');
 
-    cargarDatosColaborador(editcurp);
+    cargarDatosColaborador(editidpaceven);
 });
 
-function cargarDatosColaborador(CURP) {
+function cargarDatosColaborador(editidpaceven) {
     $.ajax({
         url: BASE_URL + '/config/get_rel.php',
         type: 'POST',
         dataType: 'json',
-        data: { curp: CURP },
+        data: { editidpaceven: editidpaceven },
         success: function (data) {
 
             wizardMode = 'edit';
 
             // Paso 1
-            $('#curp').val(data.curp);
+            $('#idpaeven').val(data.id_paciente_evento);
             $('#nombre').val(data.colaborador);
             $('#genero').val(data.genero);
             $('#fnacimiento').val(data.fec_nac);

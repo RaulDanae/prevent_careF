@@ -1,0 +1,117 @@
+<?php
+
+    require_once '../config/config.php';
+    require_once ROOT_PATH . '/middleware/auth.php';
+    require_once ROOT_PATH . '/controllers/AfiliadosController.php';
+    require_once ROOT_PATH . '/controllers/MenuController.php';
+    require_once ROOT_PATH . '/controllers/BusquedaController.php';
+    authorize(['Adminis', 'Supervi']);
+
+    $perfil  = $_SESSION['perfil'] ?? null;
+    $nombre  = $_SESSION['nombre'] ?? null;   // Nombre
+    $usuario = $_SESSION['usuario'] ?? null; // Usuario
+    $nomevento  = $_SESSION['nomevento'] ?? null; // Evento
+    $modulo = 'agenda';
+
+    $registros = AfiliadosController::getRegistros(
+        $perfil,
+        $nombre,
+        $usuario
+    );
+
+    $tipo_menu = 'agenda'; 
+
+    $menuItems = MenuController::getMenuByPerfil($perfil, $tipo_menu);
+    $acciones = BusquedaController::getAcciones($perfil, $modulo);
+
+    // Cargamos las variables de MySQL
+    require_once "../config/database.php";
+    $conn = conn();
+
+    $query1 = "SELECT t1.id, t1.colaborador FROM pacientes t1 ORDER BY t1.id ASC";
+    $paciente = $conn -> query($query1);
+
+    $query2 = "SELECT t1.id_evento, t1.nomevento FROM eventos t1 ORDER BY t1.id_evento ASC";
+    $evento = $conn -> query($query2);
+
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+    <meta charset="UTF-8">
+    <!-- Logo -->
+    <link rel="shortcut icon" href="<?= BASE_URL ?>/assets/img/preventcare_icon1.png">
+    <!-- /Logo -->
+    <!-- CSS -->
+    <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/libs/css/bootstrap.min.css">
+    <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/libs/fontawesome/css/all.min.css">
+    <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/libs/css/jquery-ui.css">
+    <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/libs/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/libs/css/alertify.min.css">
+    <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/libs/css/default.min.css">
+    <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/libs/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/css/main.css">
+    <!-- <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/css/menu.css"> -->
+    <!-- /CSS -->
+    <!-- JS -->
+    <script type = "text/javascript" src = "<?= BASE_URL ?>/assets/libs/js/jquery-3.7.1.min.js"></script>
+    <script type = "text/javascript" src = "<?= BASE_URL ?>/assets/libs/js/jquery-ui.min.js"></script>
+    <script type = "text/javascript" src = "<?= BASE_URL ?>/assets/libs/js/jquery.dataTables.min.js"></script>
+    <script type = "text/javascript" src = "<?= BASE_URL ?>/assets/libs/js/dataTables.buttons.min.js"></script>
+    <script type = "text/javascript" src = "<?= BASE_URL ?>/assets/libs/js/jszip.min.js"></script>
+    <script type = "text/javascript" src = "<?= BASE_URL ?>/assets/libs/js/buttons.html5.min.js"></script>
+    <script type = "text/javascript" src = "<?= BASE_URL ?>/assets/libs/js/alertify.min.js"></script>
+    <script type = "text/javascript" src = "<?= BASE_URL ?>/assets/libs/js/bootstrap.bundle.min.js"></script>
+    <!-- /JS -->
+
+
+    <title>Agendar</title>
+    
+    </head>
+
+    <body>
+
+        <?php include '../partials/navbar_m.php'; ?>
+
+        <div class="container-fluid px-4 my-4">
+            <div class="card shadow-sm w-100">
+                <div class="card-body">
+
+                    <?php include '../partials/busquedas.php'; ?>
+
+                    <?php include '../partials/tagenda.php'; ?>
+
+                </div>
+            </div>
+        </div>
+
+        <?php include '../partials/nuevo_age.php'; ?>
+
+        <?php include '../partials/footer.php'; ?>
+        <?php include '../partials/modal_info.php'; ?>
+
+        <script>
+            const PERFIL_USUARIO = "<?= $_SESSION['perfil'] ?? '' ?>";
+            const GRUPO_NOMBRE = "<?= $_SESSION['nombre'] ?? '' ?>";
+            const GRUPO_USUARIO = "<?= $_SESSION['usuario'] ?? '' ?>";
+            const EVENTO_NOMBRE = "<?= $_SESSION['id_evento'] ?? '' ?>";
+            const BASE_URL = "<?= BASE_URL ?>";
+        </script>
+
+
+        <script src= '<?= BASE_URL ?>/assets/js/age.js'></script>
+        <script src = "<?= BASE_URL ?>/assets/js/comun.js"></script>
+
+    </body>
+
+</html>
+
+<script>
+    const INFO_MODULO = `
+        <p><strong>Agenda</strong></p>
+        <p>Aqui se Agenda a los pacientes del evento.</p>
+        <p>Paciente, Evento, Hora de toma de Muestras, Hora de Evento, Observaciones y Fecha Registro.</p>
+        <p>Se exporta datos de las tablas.</p>
+    `;
+</script>

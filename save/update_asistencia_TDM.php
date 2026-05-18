@@ -6,39 +6,26 @@
 
     $conn = conn();
 
-    $id_reg = $_POST['codigo'] ?? '';
+    $id_paciente_evento = $_POST['codigo'] ?? '';
+    $usuario = $_SESSION['usuario'] ?? 'SYSTEM';
 
-    if (!$id_reg) {
+    if (!$id_paciente_evento) {
         echo json_encode(['success' => false, 'message' => 'ID vacío']);
         exit;
     }
 
     try {
 
-        // Busqueda paciente por ir_red
-        $stmt = $conn->prepare("SELECT curp FROM pacientes WHERE id_reg = ?");
-        $stmt->execute([$id_reg]);
-        $paciente = $stmt->fetch();
-
-        if (!$paciente) {
-            echo json_encode(['success' => false, 'message' => 'No encontrado']);
-            exit;
-        }
-
-        $curp = $paciente['curp'];
-
         // Actualizar
         $stmt = $conn->prepare("
-            INSERT INTO tmuestras (curp, acudiotm, fmuestra, hmuestra, usmuestra)
-            VALUES (?, 'SI', CURDATE(), CURTIME(), ?)
+            INSERT INTO tmuestras (id_paciente_evento, acudiotm, usmuestra)
+            VALUES (?, 'SI', ?)
             ON DUPLICATE KEY UPDATE
-                acudiotm = 'SI',
-                fmuestra = CURDATE(),
-                hmuestra = CURTIME(),
+                acudiotm = VALUES(acudiotm),
                 usmuestra = VALUES(usmuestra)
         ");
 
-        $stmt->execute([$curp, $_SESSION['usuario']]);
+        $stmt->execute([$id_paciente_evento, $usuario]);
 
         echo json_encode(['success' => true]);
 

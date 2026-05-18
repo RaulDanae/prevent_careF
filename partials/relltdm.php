@@ -34,6 +34,7 @@
     $perfil = $_SESSION['perfil'] ?? '';
     $nombre = $_SESSION['nombre'] ?? '';
     $usuario = $_SESSION['usuario'] ?? '';
+    $id_evento = $_SESSION['id_evento'] ?? '';
 
     /* ===============================
         4. FILTROS BASE POR PERFIL
@@ -44,22 +45,28 @@
     /* ===============================
         5. FILTROS DE BÚSQUEDA
     ================================ */
-    $searchValue       = $_POST['search']['value'] ?? '';
 
     // Condición fija
-    $where[] = "t1.rfc <> ''";
+    $where[] = "t1.rfc <> '' AND t2.hora_evento IS NOT NULL";
 
-    // COndificones variables
+    // Filtro por Evento 
+    if (!empty($id_evento)) {
+        $where[] = "t2.id_evento = ?";
+        $params[] = $id_evento;
+    }
+
+    // Filtro de busqueda
+    $searchValue = $_POST['search']['value'] ?? '';
+
     if ($searchValue !== '') {
         $where[] = "(
             t1.colaborador LIKE ? OR
-            t1.curp LIKE ? OR
-            t1.id_reg LIKE ?
+            t2.id_paciente_evento LIKE ?
         )";
 
-        for ($i = 0; $i < 3; $i++){
-            $params[] = "%$searchValue%";
-        }
+        $params[] = "%$searchValue%";
+        $params[] = "%$searchValue%";
+
     }
 
     $whereSQL = '';
@@ -68,23 +75,20 @@
         $whereSQL = 'WHERE ' . implode(' AND ', $where);
     }
 
-
-    /* ===============================
-        6. ORDENAMIENTO
-    ================================ */
-    $orderColumn = 't1.id';
-    $orderDir = 'DESC';
-
     /* ===============================
         7. TOTAL DE REGISTROS (SIN FILTRO)
     ================================ */
-    $stmtTotal = $conn->query("SELECT COUNT(*) FROM pacientes");
+    $sqlTotal = "SELECT COUNT(DISTINCT t2.id_paciente) FROM paciente_evento t2 WHERE t2.id_evento = ?";
+    $stmtTotal = $conn->prepare($sqlTotal);
+    $stmtTotal->execute([$id_evento]);
     $recordsTotal = (int)$stmtTotal->fetchColumn();
 
     /* ===============================
         8. TOTAL DE REGISTROS FILTRADOS
     ================================ */    
-    $sqlFiltered = "SELECT COUNT(*) FROM pacientes t1 $whereSQL";
+    $sqlFiltered = "SELECT COUNT(*) FROM pacientes t1 
+                    LEFT JOIN paciente_evento t2 ON t1.id = t2.id_paciente
+                    $whereSQL";
     $stmtFiltered = $conn->prepare($sqlFiltered);
     $stmtFiltered->execute($params);
     $recordsFiltered = (int)$stmtFiltered->fetchColumn();
@@ -94,33 +98,25 @@
     ================================ */    
     $sqlData = "
     SELECT
-        t1.curp,
+        t2.id_paciente_evento,
         t1.colaborador,
         t1.genero,
         t1.fec_nac,
-        t2.acudiotm,
-        t2.obs_mues,
-        t2.fmuestra,
-        t2.hmuestra,
-        t2.usmuestra
+        t3.acudiotm,
+        t3.obs_mues,
+        t3.f_creacion,
+        t3.f_modifica,
+        t3.usmuestra
     FROM pacientes t1
-    LEFT JOIN tmuestras t2 ON t1.curp = t2.curp
+    LEFT JOIN paciente_evento t2 ON t1.id = t2.id_paciente
+    LEFT JOIN tmuestras t3 ON t2.id_paciente_evento = t3.id_paciente_evento
     $whereSQL
-    ORDER BY t1.id DESC
+    ORDER BY t2.id_paciente_evento DESC
     LIMIT $start, $length
     ";
 
-    $searchParams = [];
-
-    if ($searchValue !== '') {
-        for ($i = 0; $i < 10; $i++) {
-            $searchParams[] = "%$searchValue%";
-        }
-    }
-
     $stmt = $conn->prepare($sqlData);
     $stmt->execute($params);
-    $bindIndex = 1;
 
     /* ===============================
         10. ARMADO DE DATA
@@ -130,10 +126,11 @@
 
     while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
-        $curp = $fila['curp'];
+        $id_paciente_evento = $fila['id_paciente_evento'];
+        unset($fila['id_paciente_evento']);
 
         $btnEditar = '';
-        $btnEditar = '<button class="btn btn-warning btn-sm btnEditar" data-curp="'.$curp.'"><i class="fa fa-pencil"></i></button>';
+        $btnEditar = '<button class="btn btn-warning btn-sm btnEditar" data-idpacienteevento="'.$id_paciente_evento.'"><i class="fa fa-pencil"></i></button>';
 
         foreach ($fila as &$valor) {
             if (is_string($valor)) {

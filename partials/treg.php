@@ -4,8 +4,8 @@
         <thead class="table-dark">
             <tr>
                 <th>Editar</th>
-                <th>Imprimir</th>
                 <th>Compañia</th>
+                <th>Sucursal</th>
                 <th>Clave</th>
                 <th>Colaborador</th>
                 <th>F_Nacimiento</th>
@@ -15,13 +15,10 @@
                 <th>RFC</th>
                 <th>Edad</th>
                 <th>Celular</th>
-                <th>Aviso Privacidad</th>
-                <th>Consentimiento Informado</th>
-                <th>Hora Toma Muestras</th>
-                <th>Hora Feria</th>
+                <th>Activo</th>
                 <th>Observaciones</th>
+                <th>F_Creacion</th>
                 <th>F_Modifica</th>
-                <th>H_Modifica</th>
                 <th>Us_Modifica</th>
             </tr>
         </thead>

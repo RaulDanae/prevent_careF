@@ -4,7 +4,6 @@
         <thead class="table-dark">
             <tr>
                 <th>Editar</th>
-                <th>CURP</th>
                 <th>Nombre</th>
                 <th>Genero</th>
                 <th>F_Nacimiento</th>
@@ -13,8 +12,8 @@
                 <th>Frecuencia Card</th>
                 <th>Oxigenacion</th>
                 <th>Observacion</th>
-                <th>F_Modifica</th>
-                <th>H_Modifica</th>
+                <th>Fecha Creacion</th>
+                <th>Fecha Modifica</th>
                 <th>Us_Modifica</th>
             </tr>
         </thead>

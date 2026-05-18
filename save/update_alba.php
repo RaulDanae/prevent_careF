@@ -74,7 +74,7 @@
 
             // VALIDACIÓN DE CAMPOS OBLIGATORIOS
             $required = [
-                'nom', 'uss', 'perfil', 'estatus'
+                'nom', 'uss', 'perfil', 'estatus', 'evento'
             ];
 
             foreach ($required as $f) {
@@ -94,7 +94,7 @@
 
                 $stmt = $conn->prepare("
                     UPDATE staff SET
-                        nombre = ?, usuario = ?, password = ?, perfil = ?, estatus = ?, fec_reg = NOW()
+                        nombre = ?, usuario = ?, password = ?, perfil = ?, estatus = ?, id_evento = ?, fec_reg = NOW()
                     WHERE id = ?
                 ");
 
@@ -104,6 +104,7 @@
                     $nuevoHash,
                     $in['perfil'],
                     $in['estatus'],
+                    $in['evento'],
                     $in['id']
                 ]);
 
@@ -111,7 +112,7 @@
 
                 $stmt = $conn->prepare("
                     UPDATE staff SET
-                        nombre = ?, usuario = ?, perfil = ?, estatus = ?, fec_reg = NOW()
+                        nombre = ?, usuario = ?, perfil = ?, estatus = ?, id_evento = ?, fec_reg = NOW()
                     WHERE id = ?
                 ");
 
@@ -120,6 +121,7 @@
                     $upper($in['uss']),
                     $in['perfil'],
                     $in['estatus'],
+                    $in['evento'],
                     $in['id']
                 ]);
 

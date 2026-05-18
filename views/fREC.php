@@ -3,13 +3,15 @@
     require_once '../config/config.php';
     require_once ROOT_PATH . '/middleware/auth.php';
     require_once ROOT_PATH . '/controllers/AfiliadosController.php';
-    require_once ROOT_PATH . '/controllers/MenuControllerE.php';
-    authorize(['Laboratorio', 'Caplab']);
+    require_once ROOT_PATH . '/controllers/MenuController.php';
+    require_once ROOT_PATH . '/controllers/BusquedaController.php';
+    authorize(['Adminis', 'Supervi', 'Laboratorio', 'Caplab']);
 
     $perfil  = $_SESSION['perfil'] ?? null;
     $nombre  = $_SESSION['nombre'] ?? null;   // Nombre
     $usuario = $_SESSION['usuario'] ?? null; // Usuario
-    $modulo = 'Recepcion';
+    $nomevento  = $_SESSION['nomevento'] ?? null; // Evento
+    $modulo = 'recepcion';
 
     $registros = AfiliadosController::getRegistros(
         $perfil,
@@ -17,7 +19,10 @@
         $usuario
     );
 
-    $menuItems = MenuController::getMenuByPerfil($perfil);   
+    $tipo_menu = 'recepcion'; 
+
+    $menuItems = MenuController::getMenuByPerfil($perfil, $tipo_menu);
+    $acciones = BusquedaController::getAcciones($perfil, $modulo);   
 
     // Estas lineas son para que solo el perfil de laboratorios pueda agregar datos al catalogo de perfiles, unidades, metodologias, etc.
     $puedeCrearCatalogos = ($perfil == 'Laboratorio');
@@ -38,7 +43,8 @@
     <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/libs/css/alertify.min.css">
     <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/libs/css/default.min.css">
     <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/libs/css/buttons.dataTables.min.css">
-    <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/css/mainestud.css">
+    <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/css/main.css">
+    <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/css/etiquetas.css">
     <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/libs/css/select2.min.css">
     <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/libs/css/select2-bootstrap-5-theme.min.css">
     <!-- <link rel="stylesheet" type = "text/css" href="<?= BASE_URL ?>/assets/css/menu.css"> -->
@@ -56,7 +62,7 @@
     <!-- /JS -->
 
 
-    <title>Estudios</title>
+    <title>Estudios Pacientes</title>
     
     </head>
 
@@ -70,13 +76,13 @@
 
                     <?php include '../partials/busquedas.php'; ?>
 
-                    <?php include '../partials/testud.php'; ?>
+                    <?php include '../partials/trecep.php'; ?>
 
                 </div>
             </div>
         </div>
 
-        <?php include '../partials/nuevo_estud.php'; ?>
+        <?php include '../partials/nuevo_recep.php'; ?>
 
         <?php include '../partials/footer.php'; ?>
         <?php include '../partials/modal_info.php'; ?>
@@ -85,10 +91,11 @@
             const PERFIL_USUARIO = "<?= $_SESSION['perfil'] ?? '' ?>";
             const GRUPO_NOMBRE = "<?= $_SESSION['nombre'] ?? '' ?>";
             const GRUPO_USUARIO = "<?= $_SESSION['usuario'] ?? '' ?>";
+            const EVENTO_NOMBRE = "<?= $_SESSION['id_evento'] ?? '' ?>";
             const BASE_URL = "<?= BASE_URL ?>";
         </script>
 
-        <script src= '<?= BASE_URL ?>/assets/js/estud.js'></script>
+        <script src= '<?= BASE_URL ?>/assets/js/rcp.js'></script>
         <script src = "<?= BASE_URL ?>/assets/js/comun.js"></script>
 
     </body>

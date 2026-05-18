@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <label for="perfil" class="etiquetaL">Perfil</label>
                                 <select class="form-control" name="perfil" id="perfil" required>
                                     <option selected class="form-control" value=""></option>
@@ -63,14 +63,26 @@
                                     <?php  } ?>
                                 </select>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <label for="estatus" class="etiquetaL">Estatus</label>
                                 <select class="form-control" name="estatus" id="estatus" required>
                                     <option selected class="form-control" value = ""></option>
                                     <option value="1">Activo</option>
                                     <option value="0">Baja</option>
                                 </select>
-                            </div>                    
+                            </div>
+                            <div class="col-md-4">
+                                <label for="evento" class="etiquetaL">Evento</label>
+                                <select class="form-control" name="evento" id="evento" required>
+                                    <option selected class="form-control" value=""></option>
+                                    <?php WHILE($row = $evento -> fetch_assoc()) { ?>
+                                        <option 
+                                            value= "<?php echo htmlspecialchars($row['id_evento']); ?>">
+                                            <?php echo htmlspecialchars($row['nomevento']); ?>
+                                        </option>
+                                    <?php  } ?>
+                                </select>
+                            </div>                   
                         </div>
                      </div>
                      

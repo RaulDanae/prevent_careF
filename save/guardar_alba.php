@@ -24,7 +24,7 @@
 
         // VALIDACIÓN DE CAMPOS OBLIGATORIOS
         $required = [
-            'nom', 'uss', 'perfil', 'estatus'
+            'nom', 'uss', 'perfil', 'estatus', 'evento'
         ];
 
         foreach ($required as $f) {
@@ -66,8 +66,8 @@
         // INSERT PRINCIPAL
         $stmt = $conn -> prepare("
             INSERT INTO staff (
-                nombre, usuario, password, perfil, estatus, fec_reg
-            ) VALUES (?, ?, ?, ?, ?, NOW())
+                nombre, usuario, password, perfil, estatus, id_evento, fec_reg
+            ) VALUES (?, ?, ?, ?, ?, ?, NOW())
         ");
 
 
@@ -76,7 +76,8 @@
             $upper($in['uss']),
             $clave_hash,
             $in['perfil'],
-            $in['estatus']
+            $in['estatus'],
+            $in['evento']
         ]);
 
         // COMMIT

@@ -27,9 +27,7 @@
       ],
 
       dom:      
-         "<'row mb-2'<'col-md-6'l><'col-md-6 text-end'f>>" +
-         "rt" +
-         "<'row'<'col-md-6'i><'col-md-6'p>>",
+         '<"d-flex justify-content-between align-items-center"l f>rtip',
       buttons: [
         {
           extend: "excelHtml5",
@@ -60,31 +58,45 @@
     })
 
     // Boton Descargar
-    $('#btndescargar').on('click', function () {
-      tabla_estudio.button('.buttons-excel').trigger();
+    $(document).on('click', '.js-activar-excel', function (e) {
+        e.preventDefault();
+        tabla_estudio.button('.buttons-excel').trigger();
     });
 
   });
 
 /////////////////////////////////// Modulo Nuevo /////////////////////////////////////////////////
 
+
+
 // Agregar configuraciones ///
 let contadorConfig = 0;
 
 function crearConfiguracion(){
-    contadorConfig++;
-    let config = $("#templateConfig .configuracion-estudio").clone();
-    let collapseID = "config"+contadorConfig;
-    config.find(".accordion-button").text("Configuracion "+contadorConfig).attr("data-bs-target","#"+collapseID);
-    config.find(".accordion-collapse").attr("id",collapseID);
 
-    // Limpiar posibles select2 clonados
-    config.find(".select2-container").remove();
-    config.find("select.catalogo-select").removeClass("select2-hidden-accessible").show();    
+    contadorConfig++;
+
+    let config = $("#templateConfig .configuracion-estudio").clone();
+
+    // Destruir selec2 si viniera inicializado en el template
+    config.find("select.catalogo-select").each(function() {
+
+        if ($(this).hasClass("select2-hidden-accessible")) {
+            $(this).select2('destroy');
+        }
+
+    })
+
+    let collapseID = "config"+contadorConfig;
+    config.find(".accordion-button")
+          .text("Configuracion "+contadorConfig)
+          .attr("data-bs-target","#"+collapseID);
+
+    config.find(".accordion-collapse").attr("id",collapseID);
 
     $("#configuracionesEstudio").append(config);
 
-    // Inicializar select2 solo en este bloque
+    // Inicializar limpio
     initCatalogos(config);
 
     config.find(".accordion-collapse").addClass("show");
@@ -105,19 +117,31 @@ $('#modalNuevo').on('shown.bs.modal', function () {
 $(document).on("click", ".duplicarConfig", function(){
 
     let original = $(this).closest(".configuracion-estudio");
+
+    // Clonar sin select2 vivo
+    original.find("select.catalogo-select").each(function(){
+        if ($(this).hasClass("select2-hidden-accessible")) {
+            $(this).select2('destroy');
+        }
+    });
+
     let copia = original.clone();
 
     contadorConfig++;
 
     let collapseID = "config"+contadorConfig;
-    copia.find(".accordion-button").text("Configuración "+contadorConfig).attr("data-bs-target","#"+collapseID);
-    copia.find(".accordion-collapse").attr("id",collapseID).removeClass("show");
+    copia.find(".accordion-button")
+         .text("Configuración "+contadorConfig)
+         .attr("data-bs-target","#"+collapseID);
 
-    // limpiar select2 clonados
-    copia.find(".select2-container").remove();
-    copia.find("select.catalogo-select").removeClass("select2-hidden-accessible").show();
+    copia.find(".accordion-collapse")
+         .attr("id",collapseID)
+         .removeClass("show");
+
     $("#configuracionesEstudio").append(copia);
 
+    // Re inicializar en ambos (original y copia)
+    initCatalogos(original);
     initCatalogos(copia);
 
     renumerarConfiguraciones();
@@ -168,11 +192,11 @@ $(document).on("click", ".btnAgregarFila", function() {
             </td>
             <td><input type="number" name="edad_min[]" class="form-control"></td>
             <td><input type="number" name="edad_max[]" class="form-control"></td>
-            <td><input type="number" name="valor_bajo[]" class="form-control"></td>
-            <td><input type="number" name="lim_inf[]" class="form-control"></td>
-            <td><input type="number" name="lim_sup[]" class="form-control"></td>
-            <td><input type="number" name="valor_alto[]" class="form-control"></td>
-            <td><input type="number" name="valor_critico[]" class="form-control"></td>
+            <td><input type="number" name="valor_bajo[]" class="form-control" step="0.01"></td>
+            <td><input type="number" name="lim_inf[]" class="form-control" step="0.01"></td>
+            <td><input type="number" name="lim_sup[]" class="form-control" step="0.01"></td>
+            <td><input type="number" name="valor_alto[]" class="form-control" step="0.01"></td>
+            <td><input type="number" name="valor_critico[]" class="form-control" step="0.01"></td>
             <td>
                 <button type="button" class="btn btn-warning btn-sm eliminarFila" data-bs-toggle="tooltip"
                                       data-bs-placement="top" title="Elimina rango">
@@ -192,17 +216,26 @@ $(document).on("click", ".eliminarFila", function() {
 });
 
 ///////////////////////////Modal Salir //////////////////////////////////////////////////////////
-$('#modalNuevo').on('hide.bs.modal', function () {
-    const btnOpen = document.getElementById('btnNuevoM');
-    if (btnOpen) {
-        btnOpen.focus();
+function safeFocus(selector) {
+    const el = document.querySelector(selector);
+    if (el) el.focus();
+}
+
+$('#modalNuevo').on('hidden.bs.modal', function () {
+    if (document.querySelector('#btndescargar')) {
+        safeFocus('#btndescargar');
+    } else {
+        safeFocus('#btnNuevoM'); // fallback
     }
 });
 
-$(document).on('click', '#btnCloseModal', function () {
-    const modalEl = document.getElementById('modalNuevo');
-    const modal = bootstrap.Modal.getInstance(modalEl);
-    modal.hide();
+const btnOpen = document.getElementById('btndescargar');
+
+$('#modalNuevo').on('hide.bs.modal', function () {
+    const $btn = $('#btnNuevoM');
+    if ($btn.length) {
+        $btn.trigger('focus');
+    }
 });
 
 /////////////////// Reiniciar el numero de Configuracion /////////////////////////////////////
@@ -280,6 +313,10 @@ function limpiarModalEstudio(){
 $('#modalNuevo').on('hidden.bs.modal', function () {
 
     EstudioMode = 'create';
+
+    // solo mover foco aqui
+    $('[data-bs-target="#modalNuevo"]').trigger('focus');
+
     limpiarModalEstudio();
 
 });
@@ -311,6 +348,10 @@ $(document).on('select2:select', '#perfilest', function (e) {
 
 //const GRUPO_USUARIO = "<?= $_SESSION['usuario'] ?? '' ?>";
 
+function nullIfEmpty(val){
+    return (val === "" || val === undefined) ? null : val;
+}
+
 function armarEstudio(){
 
     let perfiles = [];
@@ -331,10 +372,10 @@ function armarEstudio(){
     $(".configuracion-estudio").each(function(){
 
         let config = {
-            metodologia: $(this).find('select[name="metodologia[]"]').val(),
-            unidad: $(this).find('select[name="unidad[]"]').val(),
-            muestra: $(this).find('select[name="muestra[]"]').val(),
-            recipiente: $(this).find('select[name="recipiente[]"]').val(),
+            metodologia: nullIfEmpty($(this).find('select[name="metodologia[]"]').val()),
+            unidad: nullIfEmpty($(this).find('select[name="unidad[]"]').val()),
+            muestra: nullIfEmpty($(this).find('select[name="muestra[]"]').val()),
+            recipiente: nullIfEmpty($(this).find('select[name="recipiente[]"]').val()),
             rangos: []
         };
 
@@ -342,13 +383,13 @@ function armarEstudio(){
 
             config.rangos.push({
                 genero: $(this).find('select[name="genero[]"]').val(),
-                edad_min: $(this).find('input[name="edad_min[]"]').val(),
-                edad_max: $(this).find('input[name="edad_max[]"]').val(),
-                valor_bajo: $(this).find('input[name="valor_bajo[]"]').val(),
-                lim_inf: $(this).find('input[name="lim_inf[]"]').val(),
-                lim_sup: $(this).find('input[name="lim_sup[]"]').val(),
-                valor_alto: $(this).find('input[name="valor_alto[]"]').val(),
-                valor_critico: $(this).find('input[name="valor_critico[]"]').val()
+                edad_min: nullIfEmpty($(this).find('input[name="edad_min[]"]').val()),
+                edad_max: nullIfEmpty($(this).find('input[name="edad_max[]"]').val()),
+                valor_bajo: nullIfEmpty($(this).find('input[name="valor_bajo[]"]').val()),
+                lim_inf: nullIfEmpty($(this).find('input[name="lim_inf[]"]').val()),
+                lim_sup: nullIfEmpty($(this).find('input[name="lim_sup[]"]').val()),
+                valor_alto: nullIfEmpty($(this).find('input[name="valor_alto[]"]').val()),
+                valor_critico: nullIfEmpty($(this).find('input[name="valor_critico[]"]').val())
             });
 
         });
@@ -507,8 +548,6 @@ function validarTraslapesEdad(){
 
 }
 
-
-
 ///////////////////////////////// EDITAR ///////////////////////////////////////
 let editId = null;
 $('#tabla-estud').on('click', '.btnEditar', function () {
@@ -661,3 +700,7 @@ function setSelect2Value(container, name, value, text = null){
     // Asignar valor
     select.val(value).trigger('change');
 }
+
+
+
+

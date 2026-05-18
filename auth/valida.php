@@ -24,9 +24,10 @@
 
     $conn = conn();
 
-    $sql = "SELECT t1.nombre, t1.usuario, t2.perfil, t1.password
+    $sql = "SELECT t1.nombre, t1.usuario, t2.perfil, t1.password, t1.id_evento, t3.nomevento
             FROM staff t1
             LEFT JOIN perfiles t2 ON t1.perfil = t2.Id
+            LEFT JOIN eventos t3 ON t1.id_evento = t3.id_evento
             WHERE t1.usuario = ? AND t1.estatus = 1";
 
     $stmt = $conn->prepare($sql);
@@ -50,14 +51,9 @@
     $_SESSION['nombre']     = $user['nombre'];
     $_SESSION['usuario']    = $user['usuario'];
     $_SESSION['perfil']     = $user['perfil'];
+    $_SESSION['nomevento']     = $user['nomevento'];
+    $_SESSION['id_evento']  = $user['id_evento'];
 
     /* Redirección según perfil */
-    if ($user['perfil'] == 'Laboratorio' || $user['perfil'] == 'Caplab') {
-        header("Location: " . BASE_URL . "/views/menuE.php");
-        exit();
-    } else {
-        header("Location: " . BASE_URL . "/views/menu.php");
-        exit();
-    }
-
+    header("Location: " . BASE_URL . "/views/menu_gral.php");
     exit();

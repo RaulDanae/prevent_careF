@@ -15,12 +15,12 @@
 
         $in = $_POST;
 
-        file_put_contents('debug_curp.txt', print_r($_POST, true));
-        if (empty($in['curp'])) {
-            throw new Exception('CURP del registro no recibido');
+        file_put_contents('debug_evento.txt', print_r($_POST, true));
+        if (empty($in['idpaeven'])) {
+            throw new Exception('Id del evento no recibido');
         }
 
-        $curp = trim($in['curp']);
+        $idpaeven = trim($in['idpaeven']);
 
         // Establecer zona horaria
         date_default_timezone_set('America/Mexico_City');
@@ -35,28 +35,24 @@
 
         $stmt = $conn -> prepare("
             INSERT INTO fpulmonar (
-                curp, fvc, fev1, fev1_fvc, consultaneum, obs_pul, fpul, hpul, uspul    
-                ) VALUES (?,?,?,?,?,?,?,?,?) AS new
+                id_paciente_evento, fvc, fev1, fev1_fvc, consultaneum, obs_pul, uspul    
+                ) VALUES (?,?,?,?,?,?,?)
             ON DUPLICATE KEY UPDATE
-                fvc = new.fvc,
-                fev1 = new.fev1,
-                fev1_fvc = new.fev1_fvc,
-                consultaneum = new.consultaneum,
-                obs_pul = new.obs_pul,
-                fpul = new.fpul,
-                hpul = new.hpul,
-                uspul = new.uspul
+                fvc = VALUES(fvc),
+                fev1 = VALUES(fev1),
+                fev1_fvc = VALUES(fev1_fvc),
+                consultaneum = VALUES(consultaneum),
+                obs_pul = VALUES(obs_pul),
+                uspul = VALUES(uspul)
         ");
 
         $stmt -> execute([
-            $curp,
+            $idpaeven,
             $in['fvc'],
             $in['fev1'],
             $in['fevfvc'],
             $in['consultaneum'],
             $in['observaciones'] ?? null,
-            date('Y-m-d'),
-            date('H:i:s'),
             $_SESSION['usuario']
         ]);
 

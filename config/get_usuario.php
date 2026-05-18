@@ -14,7 +14,7 @@
     $conn = conn(); // 👈 aquí obtienes el PDO
 
     $stmt = $conn->prepare(
-        "SELECT t1.id, t1.nombre, t1.usuario, t1.perfil, t1.estatus
+        "SELECT t1.id, t1.nombre, t1.usuario, t1.perfil, t1.estatus, t1.id_evento
         FROM staff t1
         WHERE t1.id = ?"
     );

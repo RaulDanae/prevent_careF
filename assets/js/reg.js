@@ -27,9 +27,7 @@
       ],
 
       dom:      
-         "<'row mb-2'<'col-md-6'l><'col-md-6 text-end'f>>" +
-         "rt" +
-         "<'row'<'col-md-6'i><'col-md-6'p>>",
+         '<"d-flex justify-content-between align-items-center"lf>rtip',
       buttons: [
         {
           extend: "excelHtml5",
@@ -48,6 +46,17 @@
         this.api().columns.adjust();
       },
 
+      rowCallback: function(row, data){
+
+        if(data[12] === "NO") {
+            $(row).addClass('row-baja');
+        } else {
+            $(row).removeClass('row-baja');
+        }
+
+      },
+
+
       initComplete: function() {
         this.api().columns.adjust();
       }
@@ -60,9 +69,10 @@
     })
 
     // Boton Descargar
-    $('#btndescargar').on('click', function () {
-      tabla_registros.button('.buttons-excel').trigger();
-    });
+    $(document).on('click', '.js-activar-excel', function (e) {
+        e.preventDefault();
+        tabla_registros.button('.buttons-excel').trigger();
+    });    
 
   });
 
@@ -71,11 +81,11 @@
 
 //////////////////////////////// Calcular Edad //////////////////////////////////////////////////
 
-function calcularEdadEntreFechas(fechaNacimiento, fechaRegistro) {
-    if (!fechaNacimiento || !fechaRegistro) return '';
+function calcularEdadEntreFechas(fechaNacimiento) {
+    if (!fechaNacimiento) return '';
 
     const nacimiento = new Date(fechaNacimiento);
-    const registro = new Date(fechaRegistro);
+    const registro = new Date();
 
     if (isNaN(nacimiento) || isNaN(registro)) return '';
 
@@ -91,29 +101,31 @@ function calcularEdadEntreFechas(fechaNacimiento, fechaRegistro) {
 
 function actualizarEdad() {
     const fnacimiento = $('#fnacimiento').val();
-    const fregistro = $('#fregistro').val();
 
-    if (!fnacimiento || !fregistro) return;
+    if (!fnacimiento) return;
 
-    const edad = calcularEdadEntreFechas(fnacimiento, fregistro);
+    const edad = calcularEdadEntreFechas(fnacimiento);
     $('#edad').val(edad);
 }
 
 $('#fnacimiento').on('change', actualizarEdad);
-$('#fregistro').on('change', actualizarEdad);
 
 
 ///////////////////////////Modal Salir //////////////////////////////////////////////////////////
-$(document).on('click', '#modalNuevo .btn-close', function () {
-    this.blur();              // ← quitar foco del botón cerrar
-    document.getElementById('btnNuevoM').focus(); // ← devolver foco
-});
+function safeFocus(selector) {
+    const el = document.querySelector(selector);
+    if (el) el.focus();
+}
 
-const btnOpen = document.getElementById('btnNuevoM');
+const btnOpen = document.getElementById('btndescargar');
 
 $('#modalNuevo').on('hide.bs.modal', function () {
-    btnOpen.focus();
+    const $btn = $('#btnNuevoM');
+    if ($btn.length) {
+        $btn.trigger('focus');
+    }
 });
+
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////// Para resetear el modal al dar click en nuevo /////////////////////
@@ -153,19 +165,58 @@ $('#btnNuevoM').on('click', function () {
 /////////////////////////// Se resetea el modal despues de cerrarlo /////////////////////////////
 $('#modalNuevo').on('hidden.bs.modal', function () {
 
-    // Limpieza final por seguridad
+    // Reset Form
     $('#formWizard')[0].reset();
+
+    // Reset Wizard
+    currentStep = 1;
+    totalSteps = $('#modalNuevo .step').length;
+
+    showStep(currentStep);
+
+   // $('#comp, #rescomp').prop('disabled', false);
+    // Limpiar UI
     $('#summaryContent').empty().hide();
 
     wizardMode = 'create';
     editMemberId = null;
+
+    if (document.querySelector('#btndescargar')) {
+        safeFocus('#btndescargar');
+    } else {
+        safeFocus('#btnNuevoM'); // fallback
+    }
 });
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-//////////////////////////Grupo Id/////////////////////////////////////
+//////////////////////////Compañia y Sucursales/////////////////////////////////////
 $('#compania').on('change', function () {
 
-    //if (wizardMode === 'edit') return;
+    let idComp = $(this).val();
+    let sucursal = $('#sucurs');
+
+    // limpiar siempre
+    sucursal.val('');
+    sucursal.prop('disabled', true);
+
+    // ocultar todas
+    $('#sucurs option').hide();
+
+    // dejar solo opción vacía visible
+    $('#sucurs option[value=""]').show();
+
+    if (idComp !== '') {
+
+        // mostrar solo las que coinciden
+        $('#sucurs option').each(function () {
+            if ($(this).data('comp') == idComp) {
+                $(this).show();
+            }
+        });
+
+        sucursal.prop('disabled', false);
+
+    }
 
     const cod_comp = $(this).find(':selected').data('grupo') || '';
     $('#cod_comp').val(cod_comp);
@@ -284,33 +335,10 @@ $('#modalNuevo').on('shown.bs.modal', function () {
     if (wizardMode === 'edit') return; // PAra que no borre en editar
 
     //////////////////////////////////////////////////////////////////////////////////
-    ///////////////// Calcular fecha y hora de registro en nuevo./////////////////////////////
-    const $fregistro = $('#fregistro');
-    const $hregistro = $('#hregistro');
 
-    const now = new Date();
-
-    // Fecha actual en formato YYYY-MM-DD (requerido por input[type=date])
-     const fechaHoy = now.toISOString().slice(0, 10);
-
-    // Hora actual HH:MM
-     const horaActual = now.toTimeString().slice(0, 5);
-
-    // Solo asignar si están vacíos
-     if (!$fregistro.val()) {
-         $fregistro.val(fechaHoy);
-     }
-
-     if (!$hregistro.val()) {
-        $hregistro.val(horaActual);
-     }
-    /////////////////////////////////////////////////////////////////////////////////
-
-    // 2. Bloqueo de cajas de texto
+    //Bloqueo de cajas de texto
     const PERFIL = (PERFIL_USUARIO || '').toLowerCase();
 
-    $('#cod_comp')
-        .prop('readonly', true);
     $('#edad')
         .prop('readonly', true);
     
@@ -318,8 +346,8 @@ $('#modalNuevo').on('shown.bs.modal', function () {
 
 function buildSummary() {
     const summary = [
-        { label: 'Codigo Compañia', value: $('#cod_comp').val() },
         { label: 'Compañia', value: $('#compania option:selected').text() },
+        { label: 'Sucursal', value: $('#sucurs option:selected').text() },
         { label: 'Clave', value: $('#clave').val() },
         { label: 'Colaborador', value: $('#colaborador').val() },
         { label: 'Fec Nacimiento', value: $('#fnacimiento').val() },
@@ -327,15 +355,9 @@ function buildSummary() {
         { label: 'CURP', value: $('#curp').val() },
         { label: 'Email', value: $('#email').val() },
         { label: 'RFC', value: $('#rfc').val() },
-        { label: 'Edad', value: $('#edad').val() },
         { label: 'Celular', value: $('#celular').val() },
-        { label: 'Privacidad', value: $('#privacidad option:selected').text() },
-        { label: 'Consentimiento', value: $('#consentimiento option:selected').text() },
-        { label: 'Hora de toma de muestras', value: $('#hrtomamuestra').val() },
-        { label: 'Hora de Feria', value: $('#hrferia').val() },
-        { label: 'Observaciones', value: $('#observaciones').val() },
-        { label: 'Fec Registro', value: $('#fregistro').val() },
-        { label: 'Hor Registro', value: $('#hregistro').val() }
+        { label: 'Activo', value: $('#activo').val() },
+        { label: 'Observaciones', value: $('#observaciones').val() }
     ];
 
     let html = '';
@@ -364,8 +386,8 @@ $('#formWizard').on('submit', function (e) {
     // Seguridad: solo permitir envío en último paso
     if (currentStep !== totalSteps) return;
 
-    // Removemos el nombre de la empresa ya que no lo necesitamos
-    $('#compania').removeAttr('name');
+    // Removemos la edad ya que no lo necesitamos guardar, pueso que se calcula al momento
+    $('#edad').removeAttr('name');
 
     $('#ajaxError').addClass('hidden').empty();
 
@@ -374,7 +396,7 @@ $('#formWizard').on('submit', function (e) {
     $('#btnSave .btn-text').addClass('hidden');
     $('#saveSpinner').removeClass('hidden');
 
-    // 🔓 Desbloquear selects bloqueados por perfil
+    // Desbloquear selects bloqueados por perfil
     $('#formWizard select[data-disabled-by-profile]')
         .prop('disabled', false);
 
@@ -443,16 +465,6 @@ $('#tabla-reg').on('click', '.btnEditar', function () {
 
 function cargarDatosColaborador(Id) {
 
-    ///////////////// Calcular fecha y hora de registro en nuevo./////////////////////////////
-    const $fregistro = $('#fregistro');
-    const $hregistro = $('#hregistro');
-
-    const now = new Date();
-    const fechaHoy = now.toLocaleDateString('en-CA'); // YYYY-MM-DD local
-    const horaActual = now.toTimeString().slice(0, 5);
-
-    /////////////////////////////////////////////////////////////////////////////////
-
     $.ajax({
         url: BASE_URL + '/config/get_registro.php',
         type: 'POST',
@@ -464,8 +476,15 @@ function cargarDatosColaborador(Id) {
 
             // Paso 1
             $('#id').val(data.id);
-            $('#cod_comp').val(data.cod_comp);
-            $('#compania').val(data.compania);
+            $('#compania').val(data.cod_comp).trigger('change');
+
+            // Habilitar select de sucursales
+            $('#sucurs').prop('disabled', false);
+
+            // Esperar a que se llenen las sucursales
+            setTimeout(() => {
+                $('#sucurs').val(data.id_sucursal); // Asigna option a sucursal
+            }, 200);
 
             // Paso 2
             $('#clave').val(data.clave);
@@ -474,16 +493,10 @@ function cargarDatosColaborador(Id) {
             $('#genero').val(data.genero);
             $('#curp').val(data.curp);
             $('#email').val(data.email);
-            $('#rfc').val(data.rfc || data.curp);
-            $('#edad').val(data.edad);
+            $('#rfc').val((data.rfc && data.rfc.trim() !== '' ? data.rfc : data.curp).toUpperCase()); // lo llena con curp si rfc vacio si no deja rfc
             $('#celular').val(data.celular);
-            $('#privacidad').val(data.aprivacidad);
-            $('#consentimiento').val(data.cinformado);
-            $('#hrtomamuestra').val(data.hrtomamuestra);
-            $('#hrferia').val(data.hrferia);
+            $('#activo').val(data.activo);
             $('#observaciones').val(data.obs_reg);
-            $fregistro.val(data.fregistro || fechaHoy);
-            $hregistro.val(data.hregistro || horaActual);
 
             // CALCULAR EDAD AL ABRIR
             actualizarEdad();
@@ -504,13 +517,15 @@ function cargarDatosColaborador(Id) {
 /////////////////////////// Para importar registros //////////////////////////////////
 
 ///// PAra que abra la ventana de carga de archivos ////////
-$(document).on('click', '#btnExcel', function () {
+
+$(document).on('click', '.js-subir-excel', function (e) {
+    e.preventDefault();
     $('#excelFile').click();
 });
 /////////////////////////////////////////////////////////////
 
 //////// AJAX para importar el registro ////////////////////
-$('#excelFile').on('change', function () {
+$(document).on('change', '#excelFile', function () {
 
     let archivo = this.files[0];
 
@@ -568,22 +583,6 @@ function mostrarResumenAlertify(resumen) {
 
     alertify.alert('Carga de Excel', html);
 }
-
-
-/////////////////////// IMPRIMIR BRAZALETES //////////////////////////////////////////
-
-$(document).on('click', '.btnPrint', function () {
-    const id = $(this).data('id');
-
-    const w = window.open(
-        '../partials/imprimir_brazalete.php?id=' + id,
-        '_blank',
-        'width=500,height=200'
-    );
-
-    w.focus();
-});
-
 
 
 

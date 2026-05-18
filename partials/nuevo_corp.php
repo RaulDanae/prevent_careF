@@ -28,8 +28,8 @@
                      <div class="step" data-step="1">
                         <div class="row mb-2">
                             <div class="col-md-4">
-                                <label for="curp" class="etiquetaL">CURP</label>
-                                <input type="text" class="form-control" name="curp" id="curp" readonly>
+                                <label for="idpaeven" class="etiquetaL">Id Paciente Evento</label>
+                                <input type="text" class="form-control" name="idpaeven" id="idpaeven" readonly>
                             </div>
                             <div class="col-md-8">
                                 <label for="nombre" class="etiquetaL">Nombre</label>
@@ -54,29 +54,28 @@
                             <div class="col-md-4">
                                 <label for="edad" class="etiquetaL">Edad</label>
                                 <input type="number" class="form-control" name="edad" id="edad" readonly>
+                            </div>
+                            <div class="col-md-8">
+                                <label for="celular" class="etiquetaL">Celular</label>
+                                <input type="text" class="form-control" name="celular" id="celular" readonly>
                             </div>                            
                         </div>
-                     </div>
-                     
+                     </div>     
                     <!-- /Paso 1 -->
 
                     <!-- Paso 2 -->
                      <div class="step" data-step="2">
                         <div class="row mb-2">
                             <div class="col-md-6">
-                                <label for="celular" class="etiquetaL">Celular</label>
-                                <input type="text" class="form-control" name="celular" id="celular" required>
-                            </div>
-                            <div class="col-md-6">
                                 <label for="peso" class="etiquetaL">Peso</label>
                                 <input type="number" class="form-control" name="peso" id="peso" required>
                             </div>
-                        </div>
-                        <div class="row mb-2">
                             <div class="col-md-6">
                                 <label for="talla" class="etiquetaL">Talla</label>
                                 <input type="number" class="form-control" name="talla" id="talla" required>
                             </div>
+                        </div>
+                        <div class="row mb-2">
                             <div class="col-md-6">
                                 <label for="marcapasos" class="etiquetaL">Marcapasos</label>
                                 <select class="form-control" name="marcapasos" id="marcapasos" required>

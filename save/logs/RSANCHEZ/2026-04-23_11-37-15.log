@@ -1,0 +1,9 @@
+USUARIO: RSANCHEZ
+FECHA : 2026-04-23 11:37:15
+============================================================
+Fila 2 | procesarCliente(): Argument #4 ($idcomp) must be of type int, null given, called in C:\laragon\www\prevent-care\save\importar_excel.php on line 248
+Fila 3 | procesarCliente(): Argument #4 ($idcomp) must be of type int, null given, called in C:\laragon\www\prevent-care\save\importar_excel.php on line 248
+Fila 4 | procesarCliente(): Argument #4 ($idcomp) must be of type int, null given, called in C:\laragon\www\prevent-care\save\importar_excel.php on line 248
+Fila 5 | procesarCliente(): Argument #4 ($idcomp) must be of type int, null given, called in C:\laragon\www\prevent-care\save\importar_excel.php on line 248
+Fila 6 | procesarCliente(): Argument #4 ($idcomp) must be of type int, null given, called in C:\laragon\www\prevent-care\save\importar_excel.php on line 248
+Fila 7 | procesarCliente(): Argument #4 ($idcomp) must be of type int, null given, called in C:\laragon\www\prevent-care\save\importar_excel.php on line 248

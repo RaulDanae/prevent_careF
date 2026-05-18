@@ -33,26 +33,27 @@
     FUNCIÓN PRINCIPAL DE ENTRADA
     ============================ */
 
-    function procesarCliente(PDO $conn, array $data, array &$resumen, int $idcomp, string $idreg, string $fechafinal)
+    function procesarCliente(PDO $conn, array $data, array &$resumen, string $fechafinal, string $usuario)
     {
         // Detectar si existe ya un registro
         $stmt = $conn->prepare("
-            SELECT t1.id_reg
+            SELECT t1.id
             FROM pacientes t1
-            WHERE t1.id_reg = ?
+            WHERE t1.clave = ? AND cod_comp = ?
             LIMIT 1
         ");
 
         $stmt->execute([
-            $idreg
+            $data['clave'],
+            $data['compania']
         ]);
 
         $compa = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($compa) {
-            actualizarCliente($conn, $data, $resumen, $idcomp, $idreg, $fechafinal);
+            actualizarCliente($conn, $data, $resumen, $fechafinal, $usuario);
         } else {
-            guardarCliente($conn, $data, $resumen, $idcomp, $idreg, $fechafinal);
+            guardarCliente($conn, $data, $resumen, $fechafinal, $usuario);
         }
 
         return ['ok' => true];
@@ -63,30 +64,29 @@
     GUARDAR (ALTA)
     ============================ */    
 
-    function guardarCliente(PDO $conn, array $data, array &$resumen, int $idcomp, string $idreg, string $fechafinal) 
+    function guardarCliente(PDO $conn, array $data, array &$resumen, string $fechafinal, string $usuario) 
     {
         $stmt = $conn->prepare("
             INSERT INTO pacientes (
-                id_reg, cod_comp, clave, colaborador, 
-                fec_nac, genero, curp, email, celular, 
-                hrtomamuestra, hrferia
+                cod_comp, id_sucursal, clave, colaborador, 
+                fec_nac, genero, curp, email, celular, activo, usregistro
             ) VALUES (
                 ?,?,?,?,?,?,?,?,?,?,?
             )
         ");
 
         $stmt->execute([
-            $idreg,
-            $idcomp,
+            $data['compania'],
+            $data['sucursal'],
             $data['clave'],
             $data['colaborador'],
-            $fechafinal,
+            $fechafinal, // para fecha de nacimiento
             $data['genero'],
             $data['curp'],
             $data['email'],
             $data['celular'],
-            nullIfEmpty($data['hrtomamuestra'] ?? null),
-            nullIfEmpty($data['hrferia'] ?? null)
+            $data['activo'],
+            $usuario
         ]);
 
         $resumen['altas']++;
@@ -97,13 +97,13 @@
     ACTUALIZAR
     ============================ */
 
-    function actualizarCliente(PDO $conn, array $data, array &$resumen, int $idcomp, string $idreg, string $fechafinal)
+    function actualizarCliente(PDO $conn, array $data, array &$resumen, string $fechafinal, string $usuario)
     {
 
         $stmt = $conn -> prepare("
             UPDATE pacientes SET
-                colaborador = ?, fec_nac = ?, genero = ?, curp = ?, email = ?, celular = ?, hrtomamuestra = ?, hrferia = ?
-            WHERE id_reg = ? AND cod_comp = ? AND clave = ?
+                colaborador = ?, fec_nac = ?, genero = ?, curp = ?, email = ?, celular = ?, activo = ?, usregistro = ?
+            WHERE clave = ? AND cod_comp = ?
         ");
 
         $stmt->execute([
@@ -113,11 +113,10 @@
             $data['curp'],
             $data['email'],
             $data['celular'],
-            nullIfEmpty($data['hrtomamuestra'] ?? null),
-            nullIfEmpty($data['hrferia'] ?? null),
-            $idreg,
-            $idcomp,
-            $data['clave']
+            $data['activo'],
+            $usuario,
+            $data['clave'],
+            $data['compania']
         ]);
 
         $resumen['actualizados']++;
