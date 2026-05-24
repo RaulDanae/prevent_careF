@@ -679,13 +679,15 @@ function generarEtiquetas(data) {
 
                     <svg class = "barcode" id="barcode_${i}"></svg>
 
-                    <div class="nombre">${e.id}</div>
+                    <div class="nombre">${e.nombre}</div>
+
+                    <div class="codigo"> ${e.id}</div>
 
                     <div class="vertical izquierda">${e.fechaE}</div>
 
                     <div class="vertical derecha">
-                        ${e.recipiente}<br>
-                        ${e.horaE}
+                        <div>${e.recipiente}</div>
+                        <div class="hora">${e.horaE}</div>
                     </div>
 
                     <div class="info-derecha">
@@ -695,7 +697,14 @@ function generarEtiquetas(data) {
 
                 </div>
 
-                <input type="checkbox" class="chkEtiqueta" data-index="${i}" checked>
+                <input type="checkbox" class="chkEtiqueta" data-id="${e.id}"
+                                                           data-nombre="${e.nombre}"
+                                                           data-fechae="${e.fechaE}"
+                                                           data-horae="${e.horaE}"
+                                                           data-recipiente="${e.recipiente}"
+                                                           data-edad="${e.edad}"
+                                                           data-genero="${e.genero}"
+                                                           data-fechan="${e.fechaN}" checked>
 
             </div>
         
@@ -724,106 +733,27 @@ function imprimirEtiquetas(data) {
             <head>
                 <title>Etiquetas</title>
 
-                <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
-
                 <style>
-                    body {
-                        margin: 0;
-                        display: flex;
-                        flex-wrap: wrap;
-                        gap: 5px;
-                    }
-
-                    .etiqueta {
-                        position: relative;
-                        width: 50mm;
-                        height: 30mm;
-                        padding: 2mm;
+                    body{
+                        margin:0;
+                        background:#f0f0f0;
                         font-family: Arial, sans-serif;
-                        font-size: 8px;
-                        box-sizing: border-box;
-                        overflow: hidden;
-                    }
-
-                    /* Barcode centrado */
-                    .barcode {
-                        display: block;
-                        margin: 0 auto;
-                        width: 90%;
-                        height: 30px;
-                        margin-top: 10px;
-                    }
-
-                    /* Nombre */
-                    .nombre {
-                        text-align: center;
-                        font-weight: bold;
-                        font-size: 9px;
-                        margin-top: 2px;
-                    }
-
-                    /* Texto vertical */
-                    .vertical {
-                        position: absolute;
-                        font-size: 7px;
-                        transform: rotate(-90deg);
-                        transform-origin: left top;
-                    }
-
-                    /* izquierda */
-                    .izquierda {
-                        left: 7mm;
-                        bottom: 15mm;
-                    }
-
-                    /* derecha */
-                    .derecha {
-                        position: absolute;
-                        right: 10mm;
-                        bottom: 0;
-
-                        transform: rotate(90deg);
-                        transform-origin: bottom right;
-
-                        font-size: 6px;
-                        width: 25mm;           /* 🔥 ancho fijo */
-                        text-align: left;
-                    }
-
-                    /* Info derecha inferior */
-                    .info-derecha {
-                        position: absolute;
-                        right: 12mm;
-                        bottom: 10mm;
-                        text-align: right;
-                        font-size: 7px;
-                    }
-
-                    /* Estilo para los checkbox */
-                    .etiqueta-container {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        margin: 5px;
-                    }
-
-                    .chkEtiqueta {
-                        margin-bottom: 3px;
                     }
 
                     .toolbar {
                         position: sticky;
                         top: 0;
                         background: white;
-                        padding: 5px;
-                        z-index: 10;
+                        padding: 10px;
+                        z-index: 100;
                         border-bottom: 1px solid #ccc;
                     }
 
                     .contenedor-etiquetas {
                         display: flex;
                         flex-wrap: wrap;
-                        gap: 5px;
+                        gap: 15px;
+                        padding: 15px;
                     }
 
                     .etiqueta-container {
@@ -832,6 +762,118 @@ function imprimirEtiquetas(data) {
                         align-items: center;
                     }
 
+                    .chkEtiqueta {
+                        margin-bottom: 10px;
+                        transform:scale(1.3);
+                    }
+
+                    /* Etiqueta NIIMBOT REAL */
+
+                    .etiqueta {
+                        position: relative;
+
+                        width: 384px;
+                        height: 240px;
+
+                        background: white;
+
+                        overflow: hidden;
+
+                        box-sizing: border-box;
+
+                        font-family: Arial, sans-serif;
+                    }
+
+                    /* Barcode centrado */
+                    .barcode {
+                        position:absolute;
+
+                        top:20px;
+                        left:55px;
+
+                        width:240px;
+                        height:50px;
+
+                    }
+
+                    /* Nombre */
+                    .nombre {
+                        position:absolute;
+
+                        top:80px;
+
+                        width:100%;
+
+                        text-align:center;
+
+                        font-size:16px;
+
+                        font-weight:bold;
+                    }
+
+                    /* Fecha izquierda */
+                    .izquierda {
+                        position:absolute;
+
+                        left:18px;
+                        top:100px;
+
+                        transform:rotate(-90deg);
+
+                        transform-origin:left top;
+
+                        font-size:15px;
+
+                        font-weight:bold;
+                    }
+
+                    /* Recipiente derecha */
+                    .derecha {
+                        position:absolute;
+
+                        right:10px;
+                        top:125px;
+
+                        transform:rotate(90deg);
+
+                        transform-origin:top right;
+
+                        font-size:13px;
+
+                        font-weight:bold;
+
+                        width:120px;
+
+                        line-height:18px;
+                    }
+
+                    /* Info derecha inferior */
+                    .info-derecha{
+
+                        position:absolute;
+
+                        right:55px;
+
+                        top:90px;
+
+                        text-align:right;
+
+                        font-size:14px;
+
+                        line-height:18px;
+
+                        font-weight:bold;
+                    }
+
+                    .derecha div{
+                        white-space:nowrap;
+                    }
+
+                    .derecha .hora{
+                        margin-top:12px;
+
+                        text-align:center;
+                    }
 
                 </style>
             </head>
@@ -840,24 +882,97 @@ function imprimirEtiquetas(data) {
 
                 <script>
 
-                    function imprimirSeleccionadas() {
+                    async function imprimirSeleccionadas() {
 
                         const checks = document.querySelectorAll('.chkEtiqueta');
-                        const etiquetas = document.querySelectorAll('.etiqueta-container');
 
-                        etiquetas.forEach((et, i) => {
-                            et.style.display = checks[i].checked ? 'block' : 'none';
-                        });
+                        let zpl = '';
 
-                        window.print();
+                        for (const chk of checks) {
+                            
+                            if (!chk.checked) continue;
 
-                        // Restaurar
-                        setTimeout(() => {
-                            etiquetas.forEach(et => et.style.display = 'block');
-                        }, 500);
+                            const id = chk.dataset.id;
+                            const nombre = chk.dataset.nombre;
+                            const fechae = chk.dataset.fechae;
+                            const horae = chk.dataset.horae;
+                            const recipiente = chk.dataset.recipiente;
+                            const edad = chk.dataset.edad;
+                            const genero = chk.dataset.genero;
+                            const fechan = chk.dataset.fechan;
+
+                            zpl += \`
+
+                                    ^XA
+
+                                    ^PW400
+                                    ^LL240
+                                    ^CI28
+
+                                    ; ===== FECHA IZQUIERDA =====
+                                    ^FO10,35
+                                    ^A0B,18,18
+                                    ^FD\${fechae}^FS
+
+                                    ; ===== CODIGO DE BARRAS =====
+                                    ^BY1,2,45
+                                    ^FO110,15
+                                    ^BCN,45,N,N,N
+                                    ^FD\${id}^FS
+
+                                    ; ===== NOMBRE =====
+                                    ^FO125,95
+                                    ^A0N,20,20
+                                    ^FD\${nombre}^FS
+
+                                    ; ===== RECIPIENTE =====
+                                    ^FO370,25
+                                    ^A0B,16,16
+                                    ^FD\${recipiente}^FS
+
+                                    ; ===== HORA =====
+                                    ^FO335,70
+                                    ^A0B,16,16
+                                    ^FD\${horae}^FS
+
+                                    ; ===== EDAD / SEXO =====
+                                    ^FO250,170
+                                    ^A0N,16,16
+                                    ^FD\${edad} A \${genero}^FS
+
+                                    ^FO250,195
+                                    ^A0N,16,16
+                                    ^FD\${fechan}^FS
+
+                                    ^PQ1
+                                    ^XZ
+                                    \`;
+
+                        };
+
+                        window.opener.BrowserPrint.getDefaultDevice(
+                            "printer",
+                            function(printer){
+                                printer.send(
+                                    zpl,
+                                    function(){
+                                        alert("Etiquetas impresas");
+                                    },
+                                    function(error) {
+                                        console.error(error);
+                                        alert("Error al imprimir");
+                                    }
+                                );
+                            },
+                            function(error){
+                                console.error(error);
+                                alert("No se encontro impresora Zebra");
+                            }
+                        );
+
                     }
 
-
+    
                     function seleccionarTodo() {
                         document.querySelectorAll('.chkEtiqueta').forEach(c => c.checked = true);
                     }
@@ -875,17 +990,21 @@ function imprimirEtiquetas(data) {
     ventana.document.write(contenido);
     ventana.document.close();
 
-    // Esperar a que todo argue (No solo timeout)
     ventana.onload = function () {
+
         data.forEach((e, index) => {
 
-            ventana.JsBarcode(`#barcode_${index}`, e.id, {
-                format: "CODE128",
-                width: 1,
-                height: 35,
-                displayValue: false,
-                margin: 0
-            });
+            this.window.opener.JsBarcode(
+                ventana.document.querySelector(`#barcode_${index}`),
+                e.id,
+                {
+                    format: "CODE128",
+                    width: 2,
+                    height: 65,
+                    displayValue: false,
+                    margin: 0
+                }
+            );
 
         });
 

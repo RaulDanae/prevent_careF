@@ -63,6 +63,10 @@
     <script type = "text/javascript" src = "<?= BASE_URL ?>/assets/libs/js/buttons.html5.min.js"></script>
     <script type = "text/javascript" src = "<?= BASE_URL ?>/assets/libs/js/alertify.min.js"></script>
     <script type = "text/javascript" src = "<?= BASE_URL ?>/assets/libs/js/bootstrap.bundle.min.js"></script>
+    <script src="<?= BASE_URL ?>/assets/js/BrowserPrint-3.0.216.min.js"></script>
+    <script src="<?= BASE_URL ?>/assets/js/JsBarcode.all.min.js"></script>
+    <script src="https://labeldictate.com/text2barcode/lib/t2bprinter.js"></script>
+
     <!-- /JS -->
 
 

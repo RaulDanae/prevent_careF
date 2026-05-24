@@ -1,14 +1,14 @@
 Array
 (
     [id] => 4
-    [rfc] => OLLO270115MYCPL03
+    [rfc] => FEAN55452154
     [privacidad] => SI
     [consentimiento] => SI
     [agehmuestra] => 2026-05-17T18:20
-    [hmuestra] => 2026-05-17T18:24
-    [obst] => A TIEMPO
+    [hmuestra] => 2026-05-17T18:50
+    [obst] => CON RETRASO
     [agehevento] => 2026-05-18T18:20
-    [hevento] => 2026-05-17T18:24
-    [obse] => Adelantado
-    [obs] => Prueba
+    [hevento] => 2026-05-18T18:20
+    [obse] => A tiempo
+    [obs] => 
 )
